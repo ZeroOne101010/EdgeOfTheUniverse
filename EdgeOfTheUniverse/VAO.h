@@ -19,10 +19,12 @@ public:
 
 	std::vector<VBO> vbo;
 
-	Shader shader = DefaultShader();
+	Shader* shader = new DefaultShader();
 
 	VAO(VBO modelVBO, IBO modelIBO);
-	VAO(Shader shader, VBO modelVBO, IBO modelIBO);
+	VAO(Shader* shader, VBO modelVBO, IBO modelIBO);
+	~VAO();
+	void setColor(GLfloat R, GLfloat G, GLfloat B, GLfloat A);
 
 	void updateData(GLuint IDAttributeInArray, GLsizeiptr sizeData, GLfloat* data, GLenum typeDraw);
 

@@ -7,6 +7,8 @@
 #include <string>
 #include "VBO.h"
 #include "IBO.h"
+#include <fstream>
+#include <sstream>
 #include <vector>
 
 class VAO;
@@ -17,14 +19,20 @@ public:
 	GLuint vertexShader;
 	GLuint fragmentShader;
 	GLuint shaderProgram;
-
+	const GLchar* pathVertex;
+	const GLchar* pathFragment;
 	Shader();
-	Shader(const GLchar* vertexShaderSource, const GLchar* fragmentShaderSource);
-	void setShaderSource(const GLchar* vertexShaderSource, const GLchar* fragmentShaderSource);
-
+	Shader(const GLchar* vertexShaderPath, const GLchar* fragmentShaderPath);
+	void setShaderFromSource(const GLchar* vertexShaderSource, const GLchar* fragmentShaderSource);
+	void setShader(const GLchar* vertexShaderPath, const GLchar* fragmentShaderPath);
+	void VerifySuccess(GLuint shader, std::string error);
+	void VerifySuccess(GLuint program);
 	void linkToVAO(VAO* vao);
 	void updateData(VAO* vao, GLuint IDAttributeInArray, GLsizeiptr sizeData, GLfloat* data, GLenum typeDraw);
+	virtual void cloneShader() 
+	{
 
+	}
 	void useShaderProgram();
 
 	struct Attribute
