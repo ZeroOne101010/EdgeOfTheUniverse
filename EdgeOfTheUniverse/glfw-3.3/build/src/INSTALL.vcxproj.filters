@@ -1,0 +1,13 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="16.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <CustomBuild Include="E:\Библиотеки C++\glfw-3.3\build\CMakeFiles\597157d27bbf588d9fca15a60b5d3cb7\INSTALL_force.rule">
+      <Filter>CMake Rules</Filter>
+    </CustomBuild>
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="CMake Rules">
+      <UniqueIdentifier>{F01C07F0-D244-32FA-B106-C996BCEB2993}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+</Project>
