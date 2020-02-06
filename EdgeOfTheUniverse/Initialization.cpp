@@ -1,5 +1,6 @@
 #include "Initialization.h"
-
+GLfloat Initialization::winWidth;
+GLfloat Initialization::winHeight;
 Initialization::Initialization(GLfloat winWidth, GLfloat winHeight, const GLchar* winName)
 {
 	if (!glfwInit())
@@ -29,4 +30,6 @@ Initialization::Initialization(GLfloat winWidth, GLfloat winHeight, const GLchar
 	int width, height;
 	glfwGetFramebufferSize(window, &width, &height);
 	glViewport(0, 0, width, height);
+	this->winWidth = width;
+	this->winHeight = height;
 }

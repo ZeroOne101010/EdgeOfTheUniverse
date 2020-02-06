@@ -7,6 +7,13 @@ VAO::VAO(VBO modelVBO, IBO modelIBO)
 
 	glGenVertexArrays(1, &indexVAO);
 	shader->linkToVAO(this);
+	worldPosIndex = glGetUniformLocation(shader->shaderProgram, "worldPos");
+	localPosIndex = glGetUniformLocation(shader->shaderProgram, "localPos");
+	shader->useShaderProgram();
+	glm::mat4 positionMatrix;
+	glm::mat4 originPosMatrix;
+	glUniformMatrix4fv(worldPosIndex, 1, GL_FALSE, glm::value_ptr(positionMatrix));
+	glUniformMatrix4fv(localPosIndex, 1, GL_FALSE, glm::value_ptr(originPosMatrix));
 
 	//ÇÀÏÎËÍÈÒÜ!!!
 }
@@ -20,7 +27,6 @@ VAO::VAO(Shader* shader, VBO modelVBO, IBO modelIBO)
 	glGenVertexArrays(1, &indexVAO);
 	shader->linkToVAO(this);
 
-	shader->useShaderProgram();
 }
 
 VAO::~VAO()
@@ -48,7 +54,6 @@ void VAO::updateData(GLuint IDAttributeInArray, GLsizeiptr sizeData, GLfloat* da
 
 void VAO::draw()
 {
-
 	glBindVertexArray(indexVAO);
 	glEnableVertexArrayAttrib(indexVAO, 0);
 	for (int x = 0; x < shader->attribute.size(); x++)
@@ -56,7 +61,7 @@ void VAO::draw()
 		glEnableVertexArrayAttrib(indexVAO, shader->attribute[x].index);
 	}
 	shader->useShaderProgram();
-
+	setCoords();
 	glDrawElements(GL_TRIANGLES, modelIBO.size, GL_UNSIGNED_INT, 0);
 
 	for (int x = 0; x < shader->attribute.size(); x++)
@@ -64,7 +69,17 @@ void VAO::draw()
 		glDisableVertexArrayAttrib(indexVAO, shader->attribute[x].index);
 	}
 	glDisableVertexArrayAttrib(indexVAO, 0);
+}
 
+void VAO::setCoords()
+{
+	glm::mat4 positionMatrix;
+	glm::mat4 originPosMatrix;
+	originPosMatrix = glm::translate(glm::mat4(), glm::vec3(originPos.x / Initialization::winWidth, originPos.y / Initialization::winWidth, 0));
+	positionMatrix = glm::translate(glm::mat4(), glm::vec3(position.x / Initialization::winWidth, position.y / Initialization::winWidth, 0));
+	shader->useShaderProgram();
+	glUniformMatrix4fv(localPosIndex, 1, GL_FALSE, glm::value_ptr(originPosMatrix));
+	glUniformMatrix4fv(worldPosIndex, 1, GL_FALSE, glm::value_ptr(positionMatrix));
 }
 
 

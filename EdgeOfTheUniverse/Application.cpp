@@ -32,7 +32,7 @@ void Application::GameLoop()
 	VBO modelVBO(sizeof(vertices), vertices, GL_STATIC_DRAW);
 	VBO colorVBO(sizeof(colors), colors, GL_STREAM_DRAW);
 	IBO modelIBO(sizeof(indices), indices, GL_STATIC_DRAW);
-
+	GLfloat k = 0;
 	VAO vao(modelVBO, modelIBO);
 	vao.setColor(0.5f, 0.5f, 1, 0);
 	while (!glfwWindowShouldClose(initialization->window))
@@ -41,6 +41,12 @@ void Application::GameLoop()
 
 		glClearColor(r / 255.00f, g / 255.00f, b / 255.00f, 1.0f);
 		glClear(GL_COLOR_BUFFER_BIT);
+		k+=3;
+		vao.setColor(0.5f, 0.5, 1, 1);
+		vao.position = glm::vec2(k, 0);
+		vao.draw();
+		vao.setColor(0.5f, 1, 1, 1);
+		vao.position = glm::vec2(-k, 0);
 		vao.draw();
 		glfwSwapBuffers(initialization->window);
 	}

@@ -8,5 +8,7 @@ class Initialization
 public:
 	Initialization(GLfloat winWidth, GLfloat winHeight, const GLchar* winName);
 	GLFWwindow* window;
+	static GLfloat winWidth;
+	static GLfloat winHeight;
 };
 
