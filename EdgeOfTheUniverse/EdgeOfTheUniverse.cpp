@@ -116,7 +116,6 @@ int main()
 
 		glClearColor(r / 255.00f, g / 255.00f, b / 255.00f, 1.0f);
 		glClear(GL_COLOR_BUFFER_BIT);
-		std::cout << "Lol" << std::endl;
 		vao.draw();
 
 
