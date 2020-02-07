@@ -20,17 +20,24 @@ public:
 	
 	VBO modelVBO;
 	IBO modelIBO;
+
+	glm::mat4 rotationMatrix;
+
 	GLuint localPosIndex;
 	GLuint worldPosIndex;
+	GLuint rotationMatrixIndex;
+	GLuint colorIndex;
+
 	glm::vec2 position;
 	glm::vec2 originPos;
+	glm::vec4 color;
 	std::vector<VBO> vbo;
 	Shader* shader = new DefaultShader();
 
 	VAO(VBO modelVBO, IBO modelIBO);
 	VAO(Shader* shader, VBO modelVBO, IBO modelIBO);
 	~VAO();
-	void setColor(GLfloat R, GLfloat G, GLfloat B, GLfloat A);
+	void setColor();
 	
 	void updateData(GLuint IDAttributeInArray, GLsizeiptr sizeData, GLfloat* data, GLenum typeDraw);
 

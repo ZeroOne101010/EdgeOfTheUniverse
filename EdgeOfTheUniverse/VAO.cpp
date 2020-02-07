@@ -9,11 +9,15 @@ VAO::VAO(VBO modelVBO, IBO modelIBO)
 	shader->linkToVAO(this);
 	worldPosIndex = glGetUniformLocation(shader->shaderProgram, "worldPos");
 	localPosIndex = glGetUniformLocation(shader->shaderProgram, "localPos");
+	rotationMatrixIndex = glGetUniformLocation(shader->shaderProgram, "rotation");
+	colorIndex = glGetUniformLocation(shader->shaderProgram, "Color");
 	shader->useShaderProgram();
 	glm::mat4 positionMatrix;
 	glm::mat4 originPosMatrix;
-	glUniformMatrix4fv(worldPosIndex, 1, GL_FALSE, glm::value_ptr(positionMatrix));
-	glUniformMatrix4fv(localPosIndex, 1, GL_FALSE, glm::value_ptr(originPosMatrix));
+
+	glBindVertexArray(indexVAO);
+	glEnableVertexAttribArray(0);
+	glBindVertexArray(0);
 
 	//ÇÀÏÎËÍÈÒÜ!!!
 }
@@ -26,6 +30,17 @@ VAO::VAO(Shader* shader, VBO modelVBO, IBO modelIBO)
 
 	glGenVertexArrays(1, &indexVAO);
 	shader->linkToVAO(this);
+	worldPosIndex = glGetUniformLocation(shader->shaderProgram, "worldPos");
+	localPosIndex = glGetUniformLocation(shader->shaderProgram, "localPos");
+	rotationMatrixIndex = glGetUniformLocation(shader->shaderProgram, "rotation");
+	colorIndex = glGetUniformLocation(shader->shaderProgram, "Color");
+	shader->useShaderProgram();
+	glm::mat4 positionMatrix;
+	glm::mat4 originPosMatrix;
+
+	glBindVertexArray(indexVAO);
+	glEnableVertexAttribArray(0);
+	glBindVertexArray(0);
 
 }
 
@@ -38,12 +53,9 @@ VAO::~VAO()
 	delete shader;
 }
 
-void VAO::setColor(GLfloat R, GLfloat G, GLfloat B, GLfloat A)
+void VAO::setColor()
 {
-	GLuint index = glGetUniformLocation(shader->shaderProgram, "Color");
-
-	shader->useShaderProgram();
-	glUniform4f(index, R, G, B, A);
+	glUniform4f(colorIndex, color.x, color.y, color.z, color.a);
 }
 
 void VAO::updateData(GLuint IDAttributeInArray, GLsizeiptr sizeData, GLfloat* data, GLenum typeDraw)
@@ -55,31 +67,28 @@ void VAO::updateData(GLuint IDAttributeInArray, GLsizeiptr sizeData, GLfloat* da
 void VAO::draw()
 {
 	glBindVertexArray(indexVAO);
-	glEnableVertexArrayAttrib(indexVAO, 0);
-	for (int x = 0; x < shader->attribute.size(); x++)
-	{
-		glEnableVertexArrayAttrib(indexVAO, shader->attribute[x].index);
-	}
+	//glEnableVertexAttribArray(0);
+	//for (int x = 0; x < shader->attribute.size(); x++)
+	//{
+	//	glEnableVertexAttribArray(shader->attribute[x].index);
+	//}
 	shader->useShaderProgram();
 	setCoords();
+	setColor();
 	glDrawElements(GL_TRIANGLES, modelIBO.size, GL_UNSIGNED_INT, 0);
 
-	for (int x = 0; x < shader->attribute.size(); x++)
-	{
-		glDisableVertexArrayAttrib(indexVAO, shader->attribute[x].index);
-	}
-	glDisableVertexArrayAttrib(indexVAO, 0);
+	//for (int x = 0; x < shader->attribute.size(); x++)
+	//{
+	//	glDisableVertexAttribArray(shader->attribute[x].index);
+	//}
+	//glDisableVertexAttribArray(0);
 }
 
 void VAO::setCoords()
 {
-	glm::mat4 positionMatrix;
-	glm::mat4 originPosMatrix;
-	originPosMatrix = glm::translate(glm::mat4(), glm::vec3(originPos.x / Initialization::winWidth, originPos.y / Initialization::winWidth, 0));
-	positionMatrix = glm::translate(glm::mat4(), glm::vec3(position.x / Initialization::winWidth, position.y / Initialization::winWidth, 0));
-	shader->useShaderProgram();
-	glUniformMatrix4fv(localPosIndex, 1, GL_FALSE, glm::value_ptr(originPosMatrix));
-	glUniformMatrix4fv(worldPosIndex, 1, GL_FALSE, glm::value_ptr(positionMatrix));
+	glUniformMatrix4fv(rotationMatrixIndex, 1, GL_FALSE, glm::value_ptr(rotationMatrix));
+	glUniform3f(localPosIndex, originPos.x, originPos.y, 0);
+	glUniform3f(worldPosIndex, position.x, position.y, 0);
 }
 
 
