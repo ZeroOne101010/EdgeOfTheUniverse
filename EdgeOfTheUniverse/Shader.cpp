@@ -176,6 +176,11 @@ void Shader::linkToVAO(VAO* vao)
 	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, vao->modelIBO.index);
 
 	glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, sizeof(GLfloat) * 3, 0);
+
+	glBindBuffer(GL_ARRAY_BUFFER, vao->textureUV.index);
+
+	glVertexAttribPointer(1, 2, GL_FLOAT, GL_FALSE, sizeof(GLfloat) * 2, 0);
+
 	for (int x = 0; x < attribute.size(); x++)
 	{
 		glBindBuffer(GL_ARRAY_BUFFER, attribute[x].vbo.index);
@@ -188,9 +193,9 @@ void Shader::linkToVAO(VAO* vao)
 
 void Shader::updateData(VAO * vao, GLuint IDAttributeInArray, GLsizeiptr sizeData, GLfloat* data, GLenum typeDraw)
 {
-	if (IDAttributeInArray >= 1)
+	if (IDAttributeInArray >= 2)
 	{
-		attribute[IDAttributeInArray - 1].vbo.UpdateData(sizeData, data, typeDraw);
+		attribute[IDAttributeInArray - 2].vbo.UpdateData(sizeData, data, typeDraw);
 	}
 	else
 	{

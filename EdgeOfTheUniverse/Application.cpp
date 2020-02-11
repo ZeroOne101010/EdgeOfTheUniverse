@@ -2,22 +2,25 @@
 
 Application::Application()
 {
-	initialization = new Initialization(1920, 1080, "EdgeOfTheUniverse");
+	window = new RenderWindow(1000, 1000, "EdgeOfTheUniverse");
+
+	//hero = new RectangleShape(500, 500);
+	//hero->position = glm::vec2(500, 500);
+	//hero->originPos = glm::vec2(-hero->size.x / 2, -hero->size.y / 2); 
+	//hero->color = glm::vec4(1, 0.5f, 0.5f, 1);
+    k = new Container();
+	k->Position = glm::vec2(500, 500);
+	//k->position = glm::vec2(-2, -2);
+	//obj = new RectangleShape(500, 500);
+	//obj->position = glm::vec2(500, 500);
+	//obj->originPos = glm::vec2(-obj->size.x / 2, -obj->size.y / 2);
+	//obj->color = glm::vec4(1, 0.5f, 0.5f, 1);
 }
 
 void Application::GameLoop()
 {
-	float r = 20;
-	float g = 20;
-	float b = 20;
-	//GLfloat vertices[] = {
-	//	 0.5f,  0.5f, 0.0f,  
-	//	 0.5f, -0.5f, 0.0f, 
-	//	-0.5f, -0.5f, 0.0f, 
-	//	-0.5f,  0.5f, 0.0f, 
-	//};
 
-	float size = 0.05f;
+	float size = 0.5f;
 
 	GLfloat vertices[] = {
 	 size,  size, 0.0f,
@@ -28,49 +31,46 @@ void Application::GameLoop()
 
 
 	GLfloat colors[] = {
-	 1.0f, 1.0f, 1.0f, 
-	 1.0f, 1.0f, 1.0f, 
-	 0.0f, 0.0f, 0.0f,  
-	 0.0f, 0.0f, 0.0f  
+	 1.0f, 1.0f, 1.0f,
+	 1.0f, 1.0f, 1.0f,
+	 0.0f, 0.0f, 0.0f,
+	 0.0f, 0.0f, 0.0f
 	};
 
-	GLuint indices[] = {  
-	0, 1, 3,   
-	1, 2, 3    
+	GLuint indices[] = {
+	0, 1, 3,
+	1, 2, 3
 	};
 
-	VBO modelVBO(sizeof(vertices), vertices, GL_STREAM_DRAW);
-	VBO colorVBO(sizeof(colors), colors, GL_STREAM_DRAW);
-	IBO modelIBO(sizeof(indices), indices, GL_STREAM_DRAW);
-	GLfloat k = 0;
-	VAO vao(modelVBO, modelIBO);
 
-	GLuint id = glGetUniformLocation(vao.shader->shaderProgram, "v");
+	GLfloat kVBO[] = {
+	  0.5f,  0.5f, 0.0f,
+	 0.5f, -0.5f, 0.0f,
+	-0.5f, -0.5f, 0.0f,
+	-0.5f,  0.5f, 0.0f,
+	};
+	GLuint kIBO[] = {
+	0, 1, 3,
+	1, 2, 3
+	};
 
-	float* m = new float[300];
 
-	while (!glfwWindowShouldClose(initialization->window))
+	VBO modelVBO(sizeof(GLfloat) * 12, vertices, GL_STREAM_DRAW);
+	IBO modelIBO(sizeof(GLuint) * 6, indices, GL_STREAM_DRAW);
+
+	while (!glfwWindowShouldClose(window->window))
 	{
-		glfwPollEvents();
-
-		glClearColor(r / 255.00f, g / 255.00f, b / 255.00f, 1.0f);
-		glClear(GL_COLOR_BUFFER_BIT);
-
-		k += 0.01f;
-		vao.rotationMatrix = glm::rotate(vao.rotationMatrix, 1.0f, glm::vec3(0, 0, 1));
-		vao.color = glm::vec4(1, 0.5f, 1, 1);
-
-
-		for (int x = 0; x < 4100; x++)
-		{
-			glUniform1fv(id, 300, m);
-			vao.position = glm::vec2(cos(k) / 2, 0);
-			vao.draw();
-		}
-
-		int b = 0;
-
-		glfwSwapBuffers(initialization->window);
+		window->PollEvents();
+		window->Clear(glm::vec3(20, 20, 20));
+		k->Rotation = glm::rotate(k->Rotation, 1.0f, glm::vec3(0, 0, 1));
+		k->RelSize += glm::vec2(0.01f, 0.01f);
+		k->Position += glm::vec2(0.1f, 0);
+		//window->draw(hero);
+		//k->Position += glm::vec2(1, 0);
+		//k->RelSize += glm::vec2(0.001f, 0.001f);
+		//k->Origin += glm::vec2(1, 1);
+		window->draw(k);
+		window->Display();
 	}
 	glfwTerminate();
 }

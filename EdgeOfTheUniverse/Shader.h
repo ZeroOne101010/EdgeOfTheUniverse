@@ -23,7 +23,7 @@ public:
 	const GLchar* pathFragment;
 	Shader();
 	Shader(const GLchar* vertexShaderPath, const GLchar* fragmentShaderPath);
-	void setShaderFromSource(const GLchar* vertexShaderSource, const GLchar* fragmentShaderSource);
+	void setShaderFromSource(const GLchar* vertexShaderSource, const GLchar* fragmentShaderSource); // k = n / (const / 4) * 0.5    k = (2 / const) * n
 	void setShader(const GLchar* vertexShaderPath, const GLchar* fragmentShaderPath);
 	void VerifySuccess(GLuint shader, std::string error);
 	void VerifySuccess(GLuint program);

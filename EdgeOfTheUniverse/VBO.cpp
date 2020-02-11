@@ -3,6 +3,7 @@
 VBO::VBO()
 {
 	index = 0;
+	data = nullptr;
 }
 
 VBO::VBO(GLsizeiptr size, GLfloat* data, GLenum typeDraw)

@@ -12,37 +12,56 @@
 #include <glm/gtc/matrix_transform.hpp>
 #include <glm/gtc/type_ptr.hpp>
 #include "initialization.h"
+#include "Texture.h"
+#include "RenderWindow.h"
+#include "IDraw.h"
+#include "Alterable.h"
 
-class VAO
+class VAO : public IDraw, public Alterable
 {
 public:
 	GLuint indexVAO;
 	
 	VBO modelVBO;
 	IBO modelIBO;
+	VBO textureUV;
 
 	glm::mat4 rotationMatrix;
-
 	GLuint localPosIndex;
 	GLuint worldPosIndex;
 	GLuint rotationMatrixIndex;
 	GLuint colorIndex;
+	GLuint relSizeIndex;
+	GLuint correctSizeIndex;
+	GLuint sizeIndex;
+
 
 	glm::vec2 position;
-	glm::vec2 originPos;
+	glm::vec2 origin;
+	glm::vec2 relSize = glm::vec2(1, 1);
+	glm::vec2 size;
+	//glm::vec2 correctSize = glm::vec2(RenderWindow::sizeConst / 1000, RenderWindow::sizeConst / 1000);
+	glm::vec2 correctSize = glm::vec2(RenderWindow::sizeConst / (float)RenderWindow::width, RenderWindow::sizeConst / (float)RenderWindow::height);
 	glm::vec4 color;
 	std::vector<VBO> vbo;
 	Shader* shader = new DefaultShader();
+	Texture* texture = new Texture("Resources/Textures/DefaultTexture3.png");
 
-	VAO(VBO modelVBO, IBO modelIBO);
-	VAO(Shader* shader, VBO modelVBO, IBO modelIBO);
+	VAO(VBO modelVBO, IBO modelIBO, VBO textureUV);
+	VAO(Shader* shader, VBO modelVBO, IBO modelIBO, VBO textureUV);
 	~VAO();
 	void setColor();
 	
 	void updateData(GLuint IDAttributeInArray, GLsizeiptr sizeData, GLfloat* data, GLenum typeDraw);
 
 	void draw();
+	virtual void draw(Renderer* renderer, Alterable alters) override;
 private:
  	void setCoords();
+	void setSize();
+protected:
+	virtual void setDrawParams();
+
+
 };
 

@@ -1,6 +1,4 @@
 #include "Initialization.h"
-GLfloat Initialization::winWidth;
-GLfloat Initialization::winHeight;
 Initialization::Initialization(GLfloat winWidth, GLfloat winHeight, const GLchar* winName)
 {
 	if (!glfwInit())
@@ -33,3 +31,4 @@ Initialization::Initialization(GLfloat winWidth, GLfloat winHeight, const GLchar
 	this->winWidth = width;
 	this->winHeight = height;
 }
+

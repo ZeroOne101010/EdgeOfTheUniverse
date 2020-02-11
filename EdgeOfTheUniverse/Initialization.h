@@ -3,12 +3,12 @@
 #include <GL/glew.h>
 #include <GLFW/glfw3.h>
 #include <iostream>
+#include "RenderWindow.h"
 class Initialization
 {
 public:
 	Initialization(GLfloat winWidth, GLfloat winHeight, const GLchar* winName);
 	GLFWwindow* window;
-	static GLfloat winWidth;
-	static GLfloat winHeight;
+	GLint winWidth, winHeight;
 };
 
