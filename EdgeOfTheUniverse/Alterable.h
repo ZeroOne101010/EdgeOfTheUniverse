@@ -13,10 +13,7 @@ public:
 	glm::vec2 Position;
 	glm::vec2 Origin;
 	glm::vec2 RelSize = glm::vec2(1, 1);
-	glm::vec2 RelPosition = glm::vec2(1, 1);
 	glm::mat4 Rotation;
-	glm::vec2 ParentPostion;
-
 	Alterable operator *= (Alterable alter);
 };
 

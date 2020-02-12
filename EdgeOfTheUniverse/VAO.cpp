@@ -50,8 +50,6 @@ VAO::VAO(Shader* shader, VBO modelVBO, IBO modelIBO, VBO textureUV)
 	glEnableVertexAttribArray(0);
 	glEnableVertexAttribArray(1);
 	glBindVertexArray(0);
-
-
 }
 
 VAO::~VAO()
@@ -77,14 +75,14 @@ void VAO::updateData(GLuint IDAttributeInArray, GLsizeiptr sizeData, GLfloat* da
 
 void VAO::draw()
 {
-	glActiveTexture(GL_TEXTURE0);
-	glBindTexture(GL_TEXTURE_2D, texture->index);
-	texture->setSampler(shader);
-	glBindVertexArray(indexVAO);
+	//glActiveTexture(GL_TEXTURE0);
+	//glBindTexture(GL_TEXTURE_2D, texture->index);
+	//texture->setSampler(shader);
+	//glBindVertexArray(indexVAO);
 	
-	shader->useShaderProgram(); 
-	setDrawParams();
-	glDrawElements(GL_TRIANGLES, modelIBO.size, GL_UNSIGNED_INT, 0);
+	//shader->useShaderProgram(); 
+	//setDrawParams();
+	//glDrawElements(GL_TRIANGLES, modelIBO.size, GL_UNSIGNED_INT, 0);
 }
 
 void VAO::setCoords()
@@ -105,14 +103,14 @@ void VAO::setSize()
 
 void VAO::setDrawParams()
 {
-	setSize();
-	setCoords();
-	setColor();
+	//setSize();
+	//setCoords();
+	//setColor();
 }
 
 void VAO::draw(Renderer* renderer, Alterable alters)
 {
-	Rotation = alters.Rotation * rotation;
+	//Rotation = alters.Rotation * rotation;
 	drawRelSize = alters.RelSize * RelSize;
 	drawOrigin = Origin * alters.RelSize * RelSize;
 	drawPosition = alters.Position + Position * alters.RelSize;

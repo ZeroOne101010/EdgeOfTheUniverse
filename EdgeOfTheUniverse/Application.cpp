@@ -29,8 +29,15 @@ void Application::GameLoop()
 		k->Rotation = glm::rotate(k->Rotation, 1.0f, glm::vec3(0, 0, 1));
 		g->rotation = glm::rotate(g->rotation, 1.0f, glm::vec3(0, 0, 1));
 		g->Position += glm::vec2(1, 0);
-		window->draw(k);
-		window->draw(g);
+ 		window->draw(k);
+		for (int i = 0; i < 50000; i++) 
+		{
+			int k[4];
+			for (int l = 0; l < 4; l++)
+				k[l] = cos(k[l]) * sin(k[l]);
+			//window->draw(g);
+		}
+
 		window->Display();
 	}
 	glfwTerminate();

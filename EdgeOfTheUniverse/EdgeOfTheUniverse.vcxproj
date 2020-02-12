@@ -157,6 +157,7 @@
     <ClCompile Include="Container.cpp" />
     <ClCompile Include="DefaultShader.cpp" />
     <ClCompile Include="EdgeOfTheUniverse.cpp" />
+    <ClCompile Include="FloatRect.cpp" />
     <ClCompile Include="IBO.cpp" />
     <ClCompile Include="IDraw.cpp" />
     <ClCompile Include="Initialization.cpp" />
@@ -177,6 +178,7 @@
     <ClInclude Include="box.h" />
     <ClInclude Include="Container.h" />
     <ClInclude Include="DefaultShader.h" />
+    <ClInclude Include="FloatRect.h" />
     <ClInclude Include="IBO.h" />
     <ClInclude Include="IDraw.h" />
     <ClInclude Include="Initialization.h" />

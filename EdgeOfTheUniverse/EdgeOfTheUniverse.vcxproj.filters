@@ -72,6 +72,9 @@
     <ClCompile Include="kek.cpp">
       <Filter>Исходные файлы</Filter>
     </ClCompile>
+    <ClCompile Include="FloatRect.cpp">
+      <Filter>Исходные файлы</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="VBO.h">
@@ -126,6 +129,9 @@
       <Filter>Файлы заголовков</Filter>
     </ClInclude>
     <ClInclude Include="kek.h">
+      <Filter>Файлы заголовков</Filter>
+    </ClInclude>
+    <ClInclude Include="FloatRect.h">
       <Filter>Файлы заголовков</Filter>
     </ClInclude>
   </ItemGroup>
