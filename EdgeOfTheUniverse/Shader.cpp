@@ -9,24 +9,6 @@ Shader::Shader()
 	pathVertex = NULL;
 	pathFragment = NULL;
 }
-
-//Shader::Shader(const GLchar* vertexShaderSource, const GLchar* fragmentShaderSource)
-//{
-//	vertexShader = glCreateShader(GL_VERTEX_SHADER);
-//	glShaderSource(vertexShader, 1, &vertexShaderSource, NULL);
-//	glCompileShader(vertexShader);
-//
-//	fragmentShader = glCreateShader(GL_FRAGMENT_SHADER);
-//	glShaderSource(fragmentShader, 1, &fragmentShaderSource, NULL);
-//	glCompileShader(fragmentShader);
-//
-//	shaderProgram = glCreateProgram();
-//	glAttachShader(shaderProgram, vertexShader);
-//	glAttachShader(shaderProgram, fragmentShader);
-//	glLinkProgram(shaderProgram);
-//	glDeleteShader(vertexShader);
-//	glDeleteShader(fragmentShader);
-//}
 Shader::Shader(const GLchar* pathVertex, const GLchar* pathFragment)
 {
 	this->pathVertex = pathVertex;
@@ -73,6 +55,10 @@ Shader::Shader(const GLchar* pathVertex, const GLchar* pathFragment)
 	VerifySuccess(shaderProgram);
 	glDeleteShader(vertexShader);
 	glDeleteShader(fragmentShader);
+}
+
+Shader::~Shader()
+{
 }
 
 void Shader::setShaderFromSource(const GLchar* vertexShaderSource, const GLchar* fragmentShaderSource)

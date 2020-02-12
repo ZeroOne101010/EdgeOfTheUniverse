@@ -5,6 +5,11 @@ IBO::IBO()
 	index = 0;
 }
 
+IBO::~IBO()
+{
+	glDeleteBuffers(1, &index);
+}
+
 IBO::IBO(GLsizeiptr size, GLuint* data, GLenum typeDraw)
 {
 	glGenBuffers(1, &index);

@@ -13,6 +13,7 @@ class RenderWindow : public Renderer
 {
 public:
 	RenderWindow(GLfloat width, GLfloat height, const GLchar* winName);
+	~RenderWindow();
 	GLFWwindow* window;
 	static float width, height;
 	static const float sizeConst;

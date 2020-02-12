@@ -32,3 +32,8 @@ Initialization::Initialization(GLfloat winWidth, GLfloat winHeight, const GLchar
 	this->winHeight = height;
 }
 
+Initialization::~Initialization()
+{
+	delete window;
+}
+

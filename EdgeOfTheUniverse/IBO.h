@@ -12,6 +12,7 @@ public:
 	GLsizei size;
 	
 	IBO();
+	~IBO();
 	IBO(GLsizeiptr size, GLuint* data, GLenum typeDraw);
 	void UpdateIBO(GLsizeiptr size, GLuint* data, GLenum typeDraw);
 };

@@ -14,6 +14,11 @@ VBO::VBO(GLsizeiptr size, GLfloat* data, GLenum typeDraw)
 	this->data = data;
 }
 
+VBO::~VBO()
+{
+	glDeleteBuffers(1, &index);
+}
+
 void VBO::UpdateData(GLsizeiptr size, GLfloat* data, GLenum typeDraw)
 {
 	glBindBuffer(GL_ARRAY_BUFFER, index);

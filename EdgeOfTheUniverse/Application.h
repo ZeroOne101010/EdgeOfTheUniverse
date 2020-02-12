@@ -13,6 +13,7 @@ class Application
 {
 public:
 	Application();
+	~Application();
 	void GameLoop();
 	//Initialization* initialization = new Initialization(1000, 1000, "EdgeOfTheUniverse");
 	RenderWindow* window;

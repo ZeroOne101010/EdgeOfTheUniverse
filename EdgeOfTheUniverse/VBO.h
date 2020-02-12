@@ -12,6 +12,7 @@ public:
 
 	VBO();
 	VBO(GLsizeiptr size, GLfloat* data, GLenum typeDraw);
+	~VBO();
 	void UpdateData(GLsizeiptr size, GLfloat* data, GLenum typeDraw);
 
 };

@@ -34,6 +34,11 @@ RenderWindow::RenderWindow(GLfloat width, GLfloat height, const GLchar* winName)
 	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 }
 
+RenderWindow::~RenderWindow()
+{
+	delete window;
+}
+
 void RenderWindow::PollEvents()
 {
 	glfwPollEvents();
