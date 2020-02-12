@@ -35,6 +35,10 @@ public:
 	GLuint correctSizeIndex;
 	GLuint sizeIndex;
 
+	glm::vec2 drawPosition;
+	glm::vec2 drawOrigin;
+	glm::vec2 drawRelSize = glm::vec2(1, 1);
+	glm::vec2 drawSize;
 
 	glm::vec2 position;
 	glm::vec2 origin;

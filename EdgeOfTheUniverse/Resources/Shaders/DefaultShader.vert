@@ -14,6 +14,8 @@ out vec2 CoordsUV;
 
 void main() 
 {
-	gl_Position = vec4(worldPos, 0.0) + (  vec4(relSize, 1.0) * vec4(size, 1.0) * vec4(correctSize, 1.0) * ( (rotation * vec4(position, 1.0))) ) + vec4(correctSize, 1.0) * (rotation * vec4(localPos, 0.0));
+	//gl_Position = vec4(worldPos, 0.0) + (  vec4(relSize, 1.0) * vec4(size, 1.0) * vec4(correctSize, 1.0) * ( (rotation * vec4(position, 1.0))) ) + vec4(correctSize, 1.0) * (rotation * vec4(localPos, 0.0));
+	gl_Position = vec4(correctSize, 1.0) * vec4(worldPos, 0.0) + (  vec4(relSize, 1.0) * vec4(size, 1.0) * vec4(correctSize, 1.0) * ( (vec4(position, 1.0) * rotation)) ) + vec4(correctSize, 1.0) * (vec4(localPos, 0.0) * rotation);
+	//gl_Position = vec4(worldPos, 0.0) + (  vec4(relSize, 1.0) * vec4(size, 1.0) * vec4(correctSize, 1.0) * ( (vec4(position, 1.0))) );
 	CoordsUV = coordsUV;
 }

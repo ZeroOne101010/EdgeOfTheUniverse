@@ -160,6 +160,7 @@
     <ClCompile Include="IBO.cpp" />
     <ClCompile Include="IDraw.cpp" />
     <ClCompile Include="Initialization.cpp" />
+    <ClCompile Include="kek.cpp" />
     <ClCompile Include="RectangleShape.cpp" />
     <ClCompile Include="Renderer.cpp" />
     <ClCompile Include="RenderWindow.cpp" />
@@ -179,6 +180,7 @@
     <ClInclude Include="IBO.h" />
     <ClInclude Include="IDraw.h" />
     <ClInclude Include="Initialization.h" />
+    <ClInclude Include="kek.h" />
     <ClInclude Include="RectangleShape.h" />
     <ClInclude Include="Renderer.h" />
     <ClInclude Include="RenderWindow.h" />
