@@ -1,11 +1,20 @@
 #include "DefaultShader.h"
 
-	DefaultShader::DefaultShader() : Shader("Resources/Shaders/DefaultShader.vert", "Resources/Shaders/DefaultShader.frag")
+
+DefaultShader::DefaultShader(const GLchar* pathVertex, const GLchar* pathFragment) : Shader(pathVertex, pathFragment)
 	{
-		GLuint index = glGetUniformLocation(shaderProgram, "Color");
+		worldPosIndex = createUniformIndex("worldPos");
+		localPosIndex = createUniformIndex("localPos");
+		angleIndex = createUniformIndex("angle");
+		colorIndex = createUniformIndex("Color");
+		relSizeIndex = createUniformIndex("relSize");
+		correctSizeIndex = createUniformIndex("correctSize");
+		sizeIndex = createUniformIndex("size");
+
+		coordsUVIndex = createUniformIndex("textureCoords");
+		textureSamplerIndex = createUniformIndex("textureSampler");
 
 		useShaderProgram();
-		glUniform4f(index, 0.5f, 1, 1, 1);
 	}
 
 	void DefaultShader::setColor(GLfloat R, GLfloat G, GLfloat B, GLfloat A)

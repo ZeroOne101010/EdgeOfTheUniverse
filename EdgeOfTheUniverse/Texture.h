@@ -13,8 +13,7 @@ public:
 	GLuint index;
 	int width, height;
 	unsigned char* image;
-	Texture();
-	Texture(const char* path);
+	Texture(const char* path = "Resources/Textures/DefaultTexture.png");
 	~Texture();
 
 	void setTextureRect(GLuint index, FloatRect rect);

@@ -7,16 +7,16 @@ VAO::VAO(VBO modelVBO, IBO modelIBO, VBO textureUV)
 	this->textureUV = textureUV;
 	glGenVertexArrays(1, &indexVAO);
 	shader->linkToVAO(this);
-	worldPosIndex = glGetUniformLocation(shader->shaderProgram, "worldPos");
-	localPosIndex = glGetUniformLocation(shader->shaderProgram, "localPos");
-	angleIndex = glGetUniformLocation(shader->shaderProgram, "angle");
-	colorIndex = glGetUniformLocation(shader->shaderProgram, "Color");
-	relSizeIndex = glGetUniformLocation(shader->shaderProgram, "relSize");
-	correctSizeIndex = glGetUniformLocation(shader->shaderProgram, "correctSize");
-	sizeIndex = glGetUniformLocation(shader->shaderProgram, "size");
+	worldPosIndex = shader->getUniformIndex("worldPos");
+	localPosIndex = shader->getUniformIndex("localPos");
+	angleIndex = shader->getUniformIndex("angle");
+	colorIndex = shader->getUniformIndex("Color");
+	relSizeIndex = shader->getUniformIndex("relSize");
+	correctSizeIndex = shader->getUniformIndex("correctSize");
+	sizeIndex = shader->getUniformIndex("size");
 
-	coordsUVIndex = glGetUniformLocation(shader->shaderProgram, "textureCoords");
-	textureSamplerIndex = glGetUniformLocation(shader->shaderProgram, "textureSampler");
+	coordsUVIndex = shader->getUniformIndex("textureCoords");
+	textureSamplerIndex = shader->getUniformIndex("textureSampler");
 
 	texture->setSampler(shader, textureSamplerIndex, 0); /////////////////////////////////////////Используя эту функцию, можно добавить что то типо нормаль мапы и тд. Короче передать несколько фоток в шейдер
 
@@ -42,16 +42,16 @@ VAO::VAO(Shader* shader, VBO modelVBO, IBO modelIBO, VBO textureUV)
 
 	glGenVertexArrays(1, &indexVAO);
 	shader->linkToVAO(this);
-	worldPosIndex = glGetUniformLocation(shader->shaderProgram, "worldPos");
-	localPosIndex = glGetUniformLocation(shader->shaderProgram, "localPos");
-	angleIndex = glGetUniformLocation(shader->shaderProgram, "angle");
-	colorIndex = glGetUniformLocation(shader->shaderProgram, "Color");
-	relSizeIndex = glGetUniformLocation(shader->shaderProgram, "relSize");
-	correctSizeIndex = glGetUniformLocation(shader->shaderProgram, "correctSize");
-	sizeIndex = glGetUniformLocation(shader->shaderProgram, "size");
+	worldPosIndex = shader->getUniformIndex("worldPos");
+	localPosIndex = shader->getUniformIndex("localPos");
+	angleIndex = shader->getUniformIndex("angle");
+	colorIndex = shader->getUniformIndex("Color");
+	relSizeIndex = shader->getUniformIndex("relSize");
+	correctSizeIndex = shader->getUniformIndex("correctSize");
+	sizeIndex = shader->getUniformIndex("size");
 
-	coordsUVIndex = glGetUniformLocation(shader->shaderProgram, "textureCoords");
-	textureSamplerIndex = glGetUniformLocation(shader->shaderProgram, "textureSampler");
+	coordsUVIndex = shader->getUniformIndex("textureCoords");
+	textureSamplerIndex = shader->getUniformIndex("textureSampler");
 	
 	shader->useShaderProgram();
 

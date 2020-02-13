@@ -1,14 +1,7 @@
 #include "VAO.h"
 #include "Shader.h"
 
-Shader::Shader()
-{
-	vertexShader = NULL;
-	fragmentShader = NULL;
-	shaderProgram = NULL;
-	pathVertex = NULL;
-	pathFragment = NULL;
-}
+
 Shader::Shader(const GLchar* pathVertex, const GLchar* pathFragment)
 {
 	this->pathVertex = pathVertex;
@@ -188,6 +181,105 @@ void Shader::updateData(VAO * vao, GLuint IDAttributeInArray, GLsizeiptr sizeDat
 		vao->modelVBO.UpdateData(sizeData, data, typeDraw);
 	}
 }
+
+GLuint Shader::getUniformIndex(const GLchar* name)
+{
+	if (name == nullptr)
+	{
+		std::cout << "Ошибка при получения доступа к uniform в  Shader::getUniformIndex(const GLchar* name)" << std::endl;
+		throw;
+	}
+	else
+	{
+		return uniformMap[name];;
+	}
+}
+
+GLuint Shader::createUniformIndex(const GLchar* name)
+{
+	GLuint index = glGetUniformLocation(shaderProgram, name);
+	uniformMap[name] = index;
+	return index;
+}
+
+GLuint Shader::createUniformIndex(Shader* shader, const GLchar* name)
+{
+	GLuint index = glGetUniformLocation(shader->shaderProgram, name);
+	return index;
+}
+
+void Shader::setUnifrom(const GLchar* name, GLint value)
+{
+
+	GLuint index = uniformMap[name];
+	if (index == 0)
+	{
+		std::cout << "Ошибка при получения доступа к uniform в  Shader::setUniform(const GLchar* name, GLint value)" << std::endl;
+		throw;
+	}
+	else
+	{
+		glUniform1i(index, value);
+	}
+}
+
+void Shader::setUnifrom(const GLchar* name, GLfloat value)
+{
+
+	GLuint index = uniformMap[name];
+	if (index == 0)
+	{
+		std::cout << "Ошибка при получения доступа к uniform в  Shader::setUniform(const GLchar* name, GLfloat value)" << std::endl;
+		throw;
+	}
+	else
+	{
+		glUniform1f(index, value);
+	}
+}
+
+void Shader::setUnifrom(const GLchar* name, glm::vec2 value)
+{
+	GLuint index = uniformMap[name];
+	if (index == 0)
+	{
+		std::cout << "Ошибка при получения доступа к uniform в  Shader::setUniform(const GLchar* name, glm::vec2 value)" << std::endl;
+		throw;
+	}
+	else
+	{
+		glUniform2f(index, value.x, value.y);
+	}
+}
+
+void Shader::setUnifrom(const GLchar* name, glm::vec3 value)
+{
+	GLuint index = uniformMap[name];
+	if (index == 0)
+	{
+		std::cout << "Ошибка при получения доступа к uniform в  Shader::setUniform(const GLchar* name, glm::vec3 value)" << std::endl;
+		throw;
+	}
+	else
+	{
+		glUniform3f(index, value.x, value.y, value.z);
+	}
+}
+
+void Shader::setUnifrom(const GLchar* name, glm::vec4 value)
+{
+	GLuint index = uniformMap[name];
+	if (index == 0)
+	{
+		std::cout << "Ошибка при получения доступа к uniform в  Shader::setUniform(const GLchar* name, glm::vec4 value)" << std::endl;
+		throw;
+	}
+	else
+	{
+		glUniform4f(index, value.x, value.y, value.z, value.w);
+	}
+}
+
 
 
 

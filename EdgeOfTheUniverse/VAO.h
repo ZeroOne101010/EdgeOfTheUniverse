@@ -31,7 +31,7 @@ public:
 
 	std::vector<VBO> vbo;
 	Shader* shader = new DefaultShader();
-	Texture* texture = new Texture("Resources/Textures/DefaultTexture3.png");
+	Texture* texture = new Texture();
 	FloatRect textureRect = FloatRect(0, 0, 1, 1);
 
 	VAO(VBO modelVBO, IBO modelIBO, VBO textureUV);
@@ -39,8 +39,6 @@ public:
 	~VAO();
 
 	void setTexture(Texture texture);
-
-	void setTextureRect(FloatRect rect);
 
 	void setColor();
 	

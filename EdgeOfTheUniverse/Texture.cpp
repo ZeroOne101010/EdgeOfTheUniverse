@@ -1,15 +1,6 @@
 #include "Texture.h"
 
 
-
-Texture::Texture()
-{
-	index = NULL;
-	width = NULL;
-	height = NULL;
-	image = nullptr;
-}
-
 Texture::Texture(const char* path)
 {
 	glGenTextures(1, &index);
