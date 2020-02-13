@@ -6,6 +6,7 @@ Container::Container()
 	obj->Position = glm::vec2(0, 0);
 	obj->Color = glm::vec4(0.5f, 1, 0.8f, 1);
 	obj->Origin = glm::vec2(-obj->Size.x / 2, -obj->Size.y / 2);
+	obj->textureRect = FloatRect(0, 0, 10, 10);
 	b = new box();
 	b->Position = glm::vec2(-100, -100);
 }
@@ -19,6 +20,7 @@ Container::~Container()
 void Container::draw(Renderer* renderer, Alterable alters)
 {
 	alters *= *this;
+	b->Angle += 0.01f;
 	renderer->draw(obj, alters);
 	renderer->draw(b, alters);
 }

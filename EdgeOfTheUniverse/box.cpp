@@ -8,6 +8,7 @@ box::box()
 	o->Origin = glm::vec2(-o->Size.x / 2, -o->Size.y / 2);
 	aha = new kek();
 	aha->Position = glm::vec2(75, 0);
+	o->textureRect = FloatRect(102, 100, 2, 2);
 }
 
 box::~box()
@@ -19,6 +20,7 @@ box::~box()
 void box::draw(Renderer* renderer, Alterable alters)
 {
 	alters *= *this;
+	k += 1;
 	renderer->draw(o, alters);
 	renderer->draw(aha, alters);
 

@@ -6,11 +6,12 @@ uniform vec4 Color;
 
 uniform float v[300];
 uniform sampler2D textureSampler;
- vec2 coords;
+uniform vec4 textureCoords;
+vec2 coords;
 
 void main()
 {
-	coords = vec2(CoordsUV.x * 2, CoordsUV.y * 2);
+	coords = vec2(CoordsUV.x * textureCoords.z + textureCoords.x, CoordsUV.y * textureCoords.w + textureCoords.y);
 	vec4 tColor = texture(textureSampler, coords) * Color;
 //	if(tColor.w < 1)
 //	{

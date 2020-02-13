@@ -32,10 +32,16 @@ public:
 	std::vector<VBO> vbo;
 	Shader* shader = new DefaultShader();
 	Texture* texture = new Texture("Resources/Textures/DefaultTexture3.png");
+	FloatRect textureRect = FloatRect(0, 0, 1, 1);
 
 	VAO(VBO modelVBO, IBO modelIBO, VBO textureUV);
 	VAO(Shader* shader, VBO modelVBO, IBO modelIBO, VBO textureUV);
 	~VAO();
+
+	void setTexture(Texture texture);
+
+	void setTextureRect(FloatRect rect);
+
 	void setColor();
 	
 	void updateData(GLuint IDAttributeInArray, GLsizeiptr sizeData, GLfloat* data, GLenum typeDraw);
@@ -49,13 +55,19 @@ private:
 	glm::vec2 drawOrigin;
 	glm::vec2 drawRelSize = glm::vec2(1, 1);
 	glm::vec2 drawSize;
+	GLfloat drawAngle;
+
 	GLuint localPosIndex;
 	GLuint worldPosIndex;
-	GLuint rotationMatrixIndex;
+	GLuint angleIndex;
 	GLuint colorIndex;
 	GLuint relSizeIndex;
 	GLuint correctSizeIndex;
 	GLuint sizeIndex;
+
+	GLuint coordsUVIndex;
+	GLuint textureSamplerIndex;
+
 	glm::vec2 position;
 	glm::vec2 origin;
 	glm::vec2 relSize = glm::vec2(1, 1);

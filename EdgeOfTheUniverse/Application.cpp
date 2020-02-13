@@ -6,6 +6,7 @@ Application::Application()
 
     k = new Container();
 	k->Position = glm::vec2(500, 500);
+
 }
 
 Application::~Application()
@@ -26,18 +27,26 @@ void Application::GameLoop()
 	{
 		window->PollEvents();
 		window->Clear(glm::vec3(20, 20, 20));
-		k->Rotation = glm::rotate(k->Rotation, 1.0f, glm::vec3(0, 0, 1));
-		g->rotation = glm::rotate(g->rotation, 1.0f, glm::vec3(0, 0, 1));
+		k->Angle += 0.01f;
+		//k->Position += glm::vec2(-1, 0);
+		//g->rotation = glm::rotate(g->rotation, 1.0f, glm::vec3(0, 0, 1));
 		g->Position += glm::vec2(1, 0);
- 		window->draw(k);
-		for (int i = 0; i < 50000; i++) 
-		{
-			int k[4];
-			for (int l = 0; l < 4; l++)
-				k[l] = cos(k[l]) * sin(k[l]);
-			//window->draw(g);
-		}
 
+		//g->Angle += 0.01f;
+
+		//glm::mat2 opa = glm::rotate(opa, 1.0f, glm::vec2(0, 0));
+ 		window->draw(k);
+
+		int n = 0;
+
+		//for (int i = 0; i < 8100; i++) 
+		//{
+			//window->draw(g);
+		//}
+
+
+		n = 0;
+		//window->draw(g);
 		window->Display();
 	}
 	glfwTerminate();

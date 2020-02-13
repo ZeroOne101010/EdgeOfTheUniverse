@@ -11,14 +11,19 @@ class Texture
 {
 public:
 	GLuint index;
-	FloatRect rect;
 	int width, height;
 	unsigned char* image;
 	Texture();
 	Texture(const char* path);
 	~Texture();
-	void setSampler(Shader* shader);
+
+	void setTextureRect(GLuint index, FloatRect rect);
+	void setTextureRect(GLuint index, glm::vec2 position, glm::vec2 size);
+	void setTextureRect(GLuint index, float x, float y, float width, float height);
+
+	void setSampler(Shader* shader, GLuint indexSampler, GLuint value);
 private: 
 	VBO vboUV;
+	bool haveSampler;
 };
 

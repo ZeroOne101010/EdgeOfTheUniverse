@@ -18,7 +18,12 @@ Texture::Texture(const char* path)
 	glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, width, height, 0, GL_RGBA, GL_UNSIGNED_BYTE, image);
 	glGenerateMipmap(GL_TEXTURE_2D);
 	SOIL_free_image_data(image);
+	//glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
+	//GLint swizzleMask[] = { GL_ZERO, GL_ZERO, GL_ZERO, GL_RED };
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
 	glBindTexture(GL_TEXTURE_2D, 0);
+
+
 }
 
 Texture::~Texture()
@@ -26,8 +31,26 @@ Texture::~Texture()
 	delete[] image;
 }
 
-void Texture::setSampler(Shader* shader)
+void Texture::setTextureRect(GLuint index, FloatRect rect)
 {
-	glUniform1i(glGetUniformLocation(shader->shaderProgram, "textureSampler"), 0);
-	DefaultShader kek;
+	glUniform4f(index, rect.positionX, rect.positionY, rect.sizeX, rect.sizeY);
+}
+
+void Texture::setTextureRect(GLuint index, glm::vec2 position, glm::vec2 size)
+{
+	glUniform4f(index, position.x, position.y, size.x, size.y);
+}
+
+void Texture::setTextureRect(GLuint index, float x, float y, float width, float height)
+{
+	glUniform4f(index, x, y, width, height);
+}
+
+void Texture::setSampler(Shader* shader, GLuint indexSampler,  GLuint value)
+{
+	if (haveSampler)
+	{
+		glUniform1i(indexSampler, value);
+		haveSampler = false;
+	}
 }
