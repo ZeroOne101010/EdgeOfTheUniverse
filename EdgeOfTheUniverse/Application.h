@@ -1,23 +1,19 @@
 #pragma once
-#define GLEW_STATIC
 #include <GL/glew.h>
 #include <GLFW/glfw3.h>
-#include "Initialization.h"
-#include "VAO.h"
-#include "VBO.h"
+#include "OpenGLEngine/RectangleShape.h"
+#include "OpenGLEngine/RenderWindow.h"
+#include "Registery.h"
 #include <vector>
-#include "RectangleShape.h"
-#include "RenderWindow.h"
-#include "Container.h"
+#include "Game.h"
+#include "Content.h"
 class Application
 {
 public:
 	Application();
 	void GameLoop();
 	RenderWindow* window;
-	RectangleShape* hero;
-	RectangleShape* obj;
-	Container* k;
+	Game* game;
 
 };
 
