@@ -200,7 +200,7 @@ unsigned char* ConvertRegionData::createRegionFile(int regionX, int regionY, int
     std::string path = ConvertRegionData::getPath(directoryToMaps + directioryToRegions + name + extensionRegion);
 
 
-    std::ofstream writer(path);
+    std::ofstream writer(path, std::ofstream::binary);
     writer.write(reinterpret_cast<char*>(data), dataSize);
     writer.close();
     size = dataSize;
@@ -268,7 +268,7 @@ void ConvertRegionData::saveChunkDataToRegion(Chunk* chunk, World* world)
 
     std::ifstream reader;
 
-    reader.open(path);
+    reader.open(path, std::ifstream::binary);
 
     unsigned char* data = nullptr;
     int sizeData = 0;
@@ -277,11 +277,20 @@ void ConvertRegionData::saveChunkDataToRegion(Chunk* chunk, World* world)
 
     std::vector<unsigned char> fileData;
 
+    if (chunk->chunkX == 27)
+    {
+        int k = 1;
+    }
+
     if (reader.is_open())
     {
         char ch = 0;
         while (reader.get(ch))
         {
+            if (fileData.size() == 105)
+            {
+                int k = 1;
+            }
             fileData.push_back(ch);
         }
         data = fileData.data();
@@ -425,6 +434,8 @@ void ConvertRegionData::notHaveChunk(unsigned long pointer, Chunk* chunk, int re
 
     ConvertChunkToData::setValueForData(countFillChunks + 1, sizeRegionPos * 2, sizeAddress, data, STRIDE);
 
+
+    long value = chunk->chunkX + (int)(std::pow(2, sizeRegionPos * 8) / 2);
     ConvertChunkToData::setValueForData(chunk->chunkX + (int)(std::pow(2, sizeRegionPos * 8) / 2), pointer, sizeRegionPos, data, STRIDE);
     pointer += sizeRegionPos;
 
@@ -455,7 +466,7 @@ void ConvertRegionData::notHaveChunk(unsigned long pointer, Chunk* chunk, int re
     std::string path = ConvertRegionData::getPath(directoryToMaps + directioryToRegions + name + extensionRegion);
 
 
-    std::ofstream writer(path);
+    std::ofstream writer(path, std::ofstream::binary);
     writer.write(reinterpret_cast<char*>(data), size);
     writer.close();
 }
@@ -607,7 +618,7 @@ void ConvertRegionData::haveChunk(unsigned long pointer, Chunk* chunk, int regio
     std::string path = ConvertRegionData::getPath(directoryToMaps + directioryToRegions + name + extensionRegion);
 
 
-    std::ofstream writer(path);
+    std::ofstream writer(path, std::ofstream::binary);
     writer.write(reinterpret_cast<char*>(data), size);
     writer.close();
 
@@ -679,7 +690,7 @@ Chunk* ConvertRegionData::getChunkFromDataRegion(int chunkX, int chunkY, World* 
 
     std::ifstream reader;
 
-    reader.open(path);
+    reader.open(path, std::ifstream::binary);
 
     unsigned char* data = nullptr;
     int sizeData = 0;

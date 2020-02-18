@@ -27,7 +27,7 @@ void ChunkThread::updateThread()
             id = chunkContainer.size() - 1;
             threadLocator.unlock();
 
-            //std::cout << chunkContainer.size() << std::endl;
+            std::cout << chunkContainer.size() << std::endl;
 
             loadChunkToWorld(chunkContainer[id]);
 
@@ -83,11 +83,6 @@ void ChunkThread::loadChunkToWorld(ChunkContainer container)
 {
     World* world = container.world;
 
-    if (container.chunkX == 0 && container.chunkY == 0)
-    {
-        int k = 1;
-    }
-
     Chunk* localChunk = ConvertRegionData::getChunkFromDataRegion(container.chunkX, container.chunkY, world);;
 
         if (localChunk == nullptr)
@@ -119,7 +114,12 @@ void ChunkThread::loadChunkToWorld(ChunkContainer container)
         }
         threadLocator.unlock();
 
-        std::cout << world->chunkPointer << std::endl;
+        //std::cout << world->chunkPointer << "   " << container.chunkX << " " << container.chunkY << std::endl;
+
+        //if (container.chunkX == 17 && container.chunkY == 19)
+        //{
+        //    int k = 1;
+        //}
 
         if (world->chunk[world->chunkPointer] != nullptr)
         {

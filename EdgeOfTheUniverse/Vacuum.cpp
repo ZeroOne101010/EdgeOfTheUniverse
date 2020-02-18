@@ -2,7 +2,7 @@
 
 Vacuum::Vacuum()
 {
-	color = glm::vec4(100, 100, 100, 150);
+	color = glm::vec4(200, 100, 200, 150);
 }
 
 Block* Vacuum::getNewBlock()

@@ -1,12 +1,18 @@
 #include "Game.h"
 #include "Map.h"
+#include "Mountains.h"
 
-Map::Map(Game* game)
+Map::Map(int sizeNumberMap, int seed, Game* game)
 {
+	this->rand = new RandomCoor(seed, sizeNumberMap);
 	this->game = game;
 	chunkThread = new ChunkThread();
 	chunkThread->start();
 	world = new World(0, this);
+
+	Mountains* mountains = new Mountains(-100, 100);
+
+	world->addBiome(mountains);
 	world->Position = vec2(0, 0);
 }
 

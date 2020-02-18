@@ -23,14 +23,9 @@ Chunk::Chunk(World* world, int chunkX, int chunkY)
 	for(int x = 0; x < sizeChunk; x++)
 		for (int y = 0; y < sizeChunk; y++)
 		{
-			block[x][y] = RegisteryBlocks::createBlock(chunkX * sizeChunk + x, chunkY * sizeChunk + y, false, world, 1);
-			backBlock[x][y] = RegisteryBlocks::createBlock(chunkX * sizeChunk + x, chunkY * sizeChunk + y, false, world, 2);
+			block[x][y] = RegisteryBlocks::createBlock(chunkX * sizeChunk + x, chunkY * sizeChunk + y, false, world, 0);
+			backBlock[x][y] = RegisteryBlocks::createBlock(chunkX * sizeChunk + x, chunkY * sizeChunk + y, false, world, 0);
 		}
-
-	//for (int x = 10; x < 15; x++)
-	//{
-	//	block[x][5] = RegisteryBlocks::createBlock(chunkX * sizeChunk + x, chunkY * sizeChunk + 5, false, world, 2);
-	//}
 }
 
 Chunk::~Chunk()

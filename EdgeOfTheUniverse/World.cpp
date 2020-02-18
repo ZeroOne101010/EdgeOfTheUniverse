@@ -1,5 +1,6 @@
 #include "Map.h"
 #include"Game.h"
+#include "RegisteryBiome.h"
 #include "World.h"
 
 #define OFFSET_CHUNK_DRAW 2
@@ -10,6 +11,7 @@ const int World::countActiveChunks = 100;
 
 World::World(int seed, Map* map)
 {
+    rand = new RandomCoor(10000, seed);
     this->seed = seed;
     this->map = map;
     countChunks = 0;
@@ -19,6 +21,18 @@ World::World(int seed, Map* map)
     {
         chunk[x] = nullptr;
     }
+
+    //for (int x = 0; x < 28; x++)
+    //{
+    //    if (x == 26)
+    //    {
+    //        int k = 1;
+    //    }
+    //    chunk[x] = new Chunk(this, x, 0);
+    //    ConvertRegionData::saveChunkDataToRegion(chunk[x], this);
+    //}
+
+    //int k = 1;
 
     //for (int x = countActiveChunks - 1; x >= 0; x--)
     //{
@@ -39,7 +53,7 @@ World::World(int seed, Map* map)
  //   //chunk[0] = getChunk(0, 0);
  //   //chunkPointer++;
 
-    //6setBlocks(0, 0, 10, 10, 2, false);
+    //setBlocks(0, 0, 10, 10, 2, false);
     //setBlock(0, 0, false, 2);
 }
 
@@ -50,17 +64,10 @@ World::~World()
     {
         if (chunk[x] != nullptr)
         {
-            //if (chunk[x]->chunkX == 0 && chunk[x]->chunkY == 0)
-            //{
-            //    for (int y = 0; y < Chunk::sizeChunk; y++)
-            //    {
-            //        for (int z = 0; z < Chunk::sizeChunk; z++)
-            //        {
-            //            std::cout << chunk[x]->block[z][y]->id;
-            //        }
-            //        std::cout << std::endl;
-            //    }
-            //}
+            if (chunk[x]->chunkX == 0 && chunk[x]->chunkY == 0)
+            {
+                int k = 1;
+            }
             ConvertRegionData::saveChunkDataToRegion(chunk[x], this);
         }
     }
@@ -68,6 +75,8 @@ World::~World()
     {
         if (chunk[x] != nullptr) delete chunk[x];
     }
+    delete rand;
+    delete defaulBiome;
 }
 
 Entity* World::addEntity(int posX, int posY, int id)
@@ -80,7 +89,119 @@ Entity* World::addEntity(int posX, int posY, int id)
 
 Chunk* World::generationChunk(int chunkX, int chunkY)
 {
-    return new Chunk(this, chunkX, chunkY);
+    Chunk* chunk = nullptr;
+    chunk = getChunkBiome(chunkX, chunkY)->generateChunk(chunkX, chunkY, this);
+    return chunk;
+}
+
+void World::addBiome(Biome* biome)
+{
+    biome->id = this->biome.size();
+    this->biome.push_back(biome);
+}
+
+Biome* World::getChunkBiome(int chunkX, int chunkY)
+{
+    Biome* findedBiome = defaulBiome;
+
+    int maxHigh = 0;
+
+    for (int x = 0; x < biome.size(); x++)
+    {
+        if (biome[x]->toSpawnBiome(chunkX, chunkY, this->rand))
+        {
+            findedBiome = biome[x];
+        }
+    }
+    return findedBiome;
+}
+
+Biome* World::getBlockBiome(int posX, int posY)
+{
+    int chunkX = 0;
+    int chunkY = 0;
+
+    if (posX < 0)
+    {
+        posX = abs(posX) % Chunk::sizeChunk > 0 ? chunkX = posX / Chunk::sizeChunk - 1 : chunkX = posX / Chunk::sizeChunk;
+    }
+    else
+    {
+        chunkX = posX / Chunk::sizeChunk;
+    }
+
+
+    if (posY < 0)
+    {
+        posY = abs(posY) % Chunk::sizeChunk > 0 ? chunkY = posY / Chunk::sizeChunk - 1 : chunkY = posY / Chunk::sizeChunk;
+    }
+    else
+    {
+        chunkX = posX / Chunk::sizeChunk;
+    }
+
+    int rpX = posX - chunkX * Chunk::sizeChunk;
+    int rpY = posY - chunkY * Chunk::sizeChunk;
+
+
+    Biome* biomeUp = getChunkBiome(chunkX, chunkY - 1);
+    Biome* biomeRight = getChunkBiome(chunkX + 1, chunkY);
+    Biome* biomeDown = getChunkBiome(chunkX, chunkY + 1);
+    Biome* biomeLeft = getChunkBiome(chunkX - 1, chunkY);
+
+    Biome* centreBiome = getChunkBiome(chunkX, chunkY);
+
+    int side = 4;
+
+    if (rpY < biomeUp->offsetSmoothBorder)
+    {
+        if (centreBiome->id < biomeUp->id)
+        {
+            side = 0;
+        }
+    }
+    else if (rpX > Chunk::sizeChunk - biomeRight->offsetSmoothBorder)
+    {
+        if (centreBiome->id < biomeRight->id)
+        {
+            side = 1;
+        }
+    }
+    else if (rpY > Chunk::sizeChunk - biomeDown->offsetSmoothBorder)
+    {
+        if (centreBiome->id < biomeDown->id)
+        {
+            side = 2;
+        }
+    }
+    else if (rpX < biomeLeft->offsetSmoothBorder)
+    {
+        if (centreBiome->id < biomeLeft->id)
+        {
+            side = 3;
+        }
+    }
+
+    Biome* biome = centreBiome;
+
+    if (side == 0)
+    {
+        biome = biomeUp;
+    }
+    else if (side == 1)
+    {
+        biome = biomeRight;
+    }
+    else if (side == 2)
+    {
+        biome = biomeDown;
+    }
+    else if (side == 3)
+    {
+        biome = biomeLeft;
+    }
+
+    return biome;
 }
 
 Chunk** World::getChunk(int chunkX, int chunkY)
@@ -461,9 +582,9 @@ void World::draw(Renderer* renderer, Alterable alters)
                         Block* backBlock = (*chunkRenderer[x])->backBlock[y][z];
                         if (block != nullptr)
                         {
-                            if (block->pX > rendererBlockX && block->pX < maxBlockXInCamera)
+                            if (block->pX > rendererBlockX&& block->pX < maxBlockXInCamera)
                             {
-                                if (block->pY > rendererBlockY && block->pY < maxBlockYInCamera)
+                                if (block->pY > rendererBlockY&& block->pY < maxBlockYInCamera)
                                 {
                                     if (backBlock != nullptr)
                                     {

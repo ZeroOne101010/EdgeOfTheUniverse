@@ -3,7 +3,7 @@
 Game::Game(RenderWindow* window)
 {
 	this->window = window;
-	map = new Map(this);
+	map = new Map(1000, 345, this);
 }
 
 Game::~Game()

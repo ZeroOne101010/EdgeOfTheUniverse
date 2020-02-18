@@ -7,6 +7,9 @@
 #include "RegisteryEntity.h"
 #include "ConvertRegionData.h"
 #include "ICloseObject.h";
+#include "RandomCoor.h"
+#include "Biome.h"
+#include"BiomeAir.h"
 
 class Map;
 
@@ -24,9 +27,18 @@ public:
 	int chunkPointer = 0;
 	int seed;
 	vec2 camera = vec2(0, 0);
+	RandomCoor* rand;
+
+	std::vector<Biome*> biome;
 
 	std::vector<Entity*> entity;
 	Entity* addEntity(int posX, int posY, int id);
+
+	Biome* defaulBiome = new BiomeAir();
+	void addBiome(Biome* biome);
+	Biome* getChunkBiome(int chunkX, int chunkY);
+	Biome* getBlockBiome(int posX, int posY);
+
 
 	Chunk* generationChunk(int chunkX, int chunkY);
 	Chunk** getChunk(int chunkX, int chunkY);

@@ -26,16 +26,9 @@ int ConvertChunkToData::getValueFromData(unsigned long address, unsigned long of
     unsigned char* code = new unsigned char[offset];
     //13487571
     //124434
-    if (address != 124434)
+    for (int x = 0; x < offset; x++)
     {
-        for (int x = 0; x < offset; x++)
-        {
-            code[x] = data[address + x];
-        }
-    }
-    else
-    {
-        int k = 0;
+        code[x] = data[address + x];
     }
     int value = ByteHelper::set256To10(code, offset);
     delete[offset] code;

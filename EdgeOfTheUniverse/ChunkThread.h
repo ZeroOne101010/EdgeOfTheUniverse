@@ -1,7 +1,6 @@
 #pragma once
 #include <iostream>
 #include <thread>
-#include <vector>
 #include <mutex>
 #include <algorithm>
 #include "ConvertRegionData.h"
