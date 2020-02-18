@@ -1,6 +1,8 @@
 #include "RenderWindow.h"
 float RenderWindow::width;
 float RenderWindow::height;
+ glm::vec2 RenderWindow::correctSize;
+ bool RenderWindow::changeWindow = true;
 
 const int RenderWindow::sizeKeyState = 256;
 bool* RenderWindow::keyState = new bool[RenderWindow::sizeKeyState];
@@ -21,8 +23,6 @@ bool RenderWindow::getKeyState(int keyCode)
 
 RenderWindow::RenderWindow(GLfloat width, GLfloat height, const GLchar* winName)
 {
-	this->width = width;
-	this->height = height;
 	if (!glfwInit())
 	{
 		std::cout << "Failed to init glfw!" << std::endl;
@@ -80,7 +80,11 @@ void RenderWindow::setViewPort()
 {
 	int kwindth, kheight;
 	glfwGetFramebufferSize(window, &kwindth, &kheight);
-	width = kwindth;
-	height = kheight;
-	glViewport(0, 0, kwindth, kheight);
+	if (width - kwindth != 0 || height - kheight != 0)
+	{
+		width = kwindth;
+		height = kheight;
+		correctSize = glm::vec2(1.0f / RenderWindow::width, 1.0f / RenderWindow::height);
+		glViewport(0, 0, kwindth, kheight);
+	}
 }

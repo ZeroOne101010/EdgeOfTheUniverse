@@ -13,6 +13,7 @@ DefaultShader::DefaultShader(const GLchar* pathVertex, const GLchar* pathFragmen
 
 		coordsUVIndex = createUniformIndex("textureCoords");
 		textureSamplerIndex = createUniformIndex("textureSampler");
+		optimizeMode = createUniformIndex("optimizeMode");
 
 		useShaderProgram();
 	}

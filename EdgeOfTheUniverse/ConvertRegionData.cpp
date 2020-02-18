@@ -268,6 +268,8 @@ void ConvertRegionData::saveChunkDataToRegion(Chunk* chunk, World* world)
 
     std::ifstream reader;
 
+    reader.open(path);
+
     unsigned char* data = nullptr;
     int sizeData = 0;
 
@@ -518,9 +520,11 @@ void ConvertRegionData::haveChunk(unsigned long pointer, Chunk* chunk, int regio
 
     int offsetChunk = newSizeChunk - oldSizeChunk;
 
+    int sizeNewRegionData = 0;
+
     if (offsetChunk > 0) // Смещать вправо
     {
-        int sizeNewRegionData = (size - oldSizeChunk) + newSizeChunk;
+        sizeNewRegionData = (size - oldSizeChunk) + newSizeChunk;
         byte* newRegionData = new byte[sizeNewRegionData];
         for (int x = 0; x < size; x++)
         {
@@ -552,7 +556,7 @@ void ConvertRegionData::haveChunk(unsigned long pointer, Chunk* chunk, int regio
         {
             data[x] = data[x - offsetChunk];
         }
-        int sizeNewRegionData = (size - oldSizeChunk) + newSizeChunk;
+        sizeNewRegionData = (size - oldSizeChunk) + newSizeChunk;
         byte* newRegionData = new byte[sizeNewRegionData];
         for (int x = 0; x < sizeNewRegionData; x++)
         {
@@ -606,6 +610,11 @@ void ConvertRegionData::haveChunk(unsigned long pointer, Chunk* chunk, int regio
     std::ofstream writer(path);
     writer.write(reinterpret_cast<char*>(data), size);
     writer.close();
+
+    if (offsetChunk > 0 || offsetChunk < 0)
+    {
+        delete[sizeNewRegionData] data;
+    }
 }
 
 Chunk* ConvertRegionData::getChunkFromDataRegion(int chunkX, int chunkY, World* world)
@@ -669,6 +678,8 @@ Chunk* ConvertRegionData::getChunkFromDataRegion(int chunkX, int chunkY, World* 
     std::string path = ConvertRegionData::getPath(directoryToMaps + directioryToRegions + name + extensionRegion);
 
     std::ifstream reader;
+
+    reader.open(path);
 
     unsigned char* data = nullptr;
     int sizeData = 0;

@@ -27,10 +27,10 @@ Chunk::Chunk(World* world, int chunkX, int chunkY)
 			backBlock[x][y] = RegisteryBlocks::createBlock(chunkX * sizeChunk + x, chunkY * sizeChunk + y, false, world, 2);
 		}
 
-	for (int x = 10; x < 15; x++)
-	{
-		block[x][5] = RegisteryBlocks::createBlock(chunkX * sizeChunk + x, chunkY * sizeChunk + 5, false, world, 2);
-	}
+	//for (int x = 10; x < 15; x++)
+	//{
+	//	block[x][5] = RegisteryBlocks::createBlock(chunkX * sizeChunk + x, chunkY * sizeChunk + 5, false, world, 2);
+	//}
 }
 
 Chunk::~Chunk()

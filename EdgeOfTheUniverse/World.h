@@ -29,18 +29,17 @@ public:
 	Entity* addEntity(int posX, int posY, int id);
 
 	Chunk* generationChunk(int chunkX, int chunkY);
-	Chunk* getChunk(int chunkX, int chunkY);
-	Chunk* getChunkWithoutThread(int chunkX, int chunkY);
-	Chunk* getChunkByBlockPosition(int posX, int posY);
-	Block* getBlockByBlockPosition(int posX, int posY, bool isBackBlock);
+	Chunk** getChunk(int chunkX, int chunkY);
+	Chunk** getChunkWithoutThread(int chunkX, int chunkY);
+	Chunk** getChunkByBlockPosition(int posX, int posY);
+	Block** getBlockByBlockPosition(int posX, int posY, bool isBackBlock);
 	void updateCloseChunk(Chunk* chunk);
-	void setBlock(int blockX, int blockY, int id);
+	void setBlock(int blockX, int blockY, int id, bool isBackBlock);
+	void setBlocks(int blockX, int blockY, int width, int height, int id, bool isBackBlock);
 
 	void rendererBlock(Block* block, Renderer* renderer, Alterable alters);
-	void renderChunk(Renderer* renderer, Alterable alters);
 
 	virtual void draw(Renderer* renderer, Alterable alters) override;
-private:
 	int countChunks;
 	int chunkRendererSize = 0;
 	int rendererChunkX = 0;
@@ -54,6 +53,6 @@ private:
 	int oldWidth = 0;
 	int oldHeight = 0;
 	vec2 leftTopAngleCamera = vec2(0, 0);
-	Chunk** chunkRenderer = nullptr;
+	Chunk*** chunkRenderer = nullptr;
 };
 

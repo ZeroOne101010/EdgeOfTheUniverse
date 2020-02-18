@@ -26,7 +26,7 @@ public:
 	int pX = 0;
 	int pY = 0;
 	int id;
-
+	bool optimizeMode = true;
 
 	virtual Block* getNewBlock() = 0;
 	Block* createBlock(int pX, int pY, bool isBackBlock, World* world);

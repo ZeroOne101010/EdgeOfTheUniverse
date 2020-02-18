@@ -11,6 +11,7 @@ class Application
 {
 public:
 	Application();
+	~Application();
 	void GameLoop();
 	RenderWindow* window;
 	Game* game;

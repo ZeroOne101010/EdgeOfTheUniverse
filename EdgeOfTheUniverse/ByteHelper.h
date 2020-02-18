@@ -10,5 +10,6 @@ public:
 	static int* set10ToValue(int value, float res, int& size);
 	static unsigned char* set10To256(int value, int& size);
 	static float distance(glm::vec2 vec1, glm::vec2 vec2);
+	//static 
 };
 

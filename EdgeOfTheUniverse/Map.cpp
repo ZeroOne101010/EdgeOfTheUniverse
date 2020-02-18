@@ -13,8 +13,8 @@ Map::Map(Game* game)
 Map::~Map()
 {
 	chunkThread->close();
-	delete chunkThread;
 	delete world;
+	delete chunkThread;
 }
 
 void Map::draw(Renderer* renderer, Alterable alters)

@@ -21,10 +21,11 @@ public:
 	~RenderWindow();
 	GLFWwindow* window;
 	static float width, height;
+	static glm::vec2 correctSize;
+	static bool changeWindow;
 	void PollEvents();
 	void Clear(glm::vec3 color);
 	void Display();
-private:
 	void setViewPort();
 };
 

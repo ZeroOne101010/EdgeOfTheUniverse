@@ -2,6 +2,7 @@
 layout (location = 0) in vec3 position;
 layout (location = 1) in vec2 coordsUV;
 
+uniform int optimizeMode;
 uniform vec2 localPos;
 uniform vec2 worldPos;
 uniform vec2 relSize;
@@ -28,10 +29,19 @@ void main()
 //		vec2 p = vec2(correctSize.xy) * vec2(worldPos.xy) + (  vec2(relSize.xy) * vec2(size.xy) * vec2(correctSize.xy) * ( (  v   )) ) + vec2(correctSize.xy) * (  v1  );
 //		gl_Position = vec4(p, 0, 1);
 		
+		vec2 p = vec2(0, 0);
+
+		if(optimizeMode == 0)
+		{
 		float s = sin(angle);
 		float c = cos(angle);
 
-		vec2 p = correctSize * worldPos + (  relSize * size * correctSize * ( (  vec2(position.x * c + position.y * s, position.y * c - position.x * s)   )) ) + correctSize * (  vec2(localPos.x * c + localPos.y * s, localPos.y * c - localPos.x * s)  );
+		p = correctSize * worldPos + (  relSize * size * correctSize * ( (  vec2(position.x * c + position.y * s, position.y * c - position.x * s)   )) ) + correctSize * (  vec2(localPos.x * c + localPos.y * s, localPos.y * c - localPos.x * s)  );
+		}
+		else
+		{
+		p = correctSize * (worldPos +  size *  position.xy);
+		}
 		gl_Position = vec4(p, 0, 1);
 	
 	CoordsUV = coordsUV;

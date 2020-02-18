@@ -15,6 +15,7 @@ public:
 
 	GLuint coordsUVIndex;
 	GLuint textureSamplerIndex;
+	GLuint optimizeMode;
 
 	DefaultShader(const GLchar* pathVertex = "Resources/Shaders/DefaultShader.vert", const GLchar* pathFragment = "Resources/Shaders/DefaultShader.frag");
 	void setColor(GLfloat R, GLfloat G, GLfloat B, GLfloat A);

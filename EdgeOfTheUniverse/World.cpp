@@ -2,17 +2,18 @@
 #include"Game.h"
 #include "World.h"
 
-#define CONST_MOD 1
-#define OFFSET_DRAW 0
+#define OFFSET_CHUNK_DRAW 2
+#define OFFSET_BLOCK_DRAW_X 2
+#define OFFSET_BLOCK_DRAW_Y 2
 
-const int World::countActiveChunks = 50;
+const int World::countActiveChunks = 100;
 
 World::World(int seed, Map* map)
 {
-	this->seed = seed;
+    this->seed = seed;
     this->map = map;
-	countChunks = 0;
-	chunk = new Chunk * [countActiveChunks];
+    countChunks = 0;
+    chunk = new Chunk * [countActiveChunks];
     int size = 0;
     for (int x = 0; x < countActiveChunks; x++)
     {
@@ -34,28 +35,47 @@ World::World(int seed, Map* map)
  //       chunk[x] = nullptr;
  //   }
  //   camera = vec2(Chunk::sizeChunk * Block::sizeBlock * 2, 0);
-	////chunk[0] = new Chunk(this, 0, 0);
+    ////chunk[0] = new Chunk(this, 0, 0);
  //   //chunk[0] = getChunk(0, 0);
  //   //chunkPointer++;
 
-
-    //setBlock(Chunk::sizeChunk * 2 + 5, 5, 2);
+    //6setBlocks(0, 0, 10, 10, 2, false);
+    //setBlock(0, 0, false, 2);
 }
 
 World::~World()
 {
-	for (int x = 0; x < countActiveChunks; x++)
-	{
-		if (chunk[x] != nullptr) delete chunk[x];
-	}
+
+    for (int x = 0; x < countActiveChunks; x++)
+    {
+        if (chunk[x] != nullptr)
+        {
+            //if (chunk[x]->chunkX == 0 && chunk[x]->chunkY == 0)
+            //{
+            //    for (int y = 0; y < Chunk::sizeChunk; y++)
+            //    {
+            //        for (int z = 0; z < Chunk::sizeChunk; z++)
+            //        {
+            //            std::cout << chunk[x]->block[z][y]->id;
+            //        }
+            //        std::cout << std::endl;
+            //    }
+            //}
+            ConvertRegionData::saveChunkDataToRegion(chunk[x], this);
+        }
+    }
+    for (int x = 0; x < countActiveChunks; x++)
+    {
+        if (chunk[x] != nullptr) delete chunk[x];
+    }
 }
 
 Entity* World::addEntity(int posX, int posY, int id)
 {
-	Entity* localEntity = RegisteryEntity::createEntity(this, id);
-	localEntity->Position = glm::vec2(posX, posY);
-	entity.push_back(localEntity);
-	return localEntity;
+    Entity* localEntity = RegisteryEntity::createEntity(this, id);
+    localEntity->Position = glm::vec2(posX, posY);
+    entity.push_back(localEntity);
+    return localEntity;
 }
 
 Chunk* World::generationChunk(int chunkX, int chunkY)
@@ -63,7 +83,7 @@ Chunk* World::generationChunk(int chunkX, int chunkY)
     return new Chunk(this, chunkX, chunkY);
 }
 
-Chunk* World::getChunk(int chunkX, int chunkY)
+Chunk** World::getChunk(int chunkX, int chunkY)
 {
 
     Chunk** localChunk = nullptr;
@@ -86,102 +106,38 @@ Chunk* World::getChunk(int chunkX, int chunkY)
     {
         map->chunkThread->addChunkContainer(chunkX, chunkY, this);
     }
-
-    //if (chunkX == 0 && chunkY == 0)
-    //{
-    //    int k = 0;
-    //}
-
-    //Chunk* localChunk = nullptr;
-    //bool chunkFinded = false;
-
-    ////localChunk = chunkTable[new Vector2f(chunkX, chunkY)] as Chunk;
-
-    //for (int x = 0; x < countActiveChunks; x++)
-    //{
-    //    if (chunk[x] != nullptr)
-    //    {
-    //        if (chunkX == chunk[x]->chunkX && chunkY == chunk[x]->chunkY)
-    //        {
-    //            localChunk = chunk[x];
-    //            chunkFinded = true;
-    //            break;
-    //        }
-    //    }
-    //}
-
-    //if (chunkFinded == false)
-    //{
-    //    localChunk = ConvertRegionData::getChunkFromDataRegion(chunkX, chunkY, this);
-
-    //    if (localChunk == nullptr)
-    //    {
-    //        localChunk = generationChunk(chunkX, chunkY);
-    //    }
-
-    //    if (chunk[chunkPointer] != nullptr)
-    //    {
-    //        ConvertRegionData::saveChunkDataToRegion(chunk[chunkPointer], this);
-    //        //delete chunk[chunkPointer];
-    //        chunk[chunkPointer] = localChunk;
-    //    }
-    //    else
-    //    {
-    //        chunk[chunkPointer] = localChunk;
-    //    }
-
-    //    chunkPointer++;
-    //    if (chunkPointer >= countActiveChunks)
-    //    {
-    //        chunkPointer = 0;
-    //    }
-
-    //}
-    if (localChunk != nullptr)
-    {
-        return *localChunk;
-    }
-    else
-    {
-        return nullptr;
-    }
-
+    return localChunk;
 }
 
-Chunk* World::getChunkWithoutThread(int chunkX, int chunkY)
+Chunk** World::getChunkWithoutThread(int chunkX, int chunkY)
 {
     Chunk* localChunk = nullptr;
-    bool isFiend = false;
+    Chunk** ptrActiveChunk = nullptr;
+    bool chunkFinded = false;
+
+    //localChunk = chunkTable[new Vector2f(chunkX, chunkY)] as Chunk;
 
     for (int x = 0; x < countActiveChunks; x++)
     {
         if (chunk[x] != nullptr)
         {
-            if (chunk[x]->chunkX == chunkX && chunk[x]->chunkY)
+            if (chunkX == chunk[x]->chunkX && chunkY == chunk[x]->chunkY)
             {
-                isFiend = true;
                 localChunk = chunk[x];
+                ptrActiveChunk = &chunk[x];
+                chunkFinded = true;
                 break;
             }
         }
     }
 
-    if (!isFiend)
+    if (chunkFinded == false)
     {
         localChunk = ConvertRegionData::getChunkFromDataRegion(chunkX, chunkY, this);
+
         if (localChunk == nullptr)
         {
             localChunk = generationChunk(chunkX, chunkY);
-        }
-
-        if (chunk[chunkPointer] != nullptr)
-        {
-            delete chunk[chunkPointer];
-            chunk[chunkPointer] = localChunk;
-        }
-        else
-        {
-            chunk[chunkPointer] = localChunk;
         }
 
         chunkPointer++;
@@ -189,15 +145,53 @@ Chunk* World::getChunkWithoutThread(int chunkX, int chunkY)
         {
             chunkPointer = 0;
         }
+
+        float chunkPointerFinded = false;
+
+        while (!chunkPointerFinded)
+        {
+            if (chunk[chunkPointer] == nullptr)
+            {
+                chunkPointerFinded = true;
+            }
+            else if (chunk[chunkPointer]->chunkX < rendererChunkX || chunk[chunkPointer]->chunkX > rendererChunkX + rendererCountChunksInCameraX ||
+                chunk[chunkPointer]->chunkY < rendererChunkY || chunk[chunkPointer]->chunkY > rendererChunkY + rendererCountChunksInCameraY)
+            {
+                    chunkPointerFinded = true;
+            }
+            else
+            {
+                chunkPointer++;
+                if (chunkPointer > countActiveChunks - 1)
+                {
+                    chunkPointer = 0;
+                }
+            }
+        }
+
+        if (chunk[chunkPointer] != nullptr)
+        {
+            ConvertRegionData::saveChunkDataToRegion(chunk[chunkPointer], this);
+            delete chunk[chunkPointer];
+
+            chunk[chunkPointer] = localChunk;
+            ptrActiveChunk = &chunk[chunkPointer];
+        }
+        else
+        {
+            chunk[chunkPointer] = localChunk;
+            ptrActiveChunk = &chunk[chunkPointer];
+        }
+
     }
 
-    return localChunk;
+    return ptrActiveChunk;
 
 }
 
-Chunk* World::getChunkByBlockPosition(int posX, int posY)
+Chunk** World::getChunkByBlockPosition(int posX, int posY)
 {
-    Chunk* localChunk = nullptr;
+    Chunk** localChunk = nullptr;
 
     int chunkX = 0;
     int chunkY = 0;
@@ -240,44 +234,44 @@ Chunk* World::getChunkByBlockPosition(int posX, int posY)
     return localChunk;
 }
 
-Block* World::getBlockByBlockPosition(int posX, int posY, bool isBackBlock)
+Block** World::getBlockByBlockPosition(int posX, int posY, bool isBackBlock)
 {
 
-    Chunk* localChunk = getChunkByBlockPosition(posX, posY);
+    Chunk** localChunk = getChunkByBlockPosition(posX, posY);
 
     if (localChunk != nullptr)
     {
         int blockX = 0;
         int blockY = 0;
 
-        if (localChunk->chunkX < 0)
+        if ((*localChunk)->chunkX < 0)
         {
-            blockX = abs(localChunk->chunkX * Chunk::sizeChunk) - abs(posX);
+            blockX = abs((*localChunk)->chunkX * Chunk::sizeChunk) - abs(posX);
         }
         else
         {
-            blockX = posX - localChunk->chunkX * Chunk::sizeChunk;
+            blockX = posX - (*localChunk)->chunkX * Chunk::sizeChunk;
         }
 
 
 
 
-        if (localChunk->chunkY < 0)
+        if ((*localChunk)->chunkY < 0)
         {
-            blockY = abs(localChunk->chunkY * Chunk::sizeChunk) - abs(posY);
+            blockY = abs((*localChunk)->chunkY * Chunk::sizeChunk) - abs(posY);
         }
         else
         {
-            blockY = posY - localChunk->chunkY * Chunk::sizeChunk;
+            blockY = posY - (*localChunk)->chunkY * Chunk::sizeChunk;
         }
 
         if (isBackBlock)
         {
-            return localChunk->backBlock[blockX][blockY];
+            return &(*localChunk)->backBlock[blockX][blockY];
         }
         else
         {
-            return localChunk->block[blockX][blockY];
+            return &(*localChunk)->block[blockX][blockY];
         }
     }
     else
@@ -287,12 +281,29 @@ Block* World::getBlockByBlockPosition(int posX, int posY, bool isBackBlock)
 
 }
 
-void World::setBlock(int blockX, int blockY, int id)
+void World::setBlock(int blockX, int blockY, int id, bool isBackBlock)
 {
-    Chunk* chunk = getChunkWithoutThread(blockX / Chunk::sizeChunk, blockY / Chunk::sizeChunk);
+    Chunk** chunk = getChunkWithoutThread(blockX / Chunk::sizeChunk, blockY / Chunk::sizeChunk);
     int blockInChunkX = blockX % Chunk::sizeChunk;
     int blockInChunkY = blockY % Chunk::sizeChunk;
-    chunk->block[blockInChunkX][blockInChunkY] = RegisteryBlocks::createBlock(chunk->chunkX * Chunk::sizeChunk + blockInChunkX, chunk->chunkY * Chunk::sizeChunk + blockInChunkY, false, this, id);
+
+    if (!isBackBlock)
+    {
+        (*chunk)->block[blockInChunkX][blockInChunkY] = RegisteryBlocks::createBlock((*chunk)->chunkX * Chunk::sizeChunk + blockInChunkX, (*chunk)->chunkY * Chunk::sizeChunk + blockInChunkY, false, this, id);
+    }
+    else
+    {
+        (*chunk)->backBlock[blockInChunkX][blockInChunkY] = RegisteryBlocks::createBlock((*chunk)->chunkX * Chunk::sizeChunk + blockInChunkX, (*chunk)->chunkY * Chunk::sizeChunk + blockInChunkY, false, this, id);
+    }
+}
+
+void World::setBlocks(int blockX, int blockY, int width, int height, int id, bool isBackBlock)
+{
+    for (int x = blockX; x < blockX + width; x++)
+        for (int y = blockY; y < blockY + height; y++)
+        {
+            setBlock(x, y, id, isBackBlock);
+        }
 }
 
 void World::updateCloseChunk(Chunk* chunk)
@@ -314,71 +325,49 @@ void World::updateCloseChunk(Chunk* chunk)
 
 void World::rendererBlock(Block* block, Renderer* renderer, Alterable alters)
 {
-    if (block != nullptr)
-    {
-        renderer->draw(block, alters);
-    }
+    block->updateTextureBlock();
+    renderer->draw(block->rect, alters);
 }
 
-void World::renderChunk(Renderer* renderer, Alterable alters)
-{
-    for (int i = 0; i < chunkRendererSize; i++)
-    {
-        if (chunkRenderer[i] != nullptr)
-        {
-            int chunkBlockXToRender = 0;
-            int chunkBlockYToRender = 0;
-
-            int chunkMaxBlockXToRenderer = Chunk::sizeChunk;
-            int chunkMaxBlockYToRenderer = Chunk::sizeChunk;
-
-            int chunkBlockX = chunkRenderer[i]->chunkX * Chunk::sizeChunk;
-            int chunkBlockY = chunkRenderer[i]->chunkY * Chunk::sizeChunk;
-
-            int maxPositionCameraBlockX = rendererBlockX + rendererCountBlocksInCameraX;
-            int maxPositionCameraBlockY = rendererBlockY + rendererCountBlocksInCameraY;
-
-            if (chunkBlockX < rendererBlockX)
-            {
-                chunkBlockXToRender = (int)abs(rendererBlockX) % Chunk::sizeChunk;
-            }
-            if (chunkBlockY < rendererBlockY)
-            {
-                chunkBlockYToRender = (int)abs(rendererBlockY) % Chunk::sizeChunk;
-            }
-
-
-
-            if (chunkBlockX + Chunk::sizeChunk > maxPositionCameraBlockX)
-            {
-                chunkMaxBlockXToRenderer = (int)abs(maxPositionCameraBlockX) % Chunk::sizeChunk;
-            }
-            if (chunkBlockY + Chunk::sizeChunk > maxPositionCameraBlockY)
-            {
-                chunkMaxBlockYToRenderer = (int)abs(maxPositionCameraBlockY) % Chunk::sizeChunk;
-            }
-
-
-
-            //for (int x = chunkBlockXToRender; x < chunkMaxBlockXToRenderer; x++)
-            //    for (int y = chunkBlockYToRender; y < chunkMaxBlockYToRenderer; y++)
-            //    {
-            //        renderer->draw(chunkRenderer[i]->block[x][y], alters);
-            //    }
-            for (int x = chunkBlockXToRender; x < chunkMaxBlockXToRenderer; x++)
-                for (int y = chunkBlockYToRender; y < chunkMaxBlockYToRenderer; y++)
-                {
-                    renderer->draw(chunkRenderer[i]->block[x][y], alters);
-                }
-        }
-    }
-}
+//void World::renderChunk(Renderer* renderer, Alterable alters)
+//{
+//    for (int i = 0; i < chunkRendererSize; i++)
+//    {
+//        if (chunkRenderer[i] != nullptr)
+//            if (*(chunkRenderer[i]) != nullptr)
+//            {
+//                int chunkBlockXToRender = 0;
+//                int chunkBlockYToRender = 0;
+//
+//                int chunkMaxBlockXToRenderer = Chunk::sizeChunk;
+//                int chunkMaxBlockYToRenderer = Chunk::sizeChunk;
+//
+//                /*int chunkBlockX = (*(chunkRenderer[i]))->chunkX * Chunk::sizeChunk;
+//                int chunkBlockY = (*(chunkRenderer[i]))->chunkY * Chunk::sizeChunk;*/
+//                int chunkBlockX = 0;
+//                int chunkBlockY = 0;
+//
+//                int maxPositionCameraBlockX = 0;
+//                int maxPositionCameraBlockY = 0;
+//
+//
+//
+//                for (int x = 0; x < 30; x++)
+//                    for (int y = 0; y < 30; y++)
+//                    {
+//                        renderer->draw((*(chunkRenderer[i]))->block[x][y], alters);
+//                    }
+//
+//
+//            }
+//    }
+//}
 
 void World::draw(Renderer* renderer, Alterable alters)
 {
     alters *= *this;
 
-    float speed = 10;
+    float speed = 20;
 
     if (RenderWindow::getKeyState(GLFW_KEY_W))
     {
@@ -398,67 +387,99 @@ void World::draw(Renderer* renderer, Alterable alters)
         camera += vec2(-speed, 0);
     }
 
-    vec2 sizeCamera = vec2(RenderWindow::width + OFFSET_DRAW, RenderWindow::height + OFFSET_DRAW);
+
+
+    vec2 sizeCamera = vec2(RenderWindow::width, RenderWindow::height);
     leftTopAngleCamera = camera - vec2(sizeCamera.x / 2, sizeCamera.y / 2);
 
     if (oldWidth - sizeCamera.x != 0 || oldHeight - sizeCamera.y != 0)
     {
-       /* oldWidth = sizeCamera.x;
+        RenderWindow::changeWindow = true;
+        oldWidth = sizeCamera.x;
         oldHeight = sizeCamera.y;
-
-        rendererCountBlocksInCameraX = sizeCamera.x / Block::sizeBlock;
-        rendererCountBlocksInCameraY = sizeCamera.y / Block::sizeBlock;
-
-        blocksToRenderer = new Block ** [rendererCountBlocksInCameraX];
-        for (int x = 0; x < rendererCountBlocksInCameraX; x++)
-        {
-            blocksToRenderer[x] = new Block * [rendererCountBlocksInCameraY];
-        }
-
-        std::cout << "kek" << std::endl;*/
-        sizeCamera = vec2(RenderWindow::width + OFFSET_DRAW, RenderWindow::height + OFFSET_DRAW);
-        leftTopAngleCamera = camera - vec2(sizeCamera.x / 2, sizeCamera.y / 2);
 
         rendererBlockX = leftTopAngleCamera.x / Block::sizeBlock;
         rendererBlockY = leftTopAngleCamera.y / Block::sizeBlock;
 
-        rendererCountBlocksInCameraX = sizeCamera.x / Block::sizeBlock;
-        rendererCountBlocksInCameraY = sizeCamera.y / Block::sizeBlock;
-
         rendererChunkX = rendererBlockX / Chunk::sizeChunk;
         rendererChunkY = rendererBlockY / Chunk::sizeChunk;
-        //Вместо того, чтобы использовать % для более точного определения размера экрана, эффективней просто прибавлять еденицу( а ещё так меньше писать) )
-        //В качестве еденицы я создал макрос CONST_MOD, шоб не запутаться :D
-        rendererCountChunksInCameraX = rendererCountBlocksInCameraX / Chunk::sizeChunk + CONST_MOD;
-        rendererCountChunksInCameraY = rendererCountBlocksInCameraY / Chunk::sizeChunk + CONST_MOD;
+
+        rendererCountBlocksInCameraX = oldWidth / Block::sizeBlock + OFFSET_BLOCK_DRAW_X * 2;
+        rendererCountBlocksInCameraY = oldHeight / Block::sizeBlock + OFFSET_BLOCK_DRAW_Y * 2;
+
+        rendererCountChunksInCameraX = rendererCountBlocksInCameraX / Chunk::sizeChunk + OFFSET_CHUNK_DRAW;
+        rendererCountChunksInCameraY = rendererCountBlocksInCameraY / Chunk::sizeChunk + OFFSET_CHUNK_DRAW;
+
+        delete[chunkRendererSize] chunkRenderer;
 
         chunkRendererSize = rendererCountChunksInCameraX * rendererCountChunksInCameraY;
-        chunkRenderer = new Chunk *[rendererCountChunksInCameraX];
 
+        chunkRenderer = new Chunk * *[chunkRendererSize];
     }
 
-    leftTopAngleCamera = camera - vec2(sizeCamera.x / 2, sizeCamera.y / 2);
+    map->chunkThread->threadLocator.lock();
+    rendererBlockX = leftTopAngleCamera.x / Block::sizeBlock - OFFSET_BLOCK_DRAW_X;
+    rendererBlockY = leftTopAngleCamera.y / Block::sizeBlock - OFFSET_BLOCK_DRAW_Y;
 
-    rendererChunkX = leftTopAngleCamera.x / (Chunk::sizeChunk * Block::sizeBlock);
-    rendererChunkY = leftTopAngleCamera.y / (Chunk::sizeChunk * Block::sizeBlock);
+    rendererChunkX = rendererBlockX / Chunk::sizeChunk;
+    rendererChunkY = rendererBlockY / Chunk::sizeChunk;
+    map->chunkThread->threadLocator.unlock();
+
+    if (rendererChunkX <= 0)
+    {
+        rendererChunkX--;
+    }
+
+    if (rendererChunkY <= 0)
+    {
+        rendererChunkY--;
+    }
 
     int id = 0;
+    int maxChunkX = rendererChunkX + rendererCountChunksInCameraX;
+    int maxChunkY = rendererChunkY + rendererCountChunksInCameraY;
 
-    //for(int x = 0; x < rendererCountChunksInCameraX; x++)
-    //    for (int y = 0; y < rendererCountChunksInCameraY; y++)
-    //    {
-    //        chunkRenderer[id] = getChunkWithoutThread(x + rendererChunkX, y + rendererChunkY);
-    //        id++;
-    //    }
-   
-    //Chunk* c[50];
+    for (int x = rendererChunkX; x < maxChunkX; x++)
+        for (int y = rendererChunkY; y < maxChunkY; y++)
+        {
+            chunkRenderer[id] = getChunk(x, y);
+            id++;
+        }
 
-    //for (int x = 0; x < chunkRendererSize; x++)
-    //{
-    //    c[x] = chunkRenderer[x];
-    //}
+    int maxBlockXInCamera = rendererBlockX + rendererCountBlocksInCameraX;
+    int maxBlockYInCamera = rendererBlockY + rendererCountBlocksInCameraY;
 
-    //renderChunk(renderer, alters);
+    for (int x = 0; x < chunkRendererSize; x++)
+        for (int y = 0; y < Chunk::sizeChunk; y++)
+            for (int z = 0; z < Chunk::sizeChunk; z++)
+            {
+                if (chunkRenderer[x] != nullptr)
+                {
+                    if (*chunkRenderer[x] != nullptr)
+                    {
+                        Block* block = (*chunkRenderer[x])->block[y][z];
+                        Block* backBlock = (*chunkRenderer[x])->backBlock[y][z];
+                        if (block != nullptr)
+                        {
+                            if (block->pX > rendererBlockX && block->pX < maxBlockXInCamera)
+                            {
+                                if (block->pY > rendererBlockY && block->pY < maxBlockYInCamera)
+                                {
+                                    if (backBlock != nullptr)
+                                    {
+                                        backBlock->updateTextureBlock();
+                                        rendererBlock(backBlock, renderer, alters);
+                                    }
 
-    //Position = -leftTopAngleCamera;
+                                    block->updateTextureBlock();
+                                    rendererBlock(block, renderer, alters);
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+
+
+    Position = -leftTopAngleCamera;
 }

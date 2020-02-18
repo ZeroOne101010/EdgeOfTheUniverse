@@ -1,6 +1,6 @@
 #include "World.h"
 #include "Block.h"
-const int Block::sizeBlock = 16;
+const int Block::sizeBlock = 21;
 
 Block::Block()
 {
@@ -33,6 +33,7 @@ void Block::updateTextureBlock()
 	if (!isUpdatedTexture)
 	{
 		rect = new RectangleShape(sizeBlock, sizeBlock);
+		rect->optimizeMode = optimizeMode;
 		rect->Position = vec2(pX * sizeBlock, pY * sizeBlock);
 		rect->textureRect = textureRect;
 		isUpdatedTexture = true;

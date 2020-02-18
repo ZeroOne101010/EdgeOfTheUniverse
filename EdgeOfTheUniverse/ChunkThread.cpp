@@ -29,9 +29,7 @@ void ChunkThread::updateThread()
 
             //std::cout << chunkContainer.size() << std::endl;
 
-            threadLocator.lock();
             loadChunkToWorld(chunkContainer[id]);
-            threadLocator.unlock();
 
             threadLocator.lock();
             chunkContainer.erase(chunkContainer.begin() + id);
@@ -84,37 +82,61 @@ void ChunkThread::toSaveChunk(Chunk* chunk)
 void ChunkThread::loadChunkToWorld(ChunkContainer container)
 {
     World* world = container.world;
-    Chunk* localChunk = ConvertRegionData::getChunkFromDataRegion(container.chunkX, container.chunkY, world);
 
-    if (localChunk == nullptr)
+    if (container.chunkX == 0 && container.chunkY == 0)
     {
-        localChunk = world->generationChunk(container.chunkX, container.chunkY);
+        int k = 1;
     }
 
-    world->chunkPointer++;
-    std::cout << world->chunkPointer << std::endl;
-    if (world->chunkPointer > World::countActiveChunks - 1)
-    {
-        world->chunkPointer = 0;
-    }
+    Chunk* localChunk = ConvertRegionData::getChunkFromDataRegion(container.chunkX, container.chunkY, world);;
 
-    if (world->chunk[world->chunkPointer] != nullptr)
-    {
-        //threadLocator.lock();
-        toSaveChunk(world->chunk[world->chunkPointer]);
-        //threadLocator.unlock();
+        if (localChunk == nullptr)
+        {
+            localChunk = world->generationChunk(container.chunkX, container.chunkY);
+        }
 
-        //threadLocator.lock();
-        //world->updateCloseChunk(world->chunk[world->chunkPointer]);
-        //delete world->chunk[world->chunkPointer];
-        //threadLocator.unlock();
-    }
+        float chunkPointerFinded = false;
+        threadLocator.lock();
+        while (!chunkPointerFinded)
+        {
+            if (world->chunk[world->chunkPointer] == nullptr)
+            {
+                chunkPointerFinded = true;
+            }
+            else if (world->chunk[world->chunkPointer]->chunkX < world->rendererChunkX - 1 || world->chunk[world->chunkPointer]->chunkX > world->rendererChunkX + world->rendererCountChunksInCameraX + 1 ||
+                world->chunk[world->chunkPointer]->chunkY < world->rendererChunkY - 1 || world->chunk[world->chunkPointer]->chunkY > world->rendererChunkY + world->rendererCountChunksInCameraY + 1)
+            {
+                chunkPointerFinded = true;
+            }
+            else
+            {
+                world->chunkPointer++;
+                if (world->chunkPointer > world->countActiveChunks - 1)
+                {
+                    world->chunkPointer = 0;
+                }
+            }
+        }
+        threadLocator.unlock();
 
-    world->chunk[world->chunkPointer] = localChunk;
+        std::cout << world->chunkPointer << std::endl;
+
+        if (world->chunk[world->chunkPointer] != nullptr)
+        {
+            toSaveChunk(world->chunk[world->chunkPointer]);
+
+            threadLocator.lock();
+            world->updateCloseChunk(world->chunk[world->chunkPointer]);
+            threadLocator.unlock();
+        }
+        world->chunk[world->chunkPointer] = localChunk;
+
 }
 
 void ChunkThread::close()
 {
-    chunkThread->join(); // Ожидание завершения потока нужно, чтобы все чанки успели сохраниться
-    threadIsClose = true;
+    while (chunkContainer.size() > 0)
+    {
+        threadIsClose = true;
+    }
 }

@@ -16,6 +16,7 @@ VAO::VAO(GLuint VAOBufferID, Shader* shader, Texture* texture, IBO* modelIBO)
 	relSizeIndex = shader->getUniformIndex("relSize");
 	correctSizeIndex = shader->getUniformIndex("correctSize");
 	sizeIndex = shader->getUniformIndex("size");
+	optimizeModeIndex = shader->getUniformIndex("optimizeMode");;
 
 	int k = 0;
 
@@ -134,30 +135,55 @@ void VAO::draw()
 
 	glBindVertexArray(indexVAO);
 
-	shader->useShaderProgram(); 
+	shader->useShaderProgram();
 	setDrawParams();
 	glDrawElements(GL_TRIANGLES, modelIBO->size, GL_UNSIGNED_INT, 0);
 }
 
 void VAO::setCoords()
 {
-	glUniform1f(angleIndex, drawAngle);
-	glUniform2f(localPosIndex, (drawOrigin.x / (1.0f / 2)), -(drawOrigin.y / (1.0f / 2)));
-	glUniform2f(worldPosIndex, drawPosition.x * 2 - RenderWindow::width, -(drawPosition.y * 2 - RenderWindow::height));
-	glUniform4f(coordsUVIndex, textureRect.positionX / (GLfloat)texture->width, textureRect.positionY / (GLfloat)texture->height, textureRect.sizeX / (GLfloat)texture->width, textureRect.sizeY / (GLfloat)texture->height);
+	if (optimizeMode)
+	{
+		glUniform2f(worldPosIndex, drawPosition.x * 2 - RenderWindow::width, -(drawPosition.y * 2 - RenderWindow::height));
+		glUniform4f(coordsUVIndex, textureRect.positionX / (GLfloat)texture->width, textureRect.positionY / (GLfloat)texture->height, textureRect.sizeX / (GLfloat)texture->width, textureRect.sizeY / (GLfloat)texture->height);
+	}
+	else
+	{
+		glUniform1f(angleIndex, drawAngle);
+		glUniform2f(localPosIndex, (drawOrigin.x * 2), -(drawOrigin.y * 2));
+		glUniform2f(worldPosIndex, drawPosition.x * 2 - RenderWindow::width, -(drawPosition.y * 2 - RenderWindow::height));
+		glUniform4f(coordsUVIndex, textureRect.positionX / (GLfloat)texture->width, textureRect.positionY / (GLfloat)texture->height, textureRect.sizeX / (GLfloat)texture->width, textureRect.sizeY / (GLfloat)texture->height);
+	}
+
 }
 
 void VAO::setSize()
 {
-	glUniform2f(sizeIndex, Size.x * 4, Size.y * 4);
-	glUniform2f(relSizeIndex, drawRelSize.x, drawRelSize.y);
-	correctSize = glm::vec2(1.0f / RenderWindow::width, 1.0f / RenderWindow::height);
-	glUniform2f(correctSizeIndex, correctSize.x, correctSize.y);
+	if (optimizeMode)
+	{
+		glUniform2f(sizeIndex, Size.x * 4, Size.y * 4);
+		if (RenderWindow::changeWindow)
+		{
+			glUniform2f(correctSizeIndex, RenderWindow::correctSize.x, RenderWindow::correctSize.y);
+			RenderWindow::changeWindow = false;
+		}
+	}
+	else
+	{
+		glUniform2f(sizeIndex, Size.x * 4, Size.y * 4);
+		glUniform2f(relSizeIndex, drawRelSize.x, drawRelSize.y);
+		if (RenderWindow::changeWindow)
+		{
+			glUniform2f(correctSizeIndex, RenderWindow::correctSize.x, RenderWindow::correctSize.y);
+			RenderWindow::changeWindow = false;
+		}
+	}
 }
 
 
 void VAO::setDrawParams()
 {
+	glUniform1i(optimizeModeIndex, optimizeMode ? 1 : 0);
 	setSize();
 	setCoords();
 	setColor();
@@ -165,13 +191,20 @@ void VAO::setDrawParams()
 
 void VAO::draw(Renderer* renderer, Alterable alters)
 {
-	drawAngle = alters.Angle + Angle;
-	drawRelSize = alters.RelSize * RelSize;
-	drawOrigin = Origin * alters.RelSize * RelSize;
+	if (optimizeMode)
+	{
+		drawPosition = alters.Position + Position * alters.RelSize;
+	}
+	else
+	{
+		drawAngle = alters.Angle + Angle;
+		drawRelSize = alters.RelSize * RelSize;
+		drawOrigin = Origin * alters.RelSize * RelSize;
 
-	glm::vec2 p = Position * alters.RelSize;
-	glm::vec2 localPos = glm::vec2(p.x * cos(drawAngle) - p.y * sin(drawAngle), p.x * sin(drawAngle) + p.y * cos(drawAngle));
-	drawPosition = alters.Position + localPos;
+		glm::vec2 p = Position * alters.RelSize;
+		glm::vec2 localPos = glm::vec2(p.x * cos(drawAngle) - p.y * sin(drawAngle), p.x * sin(drawAngle) + p.y * cos(drawAngle));
+		drawPosition = alters.Position + localPos;
+	}
 	draw();
 }
 

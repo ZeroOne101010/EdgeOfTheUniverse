@@ -34,6 +34,8 @@ public:
 	Texture* texture;
 	FloatRect textureRect = FloatRect(0, 0, 1, 1);
 
+	bool optimizeMode = false;
+
 	VAO(GLuint VAOBufferID, Shader* shader, Texture* texture, IBO* modelIBO);
 	//Деструктор не требуется, тк нечего отчищать. Кек :} (эт смайлик, если что такой)
 
@@ -65,11 +67,11 @@ private:
 
 	GLuint coordsUVIndex;
 	GLuint textureSamplerIndex;
+	GLuint optimizeModeIndex;
 
 	glm::vec2 position;
 	glm::vec2 origin;
 	glm::vec2 relSize = glm::vec2(1, 1);
-	glm::vec2 correctSize = glm::vec2(1.0f / (float)RenderWindow::width, 1.0f / (float)RenderWindow::height);
 protected:
 	virtual void setDrawParams();
 
