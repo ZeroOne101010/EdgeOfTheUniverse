@@ -1,12 +1,9 @@
 #include "Content.h"
 #include "Dirt.h"
 
-Dirt::Dirt()
+Dirt::Dirt() : Block(glm::vec4(255, 255, 255, 255), Content::spriteList_Dirt, FloatRect(16 + 2, 0, 16, 16))
 {
-	//rect.Color = glm::vec4(153, 108, 75, 255);
-	texture = Content::spriteList_Grass;
-	textureRect = FloatRect(16 + 2, 0, 16, 16);
-	color = glm::vec4(255, 255, 255, 255);
+
 }
 
 Block* Dirt::getNewBlock()

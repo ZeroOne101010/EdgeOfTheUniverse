@@ -16,6 +16,27 @@ Biome::Biome(int offsetX, int offsetY, float offsetPosX, float offsetPosY, float
 	this->limitDown = limitDown;
 }
 
+Biome::Biome(int offsetX, int offsetY, float offsetPosX, float offsetPosY, float sizeNoiseX, float sizeNoiseY, float high, float highSection, float limitUp, float limitDown, 
+    int offsetXLandshaft, int offsetYLandshaft, float sizeNoiseXLandshaft, float sizeNoiseYLandshaft, float highLandshaft)
+{
+    this->offsetX = offsetX;
+    this->offsetY = offsetY;
+    this->offsetPosX = offsetPosX;
+    this->offsetPosY = offsetPosY;
+    this->sizeNoiseX = sizeNoiseX;
+    this->sizeNoiseY = sizeNoiseY;
+    this->high = high;
+    this->highSection = highSection;
+    this->limitUp = limitUp;
+    this->limitDown = limitDown;
+
+    this->offsetXLandshaft = offsetXLandshaft;
+    this->offsetYLandshaft = offsetYLandshaft;
+    this->sizeNoiseXLandshaft = sizeNoiseXLandshaft;
+    this->sizeNoiseYLandshaft = sizeNoiseYLandshaft;
+    this->highLandshaft = highLandshaft;
+}
+
 Biome::Biome()
 {
     this->offsetX = 0;
@@ -46,6 +67,16 @@ void Biome::setLandshaft(int offsetXLandshaft, int offsetYLandshaft, float sizeN
 	this->sizeNoiseXLandshaft = sizeNoiseXLandshaft;
 	this->sizeNoiseYLandshaft = sizeNoiseYLandshaft;
 	this->highLandshaft = highLandshaft;
+}
+
+void Biome::setLandshaft(int offsetXLandshaft, int offsetYLandshaft, float sizeNoiseXLandshaft, float sizeNoiseYLandshaft, float highLandshaft, float kMaxHighMounties)
+{
+    this->offsetXLandshaft = offsetXLandshaft;
+    this->offsetYLandshaft = offsetYLandshaft;
+    this->sizeNoiseXLandshaft = sizeNoiseXLandshaft;
+    this->sizeNoiseYLandshaft = sizeNoiseYLandshaft;
+    this->highLandshaft = highLandshaft;
+    this->kMaxHighMounties = kMaxHighMounties;
 }
 
 bool Biome::toSpawnBiome(int posX, int posY, RandomCoor* rand)
@@ -91,7 +122,7 @@ bool Biome::toSpawnBiome(int posX, int posY, RandomCoor* rand)
     return toSpawn;
 }
 
-void Biome::editChunk(Chunk* chunk, Block*** block, Block*** backBlock)
+void Biome::editChunk(Chunk* chunk, Block*** block, Block*** backBlock, int sizeBlockX, int sizeBlockY)
 {
     // Эта функция будет переопределяться в других класах.
 }
@@ -592,7 +623,7 @@ bool Biome::toCreateBlockInLandshaft(int blockX, int blockY, World* world)
 {
     bool toCreate = false;
 
-    float maxHighMountains = offsetYLandshaft * highLandshaft * sizeNoiseYLandshaft * 0.2f;
+    float maxHighMountains = offsetYLandshaft * highLandshaft * sizeNoiseYLandshaft * 0.5f;
     float answer = PerlinNoise::getPerlinNoise(blockX + offsetPosX * Chunk::sizeChunk, offsetPosY * Chunk::sizeChunk, offsetXLandshaft, offsetYLandshaft, world->rand) * highLandshaft;
     answer = maxHighMountains - answer;
     float answerDown = PerlinNoise::getPerlinNoise(blockX + offsetPosX * Chunk::sizeChunk + 32451, offsetPosY * Chunk::sizeChunk + 2346, offsetXLandshaft, offsetYLandshaft, world->rand) * highLandshaft;
@@ -639,13 +670,58 @@ void Biome::setAdditionChunk(Chunk* chunk, World* world)
     Biome* biomeDown = world->getChunkBiome(chunkX, chunkY + 1);
     Biome* biomeLeft = world->getChunkBiome(chunkX - 1, chunkY);
 
-    Block*** localBlock = new Block * *[Chunk::sizeChunk];
-    Block*** localBackBlock = new Block * *[Chunk::sizeChunk];
+    Block*** localBlock = new Block**[Chunk::sizeChunk];
+    Block*** localBackBlock = new Block**[Chunk::sizeChunk];
+
+    for (int x = 0; x < Chunk::sizeChunk; x++)
+    {
+        localBlock[x] = new Block * [Chunk::sizeChunk];
+        localBackBlock[x] = new Block * [Chunk::sizeChunk];
+    }
+
+
+
+    for (int x = 0; x < Chunk::sizeChunk; x++)
+        for (int y = 0; y < Chunk::sizeChunk; y++)
+        {
+            localBlock[x][y] = chunk->block[x][y]->createBlock(Chunk::sizeChunk * chunkX + x, Chunk::sizeChunk * chunkY + y, false, chunk->world);
+            localBackBlock[x][y] = chunk->backBlock[x][y]->createBlock(Chunk::sizeChunk * chunkX + x, Chunk::sizeChunk * chunkY + y, true, chunk->world);
+        }
+
+
+    editChunk(chunk, localBlock, localBackBlock, Chunk::sizeChunk, Chunk::sizeChunk);
+
+    for (int x = 0; x < Chunk::sizeChunk; x++)
+        for (int y = 0; y < Chunk::sizeChunk; y++)
+        {
+            if (localBlock[x][y]->id != 0)
+            {
+                delete chunk->block[x][y];
+                chunk->block[x][y] = localBlock[x][y];
+            }
+            if (localBackBlock[x][y]->id != 0)
+            {
+                delete chunk->backBlock[x][y];
+                chunk->backBlock[x][y] = localBackBlock[x][y];
+            }
+        }
+
+    for (int x = 0; x < Chunk::sizeChunk; x++)
+    {
+        delete[Chunk::sizeChunk] localBlock[x];
+        delete[Chunk::sizeChunk] localBackBlock[x];
+    }
+
+    delete[Chunk::sizeChunk] localBlock;
+    delete[Chunk::sizeChunk] localBackBlock;
 
     float t = 0;
 
     if (biomeUp->id > id)
     {
+
+        localBlock = new Block * *[Chunk::sizeChunk];
+        localBackBlock = new Block * *[Chunk::sizeChunk];
 
         for (int x = 0; x < Chunk::sizeChunk; x++)
         {
@@ -660,7 +736,7 @@ void Biome::setAdditionChunk(Chunk* chunk, World* world)
                 localBackBlock[x][y] = chunk->backBlock[x][y]->createBlock(Chunk::sizeChunk * chunkX + x, Chunk::sizeChunk * chunkY + y, true, chunk->world);
             }
 
-        biomeUp->editChunk(chunk, localBlock, localBackBlock);
+        biomeUp->editChunk(chunk, localBlock, localBackBlock, Chunk::sizeChunk, biomeUp->offsetSmoothBorder);
 
         for (int x = 0; x < Chunk::sizeChunk; x++)
             for (int y = 0; y < biomeUp->offsetSmoothBorder; y++)
@@ -686,16 +762,22 @@ void Biome::setAdditionChunk(Chunk* chunk, World* world)
             delete[biomeUp->offsetSmoothBorder] localBlock[x];
             delete[biomeUp->offsetSmoothBorder] localBackBlock[x];
         }
+
+        delete[Chunk::sizeChunk] localBlock;
+        delete[Chunk::sizeChunk] localBackBlock;
     }
 
 
 
     if (biomeRight->id > id)
     {
-        for (int x = 0; x < Chunk::sizeChunk; x++)
+        localBlock = new Block * *[biomeRight->offsetSmoothBorder];
+        localBackBlock = new Block * *[biomeRight->offsetSmoothBorder];
+
+        for (int x = 0; x < biomeRight->offsetSmoothBorder; x++)
         {
-            localBlock[x] = new Block * [biomeRight->offsetSmoothBorder];
-            localBackBlock[x] = new Block * [biomeRight->offsetSmoothBorder];
+            localBlock[x] = new Block * [Chunk::sizeChunk];
+            localBackBlock[x] = new Block * [Chunk::sizeChunk];
         }
 
 
@@ -707,7 +789,7 @@ void Biome::setAdditionChunk(Chunk* chunk, World* world)
                 localBlock[x][y] = chunk->block[localX][localY]->createBlock(chunk->block[localX][localY]->pX, chunk->block[localX][localY]->pY, false, chunk->world);
                 localBackBlock[x][y] = chunk->backBlock[localX][localY]->createBlock(chunk->backBlock[localX][localY]->pX, chunk->backBlock[localX][localY]->pY, true, chunk->world);
             }
-        biomeRight->editChunk(chunk, localBlock, localBackBlock);
+        biomeRight->editChunk(chunk, localBlock, localBackBlock, biomeRight->offsetSmoothBorder, Chunk::sizeChunk);
 
         for (int x = 0; x < biomeRight->offsetSmoothBorder; x++)
             for (int y = 0; y < Chunk::sizeChunk; y++)
@@ -731,14 +813,20 @@ void Biome::setAdditionChunk(Chunk* chunk, World* world)
             }
         for (int x = 0; x < biomeUp->offsetSmoothBorder; x++)
         {
-            delete[biomeRight->offsetSmoothBorder] localBlock[x];
-            delete[biomeRight->offsetSmoothBorder] localBackBlock[x];
+            delete[Chunk::sizeChunk] localBlock[x];
+            delete[Chunk::sizeChunk] localBackBlock[x];
         }
+
+        delete[biomeRight->offsetSmoothBorder] localBlock;
+        delete[biomeRight->offsetSmoothBorder] localBackBlock;
     }
 
 
     if (biomeDown->id > id)
     {
+        localBlock = new Block * *[Chunk::sizeChunk];
+        localBackBlock = new Block * *[Chunk::sizeChunk];
+
         for (int x = 0; x < Chunk::sizeChunk; x++)
         {
             localBlock[x] = new Block * [biomeDown->offsetSmoothBorder];
@@ -753,7 +841,7 @@ void Biome::setAdditionChunk(Chunk* chunk, World* world)
                 localBlock[x][y] = chunk->block[localX][localY]->createBlock(chunk->block[localX][localY]->pX, chunk->block[localX][localY]->pY, false, chunk->world);
                 localBackBlock[x][y] = chunk->backBlock[localX][localY]->createBlock(chunk->backBlock[localX][localY]->pX, chunk->backBlock[localX][localY]->pY, true, chunk->world);
             }
-        biomeDown->editChunk(chunk, localBlock, localBackBlock);
+        biomeDown->editChunk(chunk, localBlock, localBackBlock, Chunk::sizeChunk, biomeDown->offsetSmoothBorder);
         for (int x = 0; x < Chunk::sizeChunk; x++)
             for (int y = 0; y < biomeDown->offsetSmoothBorder; y++)
             {
@@ -779,14 +867,20 @@ void Biome::setAdditionChunk(Chunk* chunk, World* world)
             delete[biomeDown->offsetSmoothBorder] localBlock[x];
             delete[biomeDown->offsetSmoothBorder] localBackBlock[x];
         }
+
+        delete[Chunk::sizeChunk] localBlock;
+        delete[Chunk::sizeChunk] localBackBlock;
     }
 
     if (biomeLeft->id > id)
     {
-        for (int x = 0; x < Chunk::sizeChunk; x++)
+        localBlock = new Block * *[biomeLeft->offsetSmoothBorder];
+        localBackBlock = new Block * *[biomeLeft->offsetSmoothBorder];
+
+        for (int x = 0; x < biomeLeft->offsetSmoothBorder; x++)
         {
-            localBlock[x] = new Block * [biomeLeft->offsetSmoothBorder];
-            localBackBlock[x] = new Block * [biomeLeft->offsetSmoothBorder];
+            localBlock[x] = new Block * [Chunk::sizeChunk];
+            localBackBlock[x] = new Block * [Chunk::sizeChunk];
         }
 
         for (int x = 0; x < biomeLeft->offsetSmoothBorder; x++)
@@ -797,7 +891,7 @@ void Biome::setAdditionChunk(Chunk* chunk, World* world)
                 localBlock[x][y] = chunk->block[localX][localY]->createBlock(chunk->block[localX][localY]->pX, chunk->block[localX][localY]->pY, false, chunk->world);
                 localBackBlock[x][y] = chunk->backBlock[localX][localY]->createBlock(chunk->backBlock[localX][localY]->pX, chunk->backBlock[localX][localY]->pY, true, chunk->world);
             }
-        biomeLeft->editChunk(chunk, localBlock, localBackBlock);
+        biomeLeft->editChunk(chunk, localBlock, localBackBlock, biomeLeft->offsetSmoothBorder, biomeLeft->offsetSmoothBorder);
 
         for (int x = 0; x < biomeLeft->offsetSmoothBorder; x++)
             for (int y = 0; y < Chunk::sizeChunk; y++)
@@ -821,13 +915,12 @@ void Biome::setAdditionChunk(Chunk* chunk, World* world)
             }
         for (int x = 0; x < biomeUp->offsetSmoothBorder; x++)
         {
-            delete[biomeLeft->offsetSmoothBorder] localBlock[x];
-            delete[biomeLeft->offsetSmoothBorder] localBackBlock[x];
+            delete[Chunk::sizeChunk] localBlock[x];
+            delete[Chunk::sizeChunk] localBackBlock[x];
         }
+        delete[biomeLeft->offsetSmoothBorder] localBlock;
+        delete[biomeLeft->offsetSmoothBorder] localBackBlock;
     }
-
-    delete[Chunk::sizeChunk] localBlock;
-    delete[Chunk::sizeChunk] localBackBlock;
 }
 
 Chunk* Biome::generateChunk(int chunkX, int chunkY, World* world)

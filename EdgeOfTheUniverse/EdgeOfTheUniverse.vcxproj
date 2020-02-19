@@ -162,8 +162,10 @@
     <ClCompile Include="ConvertChunkToData.cpp" />
     <ClCompile Include="ConvertRegionData.cpp" />
     <ClCompile Include="Dirt.cpp" />
+    <ClCompile Include="EditChunkHelper.cpp" />
     <ClCompile Include="Entity.cpp" />
     <ClCompile Include="Game.cpp" />
+    <ClCompile Include="Grass.cpp" />
     <ClCompile Include="ICloseObject.cpp" />
     <ClCompile Include="Map.cpp" />
     <ClCompile Include="Mountains.cpp" />
@@ -209,8 +211,10 @@
     <ClInclude Include="ConvertChunkToData.h" />
     <ClInclude Include="ConvertRegionData.h" />
     <ClInclude Include="Dirt.h" />
+    <ClInclude Include="EditChunkHelper.h" />
     <ClInclude Include="Entity.h" />
     <ClInclude Include="Game.h" />
+    <ClInclude Include="Grass.h" />
     <ClInclude Include="ICloseObject.h" />
     <ClInclude Include="Map.h" />
     <ClInclude Include="Mountains.h" />

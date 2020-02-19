@@ -2,6 +2,7 @@
 
 Air::Air()
 {
+	canUpdateTexture = false;
 	color = glm::vec4(0, 0, 0, 0);
 }
 

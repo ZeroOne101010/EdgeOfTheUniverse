@@ -134,7 +134,7 @@ bool BlockSpawner::toCreateBlock(int posX, int posY, float tSection, RandomCoor*
             if (t < 0) t = 0;
             if (t > 1) t = 1;
 
-            float section = (highSection + (offsetY * kLimit * high * sizeNoise - highSection) * tSection) + (offsetY * kLimit * high * sizeNoise - (highSection + (offsetY * kLimit * high * sizeNoise - highSection) * tSection)) * t;
+            float section = (highSection + (offsetY * kLimit * high * sizeNoise - highSection) * tSection) + (offsetY * kLimit * high * sizeNoise - (highSection + (offsetY * kLimit * high * sizeNoise - highSection) * tSection)) * t;;
 
             if (answer > section)
             {
@@ -170,7 +170,7 @@ bool BlockSpawner::toCreateBlock(int posX, int posY, float tSection, RandomCoor*
             if (t < 0) t = 0;
             if (t > 1) t = 1;
 
-            float section = (highSection + (offsetY * kLimit * high * sizeNoise - highSection) * tSection) + (offsetY * kLimit * high * sizeNoise - (highSection + (offsetY * kLimit * high * sizeNoise - highSection) * tSection)) * t;
+            float section = (highSection + (offsetY * kLimit * high * sizeNoise - highSection) * tSection) + (offsetY * kLimit * high * sizeNoise - (highSection + (offsetY * kLimit * high * sizeNoise - highSection) * tSection)) * t;;
 
             if (answer < section)
             {

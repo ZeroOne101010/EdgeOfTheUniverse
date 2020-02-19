@@ -10,6 +10,7 @@ class Block : public Alterable, public IDraw
 {
 public:
 	Block();
+	Block(glm::vec4 color, Texture* texture, FloatRect textureRect);
 	~Block();
 
 	static const int sizeBlock;
@@ -18,6 +19,8 @@ public:
 	FloatRect textureRect = FloatRect(0, 0, sizeBlock, sizeBlock);
 	Texture* texture = Content::defaultTexture;
 	bool isUpdatedTexture = false;
+	bool canUpdateTexture = true;
+	bool isUpdatedViewTexture = false;
 	RectangleShape* rect = nullptr;
 
 	PropertyManager propertyManager;
@@ -35,6 +38,10 @@ public:
 
 	virtual void update();
 	virtual void start();
+	virtual void updateTextureRect();
+
+	//ќбнавл€ет внешность блока(обновл€ет текстурку и т.д)
+	void updateViewBlock();
 
 	virtual void draw(Renderer* renderer, Alterable alters) override;
 protected:

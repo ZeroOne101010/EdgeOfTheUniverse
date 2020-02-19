@@ -52,3 +52,9 @@ float RandomCoor::next(int posX, int posY, float min, float max)
 
     return answer;
 }
+
+float RandomCoor::next(float min, float max)
+{
+    float randValue = rand() / (float)RAND_MAX;
+    return min + (max - min) * randValue;
+}

@@ -37,6 +37,7 @@ public:
 
     float limitUp;
     float limitDown;
+    float kMaxHighMounties = 0.5f;
 
 
     int offsetXLandshaft = Chunk::sizeChunk;
@@ -61,10 +62,16 @@ public:
 
     Biome();
     Biome(int offsetX, int offsetY, float offsetPosX, float offsetPosY, float sizeNoiseX, float sizeNoiseY, float high, float highSection, float limitUp, float limitDown);
+    
+    Biome(int offsetX, int offsetY, float offsetPosX, float offsetPosY, float sizeNoiseX, float sizeNoiseY, float high, float highSection, float limitUp, float limitDown,
+        int offsetXLandshaft, int offsetYLandshaft, float sizeNoiseXLandshaft, float sizeNoiseYLandshaft, float highLandshaft);
+
+    
     virtual Biome* getNewBiome() = 0;
-    virtual void editChunk(Chunk* chunk, Block*** block, Block*** backBlock);
+    virtual void editChunk(Chunk* chunk, Block*** block, Block*** backBlock, int sizeBlockX, int sizeBlockY);
     Biome* createBiome(World* world);
     void setLandshaft(int offsetXLandshaft, int offsetYLandshaft, float sizeNoiseXLandshaft, float sizeNoiseYLandshaft, float highLandshaft);
+    void setLandshaft(int offsetXLandshaft, int offsetYLandshaft, float sizeNoiseXLandshaft, float sizeNoiseYLandshaft, float highLandshaft, float kMaxHighMounties);
     bool toSpawnBiome(int posX, int posY, RandomCoor* rand);
     void addSpawnBlock(Block* block, float offsetX, float offsetY, float offsetPosX, float offsetPosY, float high, float highSection, float limitUp, float limitDown, float sizeNoise);
     void addSpawnBackBlock(Block* block, float offsetX, float offsetY, float offsetPosX, float offsetPosY, float high, float highSection, float limitUp, float limitDown, float sizeNoise);

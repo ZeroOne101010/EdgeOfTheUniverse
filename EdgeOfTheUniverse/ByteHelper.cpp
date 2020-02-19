@@ -88,3 +88,9 @@ float ByteHelper::distance(glm::vec2 vec1, glm::vec2 vec2)
     glm::vec2 dVec = vec2 - vec1;
     return (float)sqrt(dVec.x * dVec.x + dVec.y * dVec.y);
 }
+
+glm::vec2 ByteHelper::normalized(glm::vec2 vec)
+{
+    float lenght = (float)sqrt(vec.x * vec.x + vec.y * vec.y);
+    return glm::vec2(vec.x / lenght, vec.y / lenght);
+}

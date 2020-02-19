@@ -96,7 +96,7 @@ Chunk* World::generationChunk(int chunkX, int chunkY)
 
 void World::addBiome(Biome* biome)
 {
-    biome->id = this->biome.size();
+    biome->id = this->biome.size() + 1;
     this->biome.push_back(biome);
 }
 
@@ -310,6 +310,31 @@ Chunk** World::getChunkWithoutThread(int chunkX, int chunkY)
 
 }
 
+Chunk** World::getChunkWithoutThreadByBlockPosition(int blockX, int blockY)
+{
+    int chunkX = 0;
+    int chunkY = 0;
+    if (blockX < 0)
+    {
+        chunkX = abs(blockX) % Chunk::sizeChunk > 0 ? blockX / Chunk::sizeChunk - 1 : blockX / Chunk::sizeChunk;
+    }
+    else
+    {
+        chunkX = blockX / Chunk::sizeChunk;
+    }
+
+    if (blockY < 0)
+    {
+        chunkY = abs(blockY) % Chunk::sizeChunk > 0 ? blockY / Chunk::sizeChunk - 1 : blockY / Chunk::sizeChunk;
+    }
+    else
+    {
+        chunkY = blockY / Chunk::sizeChunk;
+    }
+    Chunk** chunk = getChunkWithoutThread(chunkX, chunkY);
+    return chunk;
+}
+
 Chunk** World::getChunkByBlockPosition(int posX, int posY)
 {
     Chunk** localChunk = nullptr;
@@ -402,19 +427,215 @@ Block** World::getBlockByBlockPosition(int posX, int posY, bool isBackBlock)
 
 }
 
-void World::setBlock(int blockX, int blockY, int id, bool isBackBlock)
+Chunk** World::getChunkNotGeneration(int chunkX, int chunkY)
 {
-    Chunk** chunk = getChunkWithoutThread(blockX / Chunk::sizeChunk, blockY / Chunk::sizeChunk);
-    int blockInChunkX = blockX % Chunk::sizeChunk;
-    int blockInChunkY = blockY % Chunk::sizeChunk;
+    Chunk** localChunk = nullptr;
 
-    if (!isBackBlock)
+    for (int x = 0; x < countActiveChunks; x++)
     {
-        (*chunk)->block[blockInChunkX][blockInChunkY] = RegisteryBlocks::createBlock((*chunk)->chunkX * Chunk::sizeChunk + blockInChunkX, (*chunk)->chunkY * Chunk::sizeChunk + blockInChunkY, false, this, id);
+        if (chunk[x] != nullptr)
+        {
+            if (chunkX == chunk[x]->chunkX && chunkY == chunk[x]->chunkY)
+            {
+                localChunk = &chunk[x];
+                break;
+            }
+        }
+    }
+
+
+    return localChunk;
+}
+
+Chunk** World::getChunkByBlockPositionNotGenerationWithoutThread(int blockX, int blockY)
+{
+    int chunkX = 0;
+    int chunkY = 0;
+    if (blockX < 0)
+    {
+        chunkX = abs(blockX) % Chunk::sizeChunk > 0 ? blockX / Chunk::sizeChunk - 1 : blockX / Chunk::sizeChunk;
     }
     else
     {
-        (*chunk)->backBlock[blockInChunkX][blockInChunkY] = RegisteryBlocks::createBlock((*chunk)->chunkX * Chunk::sizeChunk + blockInChunkX, (*chunk)->chunkY * Chunk::sizeChunk + blockInChunkY, false, this, id);
+        chunkX = blockX / Chunk::sizeChunk;
+    }
+
+    if (blockY < 0)
+    {
+        chunkY = abs(blockY) % Chunk::sizeChunk > 0 ? blockY / Chunk::sizeChunk - 1 : blockY / Chunk::sizeChunk;
+    }
+    else
+    {
+        chunkY = blockY / Chunk::sizeChunk;
+    }
+    Chunk** chunk = getChunkWithoutThreadNotGeneration(chunkX, chunkY);
+    return chunk;
+}
+
+Chunk** World::getChunkWithoutThreadNotGeneration(int chunkX, int chunkY)
+{
+    Chunk** localChunk = nullptr;
+    for (int x = 0; x < countActiveChunks; x++)
+    {
+        if (chunk[x] != nullptr)
+        {
+            if (chunkX == chunk[x]->chunkX && chunkY == chunk[x]->chunkY)
+            {
+                localChunk = &chunk[x];
+                break;
+            }
+        }
+    }
+    return localChunk;
+}
+
+Chunk** World::getChunkByBlockPositionNotGeneration(int posX, int posY) // Самое длинное слово в мире XD
+{
+    Chunk** localChunk = nullptr;
+
+    int chunkX = 0;
+    int chunkY = 0;
+
+    if (posX < 0)
+    {
+        chunkX = (abs(posX) % Chunk::sizeChunk) > 0 ? posX / Chunk::sizeChunk - 1 : posX / Chunk::sizeChunk;
+    }
+    else
+    {
+        chunkX = posX / Chunk::sizeChunk;
+    }
+
+
+    if (posY < 0)
+    {
+        chunkY = (abs(posY) % Chunk::sizeChunk) > 0 ? posY / Chunk::sizeChunk - 1 : posY / Chunk::sizeChunk;
+    }
+    else
+    {
+        chunkY = posY / Chunk::sizeChunk;
+    }
+
+    localChunk = getChunkWithoutThreadNotGeneration(chunkX, chunkY);
+
+    return localChunk;
+}
+
+Block** World::getBlockNotGeneration(int posX, int posY, bool isBackBlock)
+{
+    Chunk** chunk = getChunkByBlockPositionNotGeneration(posX, posY);
+    if (chunk != nullptr)
+    {
+        int blockInChunkX = 0;
+        int blockInChunkY = 0;
+
+
+        if (posX < 0)
+        {
+            //blockInChunkX = abs(posX) % Chunk::sizeChunk > 0 ? Chunk::sizeChunk - (abs(posX) % Chunk::sizeChunk) : 0;
+            blockInChunkX = abs((*chunk)->chunkX * Chunk::sizeChunk) - abs(posX);
+        }
+        else
+        {
+            blockInChunkX = posX - (*chunk)->chunkX * Chunk::sizeChunk;
+        }
+
+
+        if (posY < 0)
+        {
+            //blockInChunkY = Chunk::sizeChunk - (abs(posY) % Chunk::sizeChunk) - 1;
+            blockInChunkY = abs((*chunk)->chunkY * Chunk::sizeChunk) - abs(posY);
+        }
+        else
+        {
+            blockInChunkY = posY - (*chunk)->chunkY * Chunk::sizeChunk;
+        }
+
+        Block** block = &(*chunk)->block[blockInChunkX][blockInChunkY];
+        if (block != nullptr)
+        {
+            if (!isBackBlock)
+            {
+                return &(*chunk)->block[blockInChunkX][blockInChunkY];
+            }
+            else
+            {
+                return &(*chunk)->backBlock[blockInChunkX][blockInChunkY];
+            }
+        }
+    }
+    else
+    {
+        return nullptr;
+    }
+}
+
+void World::setBlock(int blockX, int blockY, int id, bool isBackBlock)
+{
+    Chunk** chunk = getChunkWithoutThreadByBlockPosition(blockX, blockY);
+    if (chunk != nullptr)
+    {
+        int blockInChunkX = 0;
+        int blockInChunkY = 0;
+
+
+        if (blockX < 0)
+        {
+            //blockInChunkX = abs(posX) % Chunk::sizeChunk > 0 ? Chunk::sizeChunk - (abs(posX) % Chunk::sizeChunk) : 0;
+            blockInChunkX = abs((*chunk)->chunkX * Chunk::sizeChunk) - abs(blockX);
+        }
+        else
+        {
+            blockInChunkX = blockX - (*chunk)->chunkX * Chunk::sizeChunk;
+        }
+
+
+        if (blockY < 0)
+        {
+            //blockInChunkY = Chunk::sizeChunk - (abs(posY) % Chunk::sizeChunk) - 1;
+            blockInChunkY = abs((*chunk)->chunkY * Chunk::sizeChunk) - abs(blockY);
+        }
+        else
+        {
+            blockInChunkY = blockY - (*chunk)->chunkY * Chunk::sizeChunk;
+        }
+
+
+        Block* block = (*chunk)->block[blockInChunkX][blockInChunkY];
+
+        int pX = blockX;
+        int pY = blockY;
+
+        Block*** b = new Block**[8];
+        b[0] = getBlockNotGeneration(pX, pY - 1, isBackBlock);
+        b[1] = getBlockNotGeneration(pX + 1, pY - 1, isBackBlock);
+        b[2] = getBlockNotGeneration(pX + 1, pY, isBackBlock);
+        b[3] = getBlockNotGeneration(pX + 1, pY + 1, isBackBlock);
+        b[4] = getBlockNotGeneration(pX, pY + 1, isBackBlock);
+        b[5] = getBlockNotGeneration(pX - 1, pY + 1, isBackBlock);
+        b[6] = getBlockNotGeneration(pX - 1, pY, isBackBlock);
+        b[7] = getBlockNotGeneration(pX - 1, pY - 1, isBackBlock);
+
+        for (int x = 0; x < 8; x++)
+        {
+            if (b[x] != nullptr)
+            {
+                (*b[x])->isUpdatedViewTexture = false;
+            }
+        }
+
+        if (block != nullptr)
+        {
+            if (!isBackBlock)
+            {
+                delete (*chunk)->block[blockInChunkX][blockInChunkY];
+                (*chunk)->block[blockInChunkX][blockInChunkY] = RegisteryBlocks::createBlock((*chunk)->chunkX * Chunk::sizeChunk + blockInChunkX, (*chunk)->chunkY * Chunk::sizeChunk + blockInChunkY, false, this, id);
+            }
+            else
+            {
+                delete (*chunk)->block[blockInChunkX][blockInChunkY];
+                (*chunk)->backBlock[blockInChunkX][blockInChunkY] = RegisteryBlocks::createBlock((*chunk)->chunkX * Chunk::sizeChunk + blockInChunkX, (*chunk)->chunkY * Chunk::sizeChunk + blockInChunkY, false, this, id);
+            }
+        }
     }
 }
 
@@ -446,7 +667,7 @@ void World::updateCloseChunk(Chunk* chunk)
 
 void World::rendererBlock(Block* block, Renderer* renderer, Alterable alters)
 {
-    block->updateTextureBlock();
+    block->updateViewBlock();
     renderer->draw(block->rect, alters);
 }
 
@@ -510,6 +731,7 @@ void World::draw(Renderer* renderer, Alterable alters)
 
 
 
+
     vec2 sizeCamera = vec2(RenderWindow::width, RenderWindow::height);
     leftTopAngleCamera = camera - vec2(sizeCamera.x / 2, sizeCamera.y / 2);
 
@@ -556,6 +778,34 @@ void World::draw(Renderer* renderer, Alterable alters)
         rendererChunkY--;
     }
 
+    double mouseX = 0;
+    double mouseY = 0;
+    glfwGetCursorPos(map->game->window->window, &mouseX, &mouseY);
+
+    int mousePX = mouseX / Block::sizeBlock + rendererBlockX;
+    int mousePY = mouseY / Block::sizeBlock + rendererBlockY;
+
+    int mouseButtonActive = glfwGetMouseButton(map->game->window->window, GLFW_MOUSE_BUTTON_1);
+
+    if (mouseButtonActive == 1)
+    {
+        Block** block = getBlockNotGeneration(mousePX, mousePY, false);
+        if (block != nullptr)
+        {
+
+            std::cout << "MousePX = " << mousePX << "    mousePY = " << mousePY << std::endl;
+
+            bool isBackBlock = false;
+            if ((*block)->rect != nullptr)
+            {
+                (*block)->rect->Color = glm::vec4(255, 0, 0, 255);
+            }
+
+           setBlock(mousePX, mousePY, 2, false);
+        (*block)->updateViewBlock();
+        }
+    }
+
     int id = 0;
     int maxChunkX = rendererChunkX + rendererCountChunksInCameraX;
     int maxChunkY = rendererChunkY + rendererCountChunksInCameraY;
@@ -588,11 +838,9 @@ void World::draw(Renderer* renderer, Alterable alters)
                                 {
                                     if (backBlock != nullptr)
                                     {
-                                        backBlock->updateTextureBlock();
                                         rendererBlock(backBlock, renderer, alters);
                                     }
 
-                                    block->updateTextureBlock();
                                     rendererBlock(block, renderer, alters);
                                 }
                             }

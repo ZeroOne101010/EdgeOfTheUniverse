@@ -43,8 +43,15 @@ public:
 	Chunk* generationChunk(int chunkX, int chunkY);
 	Chunk** getChunk(int chunkX, int chunkY);
 	Chunk** getChunkWithoutThread(int chunkX, int chunkY);
+	Chunk** getChunkWithoutThreadByBlockPosition(int blockX, int blockY);
 	Chunk** getChunkByBlockPosition(int posX, int posY);
+	Chunk** getChunkByBlockPositionNotGenerationWithoutThread(int blockX, int blockY);
+	Chunk** getChunkWithoutThreadNotGeneration(int chunkX, int chunkY);
 	Block** getBlockByBlockPosition(int posX, int posY, bool isBackBlock);
+
+	Chunk** getChunkNotGeneration(int chunkX, int chunkY);
+	Chunk** getChunkByBlockPositionNotGeneration(int posX, int posY);
+	Block** getBlockNotGeneration(int posX, int posY, bool isBackBlock);
 	void updateCloseChunk(Chunk* chunk);
 	void setBlock(int blockX, int blockY, int id, bool isBackBlock);
 	void setBlocks(int blockX, int blockY, int width, int height, int id, bool isBackBlock);

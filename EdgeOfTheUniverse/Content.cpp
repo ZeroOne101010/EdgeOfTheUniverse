@@ -22,6 +22,7 @@ DefaultShader* Content::defaultShader;
 //Èíèöèëèçàöèÿ òåêñòóğ
 Texture* Content::defaultTexture;
 Texture* Content::spriteList_Grass;
+Texture* Content::spriteList_Dirt;
 
 void Content::load()
 {
@@ -70,6 +71,7 @@ void Content::load()
 	////////ÍÅ ÇÀÁÛÒÜ ÑÄÅËÀÒÜ ÏÓÒÜ, ÎÒÍÎÑÈÒÅËÜÍÎ ÈÑÏÎËÍÈÒÅËÜÍÎÃÎ ÔÀÉËÀ!!!
 	defaultTexture = new Texture();
 	spriteList_Grass = new Texture("E:\\EdgeOfTheUniverse\\EdgeOfTheUniverse\\Resources\\Textures\\SpriteList_Grass.png");
+	spriteList_Dirt = new Texture("E:\\EdgeOfTheUniverse\\EdgeOfTheUniverse\\Resources\\Textures\\SpriteList_Dirt.png");
 
 	indexRectangleShape = VAO::createVAOBuffer();
 	VAO::bindVBOIBO(rectangleShapeVBO, rectangleShapeIBO, indexRectangleShape, 0);

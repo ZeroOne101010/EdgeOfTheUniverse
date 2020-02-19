@@ -29,6 +29,7 @@ public:
 	//Объявление текстур
 	static Texture* defaultTexture;
 	static Texture* spriteList_Grass;
+	static Texture* spriteList_Dirt;
 
 
 	static void load();

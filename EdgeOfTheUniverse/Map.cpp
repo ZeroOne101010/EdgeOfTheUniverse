@@ -10,7 +10,7 @@ Map::Map(int sizeNumberMap, int seed, Game* game)
 	chunkThread->start();
 	world = new World(0, this);
 
-	Mountains* mountains = new Mountains(-100, 100);
+	Mountains* mountains = new Mountains(4, 100);
 
 	world->addBiome(mountains);
 	world->Position = vec2(0, 0);
