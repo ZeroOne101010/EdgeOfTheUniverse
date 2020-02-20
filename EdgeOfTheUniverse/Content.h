@@ -1,5 +1,6 @@
 #pragma once
 #include "OpenGLEngine/DefaultShader.h"
+#include "LightingShader.h"
 #include "OpenGLEngine/Texture.h"
 #include "OpenGLEngine/VBO.h"
 #include "OpenGLEngine/IBO.h"
@@ -23,8 +24,9 @@ public:
 	static VBO* rectangleTextureUVVBO;
 
 
-	//ќбъ€вление шейдеров (ѕока только один)
+	//ќбъ€вление шейдеров
 	static DefaultShader* defaultShader;
+	static LightingShader* lightingShader;
 
 	//ќбъ€вление текстур
 	static Texture* defaultTexture;

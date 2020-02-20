@@ -57,6 +57,7 @@ void Block::updateTextureBlock()
 	if (!isUpdatedTexture)
 	{
 		rect = new RectangleShape(sizeBlock, sizeBlock);
+        rect->shader = Content::lightingShader;
 		rect->optimizeMode = optimizeMode;
 		rect->Position = vec2(pX * sizeBlock, pY * sizeBlock);
 		rect->textureRect = textureRect;

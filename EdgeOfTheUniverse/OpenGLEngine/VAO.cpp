@@ -129,7 +129,7 @@ void VAO::bindVBO(VBO* vbo, GLuint indexVAO, GLuint indexAttribute)
 
 void VAO::draw()
 {
-	glActiveTexture(GL_TEXTURE0);
+	//glActiveTexture(GL_TEXTURE0);
 
 	glBindTexture(GL_TEXTURE_2D, texture->index);
 

@@ -16,8 +16,9 @@ VBO* Content::rectangleShapeVBO;
 VBO* Content::rectangleTextureUVVBO;
 
 
-//Иницилизация шейдеров (Пока только один)
+//Иницилизация шейдеров
 DefaultShader* Content::defaultShader;
+LightingShader* Content::lightingShader;
 
 //Иницилизация текстур
 Texture* Content::defaultTexture;
@@ -62,6 +63,7 @@ void Content::load()
 	};
 
 	defaultShader = new DefaultShader();
+	lightingShader = new LightingShader();
 
 	rectangleShapeIBO = new IBO(sizeof(GLuint) * 6, rectangleShapeIndices, GL_STREAM_DRAW);
 

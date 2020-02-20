@@ -792,17 +792,7 @@ void World::draw(Renderer* renderer, Alterable alters)
         Block** block = getBlockNotGeneration(mousePX, mousePY, false);
         if (block != nullptr)
         {
-
-            std::cout << "MousePX = " << mousePX << "    mousePY = " << mousePY << std::endl;
-
-            bool isBackBlock = false;
-            if ((*block)->rect != nullptr)
-            {
-                (*block)->rect->Color = glm::vec4(255, 0, 0, 255);
-            }
-
            setBlock(mousePX, mousePY, 2, false);
-        (*block)->updateViewBlock();
         }
     }
 

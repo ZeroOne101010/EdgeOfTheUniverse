@@ -167,6 +167,7 @@
     <ClCompile Include="Game.cpp" />
     <ClCompile Include="Grass.cpp" />
     <ClCompile Include="ICloseObject.cpp" />
+    <ClCompile Include="LightingShader.cpp" />
     <ClCompile Include="Map.cpp" />
     <ClCompile Include="Mountains.cpp" />
     <ClCompile Include="OpenGLEngine\Alter.cpp" />
@@ -193,6 +194,7 @@
     <ClCompile Include="RegisteryBiome.cpp" />
     <ClCompile Include="RegisteryBlocks.cpp" />
     <ClCompile Include="RegisteryEntity.cpp" />
+    <ClCompile Include="ShadowManager.cpp" />
     <ClCompile Include="Slime.cpp" />
     <ClCompile Include="Vacuum.cpp" />
     <ClCompile Include="World.cpp" />
@@ -216,6 +218,7 @@
     <ClInclude Include="Game.h" />
     <ClInclude Include="Grass.h" />
     <ClInclude Include="ICloseObject.h" />
+    <ClInclude Include="LightingShader.h" />
     <ClInclude Include="Map.h" />
     <ClInclude Include="Mountains.h" />
     <ClInclude Include="OpenGLEngine\Alter.h" />
@@ -241,6 +244,7 @@
     <ClInclude Include="RegisteryBiome.h" />
     <ClInclude Include="RegisteryBlocks.h" />
     <ClInclude Include="RegisteryEntity.h" />
+    <ClInclude Include="ShadowManager.h" />
     <ClInclude Include="Slime.h" />
     <ClInclude Include="Vacuum.h" />
     <ClInclude Include="World.h" />
@@ -248,6 +252,7 @@
   <ItemGroup>
     <None Include="Resources\Shaders\DefaultShader.frag" />
     <None Include="Resources\Shaders\DefaultShader.vert" />
+    <None Include="Resources\Shaders\LightingShader.frag" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

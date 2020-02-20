@@ -153,6 +153,12 @@
     <ClCompile Include="Grass.cpp">
       <Filter>Исходные файлы</Filter>
     </ClCompile>
+    <ClCompile Include="ShadowManager.cpp">
+      <Filter>Исходные файлы</Filter>
+    </ClCompile>
+    <ClCompile Include="LightingShader.cpp">
+      <Filter>Исходные файлы</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Application.h">
@@ -293,9 +299,16 @@
     <ClInclude Include="Grass.h">
       <Filter>Файлы заголовков</Filter>
     </ClInclude>
+    <ClInclude Include="ShadowManager.h">
+      <Filter>Файлы заголовков</Filter>
+    </ClInclude>
+    <ClInclude Include="LightingShader.h">
+      <Filter>Файлы заголовков</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\Shaders\DefaultShader.vert" />
     <None Include="Resources\Shaders\DefaultShader.frag" />
+    <None Include="Resources\Shaders\LightingShader.frag" />
   </ItemGroup>
 </Project>
