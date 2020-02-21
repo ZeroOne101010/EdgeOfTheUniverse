@@ -1,5 +1,4 @@
 #include "Game.h"
-
 Game::Game(RenderWindow* window)
 {
 	this->window = window;
@@ -13,6 +12,6 @@ Game::~Game()
 
 void Game::draw(Renderer* renderer, Alterable alters)
 {
-	alters *= *this;
+	alters *= this;
 	renderer->draw(map, alters);
 }

@@ -251,7 +251,7 @@ void Block::updateViewBlock()
 
 void Block::draw(Renderer* renderer, Alterable alters)
 {
-	alters *= *this;
+	alters *= this;
 	renderer->draw(rect, alters);
 }
 

@@ -25,6 +25,6 @@ Map::~Map()
 
 void Map::draw(Renderer* renderer, Alterable alters)
 {
-	alters *= *this;
+	alters *= this;
 	renderer->draw(world, alters);
 }

@@ -16,10 +16,13 @@ public:
 	static bool* keyState;
 	static void updateKeyState(RenderWindow* window);
 	static bool getKeyState(int keyCode);
+	static void mouse_callback(GLFWwindow* window, int button, int action, int mods);
+	static bool mouseLeft;
+	static bool mouseRight;
 
 	RenderWindow(GLfloat width, GLfloat height, const GLchar* winName);
 	~RenderWindow();
-	GLFWwindow* window;
+	static GLFWwindow* window;
 	static float width, height;
 	static glm::vec2 correctSize;
 	static bool changeWindow;

@@ -1,4 +1,5 @@
 #include "RenderWindow.h"
+GLFWwindow* RenderWindow::window;
 float RenderWindow::width;
 float RenderWindow::height;
  glm::vec2 RenderWindow::correctSize;
@@ -6,6 +7,9 @@ float RenderWindow::height;
 
 const int RenderWindow::sizeKeyState = 256;
 bool* RenderWindow::keyState = new bool[RenderWindow::sizeKeyState];
+
+bool RenderWindow::mouseLeft;
+bool RenderWindow::mouseRight;
 
 void RenderWindow::updateKeyState(RenderWindow* window)
 {
@@ -19,6 +23,21 @@ void RenderWindow::updateKeyState(RenderWindow* window)
 bool RenderWindow::getKeyState(int keyCode)
 {
 	return keyState[keyCode];
+}
+
+void RenderWindow::mouse_callback(GLFWwindow* window, int button, int action, int mods)
+{
+	if (button == GLFW_MOUSE_BUTTON_LEFT)
+	{
+		if (GLFW_PRESS == action)
+		{
+			mouseLeft = true;
+		}
+		else
+		{
+			mouseLeft = false;
+		}
+	}
 }
 
 RenderWindow::RenderWindow(GLfloat width, GLfloat height, const GLchar* winName)
@@ -47,6 +66,7 @@ RenderWindow::RenderWindow(GLfloat width, GLfloat height, const GLchar* winName)
 		std::cout << "Failed to init GLEW!" << std::endl;
 		glfwTerminate();
 	}
+	glfwSetMouseButtonCallback(window, mouse_callback);
 	setViewPort();
 	glShadeModel(GL_FLAT);
 	//glEnable(GL_CULL_FACE);

@@ -2,7 +2,7 @@
 
 TBO::TBO()
 {
-	addTextureHandle("E:\EdgeOfTheUniverse\EdgeOfTheUniverse\Resources\Textures\DefaultTexture.png");
+	addTextureHandle("E:\\EdgeOfTheUniverse\\EdgeOfTheUniverse\\Resources\\Textures\\DefaultTexture.png");
 }
 
 TBO::TBO(const GLchar* path)

@@ -42,6 +42,6 @@ Entity* Entity::createEntity(World* world)
 
 void Entity::draw(Renderer* renderer, Alterable alters)
 {
-	alters *= *this;
+	alters *= this;
 	renderer->draw(&rect, alters);
 }

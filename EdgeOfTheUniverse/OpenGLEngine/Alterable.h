@@ -11,8 +11,9 @@ public:
 	static Alterable Default;
 	glm::vec2 Position;
 	glm::vec2 Origin;
+	glm::vec2 globalPosition;
 	glm::vec2 RelSize = glm::vec2(1, 1);
 	GLfloat Angle;
-	Alterable operator *= (Alterable alter);
+	Alterable operator *= (Alterable* alter);
 };
 

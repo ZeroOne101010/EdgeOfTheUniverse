@@ -10,6 +10,7 @@
 #include "RandomCoor.h"
 #include "Biome.h"
 #include"BiomeAir.h"
+#include "Cursor.h"
 
 class Map;
 

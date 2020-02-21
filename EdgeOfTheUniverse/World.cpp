@@ -707,7 +707,7 @@ void World::rendererBlock(Block* block, Renderer* renderer, Alterable alters)
 
 void World::draw(Renderer* renderer, Alterable alters)
 {
-    alters *= *this;
+    alters *= this;
 
     float speed = 20;
 
@@ -778,12 +778,10 @@ void World::draw(Renderer* renderer, Alterable alters)
         rendererChunkY--;
     }
 
-    double mouseX = 0;
-    double mouseY = 0;
-    glfwGetCursorPos(map->game->window->window, &mouseX, &mouseY);
+    glm::vec2 mousePos = Cursor::getMousePosition(RenderWindow::window);
 
-    int mousePX = mouseX / Block::sizeBlock + rendererBlockX;
-    int mousePY = mouseY / Block::sizeBlock + rendererBlockY;
+    int mousePX = mousePos.x / Block::sizeBlock + rendererBlockX;
+    int mousePY = mousePos.y / Block::sizeBlock + rendererBlockY;
 
     int mouseButtonActive = glfwGetMouseButton(map->game->window->window, GLFW_MOUSE_BUTTON_1);
 
