@@ -23,7 +23,7 @@ Block::Block()
 	world = nullptr;
 }
 
-Block::Block(glm::vec4 color, Texture* texture, FloatRect textureRect)
+Block::Block(glm::vec4 color, TBO* texture, FloatRect textureRect)
 {
 	world = nullptr;
 	this->color = color;
@@ -62,7 +62,7 @@ void Block::updateTextureBlock()
 		rect->Position = vec2(pX * sizeBlock, pY * sizeBlock);
 		rect->textureRect = textureRect;
 		isUpdatedTexture = true;
-		rect->texture = texture;
+		rect->tbo = texture;
 		rect->Color = color;
 	}
 }

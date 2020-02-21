@@ -10,14 +10,14 @@ class Block : public Alterable, public IDraw
 {
 public:
 	Block();
-	Block(glm::vec4 color, Texture* texture, FloatRect textureRect);
+	Block(glm::vec4 color, TBO* texture, FloatRect textureRect);
 	~Block();
 
 	static const int sizeBlock;
 
 	glm::vec4 color = glm::vec4(255, 255, 255, 255);
 	FloatRect textureRect = FloatRect(0, 0, sizeBlock, sizeBlock);
-	Texture* texture = Content::defaultTexture;
+	TBO* texture = Content::defaultTexture;
 	bool isUpdatedTexture = false;
 	bool canUpdateTexture = true;
 	bool isUpdatedViewTexture = false;

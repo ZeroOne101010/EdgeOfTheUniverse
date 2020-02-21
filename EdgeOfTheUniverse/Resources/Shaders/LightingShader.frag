@@ -8,10 +8,6 @@ uniform float v[300];
 uniform sampler2D textureSampler;
 uniform vec4 textureCoords;
 
-uniform vec2 sizeBuffer;
-uniform int positionBlockInBuffer;
-uniform vec3 blockBrightnessBuffer[];
-
 vec2 coords;
 
 void main()

@@ -1,9 +1,10 @@
 #pragma once
 #include "VAO.h"
+#include "../TBO.h"
 class Shape : public VAO
 {
 public:
-	Shape(GLuint VAOBufferID, Shader* shader, Texture* texture, IBO* modelIBO);
+	Shape(GLuint VAOBufferID, Shader* shader, TBO* texture, IBO* modelIBO);
 private:
 
 protected:

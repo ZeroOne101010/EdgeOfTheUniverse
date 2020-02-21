@@ -21,8 +21,10 @@ public:
 	void setTextureRect(GLuint index, float x, float y, float width, float height);
 
 	void setSampler(Shader* shader, GLuint indexSampler, GLuint value);
+
+	std::vector<GLuint> samplerIndexes;
+
 private: 
 	VBO vboUV;
-	bool haveSampler;
 };
 

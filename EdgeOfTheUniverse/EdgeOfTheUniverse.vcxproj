@@ -196,6 +196,7 @@
     <ClCompile Include="RegisteryEntity.cpp" />
     <ClCompile Include="ShadowManager.cpp" />
     <ClCompile Include="Slime.cpp" />
+    <ClCompile Include="TBO.cpp" />
     <ClCompile Include="Vacuum.cpp" />
     <ClCompile Include="World.cpp" />
   </ItemGroup>
@@ -246,6 +247,7 @@
     <ClInclude Include="RegisteryEntity.h" />
     <ClInclude Include="ShadowManager.h" />
     <ClInclude Include="Slime.h" />
+    <ClInclude Include="TBO.h" />
     <ClInclude Include="Vacuum.h" />
     <ClInclude Include="World.h" />
   </ItemGroup>

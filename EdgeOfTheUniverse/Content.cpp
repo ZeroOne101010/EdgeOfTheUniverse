@@ -21,9 +21,9 @@ DefaultShader* Content::defaultShader;
 LightingShader* Content::lightingShader;
 
 //Èíèöèëèçàöèÿ òåêñòóğ
-Texture* Content::defaultTexture;
-Texture* Content::spriteList_Grass;
-Texture* Content::spriteList_Dirt;
+TBO* Content::defaultTexture;
+TBO* Content::spriteList_Grass;
+TBO* Content::spriteList_Dirt;
 
 void Content::load()
 {
@@ -71,9 +71,9 @@ void Content::load()
 	rectangleTextureUVVBO = new VBO(sizeof(GLfloat) * 12, rectangleShapeCoordsUV, GL_STREAM_DRAW, defaultTextureUVAttribute);
 
 	////////ÍÅ ÇÀÁÛÒÜ ÑÄÅËÀÒÜ ÏÓÒÜ, ÎÒÍÎÑÈÒÅËÜÍÎ ÈÑÏÎËÍÈÒÅËÜÍÎÃÎ ÔÀÉËÀ!!!
-	defaultTexture = new Texture();
-	spriteList_Grass = new Texture("E:\\EdgeOfTheUniverse\\EdgeOfTheUniverse\\Resources\\Textures\\SpriteList_Grass.png");
-	spriteList_Dirt = new Texture("E:\\EdgeOfTheUniverse\\EdgeOfTheUniverse\\Resources\\Textures\\SpriteList_Dirt.png");
+	defaultTexture = new TBO();
+	spriteList_Grass = new TBO("E:\\EdgeOfTheUniverse\\EdgeOfTheUniverse\\Resources\\Textures\\SpriteList_Grass.png");
+	spriteList_Dirt = new TBO("E:\\EdgeOfTheUniverse\\EdgeOfTheUniverse\\Resources\\Textures\\SpriteList_Dirt.png");
 
 	indexRectangleShape = VAO::createVAOBuffer();
 	VAO::bindVBOIBO(rectangleShapeVBO, rectangleShapeIBO, indexRectangleShape, 0);

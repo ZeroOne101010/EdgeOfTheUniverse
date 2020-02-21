@@ -4,6 +4,7 @@
 #include "OpenGLEngine/Texture.h"
 #include "OpenGLEngine/VBO.h"
 #include "OpenGLEngine/IBO.h"
+#include "TBO.h"
 
 class Content
 {
@@ -29,9 +30,9 @@ public:
 	static LightingShader* lightingShader;
 
 	//Объявление текстур
-	static Texture* defaultTexture;
-	static Texture* spriteList_Grass;
-	static Texture* spriteList_Dirt;
+	static TBO* defaultTexture;
+	static TBO* spriteList_Grass;
+	static TBO* spriteList_Dirt;
 
 
 	static void load();

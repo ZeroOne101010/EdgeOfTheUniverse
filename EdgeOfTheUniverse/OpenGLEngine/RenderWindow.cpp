@@ -39,6 +39,7 @@ RenderWindow::RenderWindow(GLfloat width, GLfloat height, const GLchar* winName)
 		glfwTerminate();
 	}
 	glfwMakeContextCurrent(window);
+	glfwSwapInterval(0);
 	glewExperimental = GL_TRUE;
 
 	if (glewInit() != GLEW_OK)
@@ -47,11 +48,13 @@ RenderWindow::RenderWindow(GLfloat width, GLfloat height, const GLchar* winName)
 		glfwTerminate();
 	}
 	setViewPort();
-	glDisable(GL_CULL_FACE);
+	glShadeModel(GL_FLAT);
+	//glEnable(GL_CULL_FACE);
+	//glDisable(GL_CULL_FACE);
 	glEnable(GL_BLEND);
 	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
-
 	glEnable(GL_MULTISAMPLE);
+	glDisable(GL_NORMALIZE);
 }
 
 RenderWindow::~RenderWindow()

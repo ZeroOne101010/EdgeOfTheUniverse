@@ -6,7 +6,7 @@ public:
 	LightingShader();
 
 	GLuint positionBlockInBuffer;
-	GLuint blockBrightnessBufferIndex;
+	GLuint blockBrightnessTBOIndex;
 	GLuint sizeBufferIndex;
 
 	void setBlockPositionToBuffer(int blockX, int blockY);

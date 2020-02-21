@@ -15,6 +15,7 @@
 #include "RenderWindow.h"
 #include "IDraw.h"
 #include "Alterable.h"
+#include "../TBO.h"
 
 class VAO : public IDraw, public Alterable
 {
@@ -31,16 +32,19 @@ public:
 
 	std::vector<VBO> vbo;
 	Shader* shader;
-	Texture* texture;
+	//Texture* texture;
+
+	TBO* tbo;
+
 	FloatRect textureRect = FloatRect(0, 0, 1, 1);
 
 	bool optimizeMode = false;
 
-	VAO(GLuint VAOBufferID, Shader* shader, Texture* texture, IBO* modelIBO);
+	VAO(GLuint VAOBufferID, Shader* shader, TBO* texture, IBO* modelIBO);
 	//Деструктор не требуется, тк нечего отчищать. Кек :} (эт смайлик, если что такой)
 
 	static GLuint createVAOBuffer();
-	void setTexture(Texture texture);
+	//void setTexture(Texture texture);
 	void setColor();
 
 	static void bindVBO(VBO* vbo, GLuint indexVAO, GLuint indexAttribute);

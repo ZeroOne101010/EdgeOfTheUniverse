@@ -1,10 +1,12 @@
 #include "VAO.h"
 
 
-VAO::VAO(GLuint VAOBufferID, Shader* shader, Texture* texture, IBO* modelIBO)
+//VAO::VAO(GLuint VAOBufferID, Shader* shader, Texture* texture, IBO* modelIBO)
+VAO::VAO(GLuint VAOBufferID, Shader* shader, TBO* texture, IBO* modelIBO)
 {
 	this->shader = shader;
-	this->texture = texture;
+	//this->texture = texture;
+	this->tbo = texture;
 	this->modelIBO = modelIBO;
 	indexVAO = VAOBufferID;
 
@@ -33,7 +35,7 @@ VAO::VAO(GLuint VAOBufferID, Shader* shader, Texture* texture, IBO* modelIBO)
 	glEnableVertexAttribArray(1);
 	glBindVertexArray(0);
 
-	textureRect = FloatRect(0, 0, texture->width, texture->height);
+	//textureRect = FloatRect(0, 0, texture->width, texture->height);
 
 	//ÇÀÏÎËÍÈÒÜ!!!
 }
@@ -45,12 +47,12 @@ GLuint VAO::createVAOBuffer()
 	return index;
 }
 
-void VAO::setTexture(Texture texture)
-{
-	texture.setSampler(shader, textureSamplerIndex, 0);
-	this->texture = &texture;
-	textureRect = FloatRect(0, 0, this->texture->width, this->texture->height);	textureRect = FloatRect(0, 0, this->texture->width, this->texture->height);
-}
+//void VAO::setTexture(TBO* texture)
+//{
+//	texture.setSampler(shader, textureSamplerIndex, 0);
+//	this->texture = texture;
+//	textureRect = FloatRect(0, 0, this->texture->width, this->texture->height);	textureRect = FloatRect(0, 0, this->texture->width, this->texture->height);
+//}
 
 void VAO::setColor()
 {
@@ -129,9 +131,7 @@ void VAO::bindVBO(VBO* vbo, GLuint indexVAO, GLuint indexAttribute)
 
 void VAO::draw()
 {
-	//glActiveTexture(GL_TEXTURE0);
-
-	glBindTexture(GL_TEXTURE_2D, texture->index);
+	tbo->bindToDrawTextureBuffers();
 
 	glBindVertexArray(indexVAO);
 
@@ -145,14 +145,14 @@ void VAO::setCoords()
 	if (optimizeMode)
 	{
 		glUniform2f(worldPosIndex, drawPosition.x * 2 - RenderWindow::width, -(drawPosition.y * 2 - RenderWindow::height));
-		glUniform4f(coordsUVIndex, textureRect.positionX / (GLfloat)texture->width, textureRect.positionY / (GLfloat)texture->height, textureRect.sizeX / (GLfloat)texture->width, textureRect.sizeY / (GLfloat)texture->height);
+		glUniform4f(coordsUVIndex, textureRect.positionX / (GLfloat)tbo->sizeTexture[0].x, textureRect.positionY / (GLfloat)tbo->sizeTexture[0].y, textureRect.sizeX / (GLfloat)tbo->sizeTexture[0].x, textureRect.sizeY / (GLfloat)tbo->sizeTexture[0].y);
 	}
 	else
 	{
 		glUniform1f(angleIndex, drawAngle);
 		glUniform2f(localPosIndex, (drawOrigin.x * 2), -(drawOrigin.y * 2));
 		glUniform2f(worldPosIndex, drawPosition.x * 2 - RenderWindow::width, -(drawPosition.y * 2 - RenderWindow::height));
-		glUniform4f(coordsUVIndex, textureRect.positionX / (GLfloat)texture->width, textureRect.positionY / (GLfloat)texture->height, textureRect.sizeX / (GLfloat)texture->width, textureRect.sizeY / (GLfloat)texture->height);
+		glUniform4f(coordsUVIndex, textureRect.positionX / (GLfloat)tbo->sizeTexture[0].x, textureRect.positionY / (GLfloat)tbo->sizeTexture[0].y, textureRect.sizeX / (GLfloat)tbo->sizeTexture[0].x, textureRect.sizeY / (GLfloat)tbo->sizeTexture[0].y);
 	}
 
 }

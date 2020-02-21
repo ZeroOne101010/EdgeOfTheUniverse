@@ -11,8 +11,6 @@ Texture::Texture(const char* path)
 	SOIL_free_image_data(image);
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
 	glBindTexture(GL_TEXTURE_2D, 0);
-
-
 }
 
 Texture::~Texture()
@@ -35,11 +33,7 @@ void Texture::setTextureRect(GLuint index, float x, float y, float width, float 
 	glUniform4f(index, x, y, width, height);
 }
 
-void Texture::setSampler(Shader* shader, GLuint indexSampler,  GLuint value)
+void Texture::setSampler(Shader* shader, GLuint indexSampler, GLuint value)
 {
-	if (haveSampler)
-	{
-		glUniform1i(indexSampler, value);
-		haveSampler = false;
-	}
+	glUniform1i(indexSampler, value);
 }
