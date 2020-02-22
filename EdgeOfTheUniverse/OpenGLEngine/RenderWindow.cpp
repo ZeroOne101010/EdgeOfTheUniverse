@@ -111,3 +111,4 @@ void RenderWindow::setViewPort()
 		glViewport(0, 0, kwindth, kheight);
 	}
 }
+

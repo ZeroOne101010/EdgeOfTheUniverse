@@ -36,3 +36,24 @@ FloatRect::FloatRect(glm::vec2 position, glm::vec2 size)
 	this->sizeY = size.y;
 }
 
+bool FloatRect::Intersects(FloatRect rect)
+{
+	float rightX= positionX + sizeX;
+	float leftX = positionX;
+	float topY = positionY;
+	float downY = positionY + sizeY;
+
+	float rectRightX = rect.positionX + rect.sizeX;
+	float rectLeftX = rect.positionX;
+	float rectTopY = rect.positionY;
+	float rectDownY = rect.positionY + rect.sizeY;
+
+	if ((leftX < rectRightX && leftX > rectLeftX) || (rightX > rectRightX && rightX < rectLeftX))
+		if ((topY < rectDownY && topY > rectTopY) || (downY > rectDownY&& downY < rectTopY))
+		{
+			return true;
+		}
+
+	return false;
+}
+

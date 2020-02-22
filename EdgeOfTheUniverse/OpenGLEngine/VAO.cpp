@@ -162,21 +162,13 @@ void VAO::setSize()
 	if (optimizeMode)
 	{
 		glUniform2f(sizeIndex, Size.x * 4, Size.y * 4);
-		if (RenderWindow::changeWindow)
-		{
-			glUniform2f(correctSizeIndex, RenderWindow::correctSize.x, RenderWindow::correctSize.y);
-			RenderWindow::changeWindow = false;
-		}
+		glUniform2f(correctSizeIndex, RenderWindow::correctSize.x, RenderWindow::correctSize.y);
 	}
 	else
 	{
 		glUniform2f(sizeIndex, Size.x * 4, Size.y * 4);
 		glUniform2f(relSizeIndex, drawRelSize.x, drawRelSize.y);
-		if (RenderWindow::changeWindow)
-		{
-			glUniform2f(correctSizeIndex, RenderWindow::correctSize.x, RenderWindow::correctSize.y);
-			RenderWindow::changeWindow = false;
-		}
+		glUniform2f(correctSizeIndex, RenderWindow::correctSize.x, RenderWindow::correctSize.y);
 	}
 }
 
@@ -204,6 +196,7 @@ void VAO::draw(Renderer* renderer, Alterable alters)
 		glm::vec2 p = Position * alters.RelSize;
 		glm::vec2 localPos = glm::vec2(p.x * cos(drawAngle) - p.y * sin(drawAngle), p.x * sin(drawAngle) + p.y * cos(drawAngle));
 		drawPosition = alters.Position + localPos;
+		//drawPosition += velocity;
 	}
 	draw();
 }

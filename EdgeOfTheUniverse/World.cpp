@@ -21,7 +21,10 @@ World::World(int seed, Map* map)
     {
         chunk[x] = nullptr;
     }
-
+    test = new RectangleShape(100, 100);
+    player = new Player();
+    player->world = this;
+    controller = new Controller(player);
     //for (int x = 0; x < 28; x++)
     //{
     //    if (x == 26)
@@ -711,38 +714,36 @@ void World::draw(Renderer* renderer, Alterable alters)
 
     float speed = 20;
 
-    if (RenderWindow::getKeyState(GLFW_KEY_W))
-    {
-        camera += vec2(0, -speed);
-    }
-    else if (RenderWindow::getKeyState(GLFW_KEY_S))
-    {
-        camera += vec2(0, speed);
-    }
+    //if (RenderWindow::getKeyState(GLFW_KEY_W))
+    //{
+    //    //camera += vec2(0, -speed);
+    //    controller->Camera += vec2(0, -speed);
+    //}
+    //else if (RenderWindow::getKeyState(GLFW_KEY_S))
+    //{
+    //    //camera += vec2(0, speed);
+    //    controller->Camera += vec2(0, speed);
+    //}
 
-    if (RenderWindow::getKeyState(GLFW_KEY_D))
-    {
-        camera += vec2(speed, 0);
-    }
-    else if (RenderWindow::getKeyState(GLFW_KEY_A))
-    {
-        camera += vec2(-speed, 0);
-    }
+    //if (RenderWindow::getKeyState(GLFW_KEY_D))
+    //{
+    //    //camera += vec2(speed, 0);
+    //    controller->Camera += vec2(speed, 0);
+    //}
+    //else if (RenderWindow::getKeyState(GLFW_KEY_A))
+    //{
+    //    //camera += vec2(-speed, 0);
+    //    controller->Camera += vec2(-speed, 0);
+    //}
 
-
-
-
-    vec2 sizeCamera = vec2(RenderWindow::width, RenderWindow::height);
-    leftTopAngleCamera = camera - vec2(sizeCamera.x / 2, sizeCamera.y / 2);
-
-    if (oldWidth - sizeCamera.x != 0 || oldHeight - sizeCamera.y != 0)
+    if (oldWidth - RenderWindow::width != 0 || oldHeight - RenderWindow::height != 0)
     {
         RenderWindow::changeWindow = true;
-        oldWidth = sizeCamera.x;
-        oldHeight = sizeCamera.y;
+        oldWidth = RenderWindow::width;
+        oldHeight = RenderWindow::height;
 
-        rendererBlockX = leftTopAngleCamera.x / Block::sizeBlock;
-        rendererBlockY = leftTopAngleCamera.y / Block::sizeBlock;
+        rendererBlockX = controller->zeroCamera.x / Block::sizeBlock;
+        rendererBlockY = controller->zeroCamera.y / Block::sizeBlock;
 
         rendererChunkX = rendererBlockX / Chunk::sizeChunk;
         rendererChunkY = rendererBlockY / Chunk::sizeChunk;
@@ -761,8 +762,8 @@ void World::draw(Renderer* renderer, Alterable alters)
     }
 
     map->chunkThread->threadLocator.lock();
-    rendererBlockX = leftTopAngleCamera.x / Block::sizeBlock - OFFSET_BLOCK_DRAW_X;
-    rendererBlockY = leftTopAngleCamera.y / Block::sizeBlock - OFFSET_BLOCK_DRAW_Y;
+    rendererBlockX = controller->zeroCamera.x / Block::sizeBlock - OFFSET_BLOCK_DRAW_X;
+    rendererBlockY = controller->zeroCamera.y / Block::sizeBlock - OFFSET_BLOCK_DRAW_Y;
 
     rendererChunkX = rendererBlockX / Chunk::sizeChunk;
     rendererChunkY = rendererBlockY / Chunk::sizeChunk;
@@ -836,7 +837,7 @@ void World::draw(Renderer* renderer, Alterable alters)
                     }
                 }
             }
-
-
-    Position = -leftTopAngleCamera;
+    controller->UpdateController(this);
+    renderer->draw(player, alters);
+    //Position = -leftTopAngleCamera;
 }
