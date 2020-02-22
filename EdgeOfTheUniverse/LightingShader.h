@@ -4,10 +4,9 @@ class LightingShader : public DefaultShader
 {
 public:
 	LightingShader();
+	GLuint textureSampler1;
 
-	GLuint positionBlockInBuffer;
-	GLuint blockBrightnessTBOIndex;
-	GLuint sizeBufferIndex;
+	void setParams() override;
 
 	void setBlockPositionToBuffer(int blockX, int blockY);
 };

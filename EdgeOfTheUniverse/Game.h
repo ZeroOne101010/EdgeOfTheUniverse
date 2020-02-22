@@ -9,8 +9,6 @@ public:
 	Game(RenderWindow* window);
 	~Game();
 
-	Slider* slider;
-
 	RenderWindow* window;
 	Map* map;
 

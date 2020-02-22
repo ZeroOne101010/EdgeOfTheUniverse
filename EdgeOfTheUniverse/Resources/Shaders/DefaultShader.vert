@@ -2,6 +2,8 @@
 layout (location = 0) in vec3 position;
 layout (location = 1) in vec2 coordsUV;
 
+
+
 uniform int optimizeMode;
 uniform vec2 localPos;
 uniform vec2 worldPos;
@@ -36,7 +38,7 @@ void main()
 		float s = sin(angle);
 		float c = cos(angle);
 
-		p = correctSize * worldPos + (  relSize * size * correctSize * ( (  vec2(position.x * c + position.y * s, position.y * c - position.x * s)   )) ) + correctSize * (  vec2(localPos.x * c + localPos.y * s, localPos.y * c - localPos.x * s)  );
+		p = correctSize * worldPos + (  relSize * size * correctSize *   vec2(position.x * c + position.y * s, position.y * c - position.x * s)) + correctSize * (  vec2(localPos.x * c + localPos.y * s, localPos.y * c - localPos.x * s)  );
 		}
 		else
 		{

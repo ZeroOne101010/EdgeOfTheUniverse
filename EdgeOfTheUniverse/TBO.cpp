@@ -2,15 +2,20 @@
 
 TBO::TBO()
 {
-	addTextureHandle("E:\\EdgeOfTheUniverse\\EdgeOfTheUniverse\\Resources\\Textures\\DefaultTexture.png");
+	addTextureHandle("E:\\EdgeOfTheUniverse\\EdgeOfTheUniverse\\Resources\\Textures\\DefaultTexture.png", "textureSampler");
 }
 
 TBO::TBO(const GLchar* path)
 {
-	addTextureHandle(path);
+	addTextureHandle(path, "textureSampler");
 }
 
-void TBO::addTextureHandle(unsigned char* textureBuffer, GLuint textureWidth, GLuint textureHeight)
+TBO::TBO(const GLchar* path, const GLchar* nameUniformSampler)
+{
+	addTextureHandle(path, nameUniformSampler);
+}
+
+void TBO::addTextureHandle(unsigned char* textureBuffer, GLuint textureWidth, GLuint textureHeight, const GLchar* nameUniformSampler)
 {	
 	GLuint textureHandle = 0;
 	glGenTextures(1, &textureHandle);
@@ -20,17 +25,22 @@ void TBO::addTextureHandle(unsigned char* textureBuffer, GLuint textureWidth, GL
 
 	glBindTexture(GL_TEXTURE_2D, 0);
 
-	this->handleTextureBuffer.push_back(textureHandle);
+
+	TBO::textureBufferStruct buffer;
+	buffer.textureHandle = textureHandle;
+
+	this->handleTextureBuffer.push_back(buffer);
 	this->sizeTexture.push_back(glm::vec2(textureWidth, textureHeight));
 }
 
-void TBO::addTextureHandle(const GLchar* path)
+void TBO::addTextureHandle(const GLchar* path, const GLchar* nameUniformSampler)
 {
 	int width, height;
 	unsigned char* image = SOIL_load_image(path, &width, &height, 0, SOIL_LOAD_RGBA);
 
 	GLuint textureHandle = 0;
 	glGenTextures(1, &textureHandle);
+	glActiveTexture(GL_TEXTURE0 + handleTextureBuffer.size());
 	glBindTexture(GL_TEXTURE_2D, textureHandle);
 
 	glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, width, height, 0, GL_RGBA, GL_UNSIGNED_BYTE, image);
@@ -40,16 +50,19 @@ void TBO::addTextureHandle(const GLchar* path)
 
 	glBindTexture(GL_TEXTURE_2D, 0);
 
-	this->handleTextureBuffer.push_back(textureHandle);
+	TBO::textureBufferStruct buffer;
+	buffer.textureHandle = textureHandle;
+
+	this->handleTextureBuffer.push_back(buffer);
 	this->sizeTexture.push_back(glm::vec2(width, height));
 }
 
-void TBO::bindToDrawTextureBuffers()
+void TBO::bindToDrawTextureBuffers(Shader* shader)
 {
 	for (int x = 0; x < handleTextureBuffer.size(); x++)
 	{
 		glActiveTexture(GL_TEXTURE0 + x);
-		glBindTexture(GL_TEXTURE_2D, handleTextureBuffer[x]);
+		glBindTexture(GL_TEXTURE_2D, handleTextureBuffer[x].textureHandle);
 	}
 }
 

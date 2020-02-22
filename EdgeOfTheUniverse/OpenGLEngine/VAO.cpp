@@ -131,11 +131,12 @@ void VAO::bindVBO(VBO* vbo, GLuint indexVAO, GLuint indexAttribute)
 
 void VAO::draw()
 {
-	tbo->bindToDrawTextureBuffers();
+	tbo->bindToDrawTextureBuffers(shader);
 
 	glBindVertexArray(indexVAO);
 
 	shader->useShaderProgram();
+	shader->setParams();
 	setDrawParams();
 	glDrawElements(GL_TRIANGLES, modelIBO->size, GL_UNSIGNED_INT, 0);
 }
@@ -162,21 +163,14 @@ void VAO::setSize()
 	if (optimizeMode)
 	{
 		glUniform2f(sizeIndex, Size.x * 4, Size.y * 4);
-		if (RenderWindow::changeWindow)
-		{
-			glUniform2f(correctSizeIndex, RenderWindow::correctSize.x, RenderWindow::correctSize.y);
-			RenderWindow::changeWindow = false;
-		}
+		glUniform2f(correctSizeIndex, RenderWindow::correctSize.x, RenderWindow::correctSize.y);
+		RenderWindow::changeWindow = false;
 	}
 	else
 	{
 		glUniform2f(sizeIndex, Size.x * 4, Size.y * 4);
 		glUniform2f(relSizeIndex, drawRelSize.x, drawRelSize.y);
-		if (RenderWindow::changeWindow)
-		{
-			glUniform2f(correctSizeIndex, RenderWindow::correctSize.x, RenderWindow::correctSize.y);
-			RenderWindow::changeWindow = false;
-		}
+		glUniform2f(correctSizeIndex, RenderWindow::correctSize.x, RenderWindow::correctSize.y);
 	}
 }
 

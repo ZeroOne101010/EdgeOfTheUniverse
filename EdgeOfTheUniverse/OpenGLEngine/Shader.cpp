@@ -147,6 +147,7 @@ void Shader::VerifySuccess(GLuint program)
 	}
 }
 
+
 //void Shader::linkToVAO(GLuint indexVAO, VBO* modelVBO, IBO* modelIBO, VBO* textureUV)
 //{
 //	glBindVertexArray(indexVAO);
@@ -193,6 +194,10 @@ GLuint Shader::getUniformIndex(const GLchar* name)
 	{
 		return uniformMap[name];;
 	}
+}
+
+void Shader::setParams()
+{
 }
 
 GLuint Shader::createUniformIndex(const GLchar* name)

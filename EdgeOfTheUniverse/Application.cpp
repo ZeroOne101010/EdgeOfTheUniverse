@@ -17,11 +17,9 @@ Application::~Application()
 
 void Application::GameLoop()
 {
-
 	while (!glfwWindowShouldClose(window->window))
 	{
 		window->PollEvents();
-
 		window->Clear(glm::vec3(107, 155, 238));
 
 		window->draw(game);

@@ -39,6 +39,8 @@ public:
 
 	GLuint getUniformIndex(const GLchar* name);
 
+	virtual void setParams();
+
 	GLuint createUniformIndex(const GLchar* name);
 	static GLuint createUniformIndex(Shader* shader, const GLchar* name);
 

@@ -24,6 +24,7 @@ LightingShader* Content::lightingShader;
 TBO* Content::defaultTexture;
 TBO* Content::spriteList_Grass;
 TBO* Content::spriteList_Dirt;
+TBO* Content::testSprite;
 
 void Content::load()
 {
@@ -74,6 +75,9 @@ void Content::load()
 	defaultTexture = new TBO();
 	spriteList_Grass = new TBO("E:\\EdgeOfTheUniverse\\EdgeOfTheUniverse\\Resources\\Textures\\SpriteList_Grass.png");
 	spriteList_Dirt = new TBO("E:\\EdgeOfTheUniverse\\EdgeOfTheUniverse\\Resources\\Textures\\SpriteList_Dirt.png");
+
+	testSprite = new TBO("E:\\EdgeOfTheUniverse\\EdgeOfTheUniverse\\Resources\\Textures\\SpriteList_Grass.png");
+	testSprite->addTextureHandle("E:\\EdgeOfTheUniverse\\EdgeOfTheUniverse\\Resources\\Textures\\SpriteList_Dirt.png", "kekSampler");
 
 	indexRectangleShape = VAO::createVAOBuffer();
 	VAO::bindVBOIBO(rectangleShapeVBO, rectangleShapeIBO, indexRectangleShape, 0);

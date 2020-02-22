@@ -837,6 +837,5 @@ void World::draw(Renderer* renderer, Alterable alters)
                 }
             }
 
-
     Position = -leftTopAngleCamera;
 }

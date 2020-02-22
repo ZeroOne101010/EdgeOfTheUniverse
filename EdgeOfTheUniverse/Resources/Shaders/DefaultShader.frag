@@ -4,7 +4,7 @@ out vec4 color;
 
 uniform vec4 Color;
 
-uniform float v[300];
+
 uniform sampler2D textureSampler;
 uniform vec4 textureCoords;
 vec2 coords;

@@ -12,9 +12,7 @@ DefaultShader::DefaultShader(const GLchar* pathVertex, const GLchar* pathFragmen
 		sizeIndex = createUniformIndex("size");
 
 		coordsUVIndex = createUniformIndex("textureCoords");
-		textureSamplerIndex = createUniformIndex("textureSampler");
 		optimizeMode = createUniformIndex("optimizeMode");
-
 	}
 
 	void DefaultShader::setColor(GLfloat R, GLfloat G, GLfloat B, GLfloat A)
