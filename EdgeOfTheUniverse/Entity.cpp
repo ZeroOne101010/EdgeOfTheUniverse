@@ -6,6 +6,14 @@ Entity::Entity()
 
 }
 
+Entity::~Entity()
+{
+	delete rect;
+}
+
+
+
+
 void Entity::start()
 {
 	//Здесь пока ничего нету :3
@@ -43,5 +51,6 @@ Entity* Entity::createEntity(World* world)
 void Entity::draw(Renderer* renderer, Alterable alters)
 {
 	alters *= this;
-	renderer->draw(&rect, alters);
+	update();
+	renderer->draw(rect, alters);
 }

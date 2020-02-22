@@ -11,6 +11,8 @@
 #include "Biome.h"
 #include"BiomeAir.h"
 #include "Cursor.h"
+#include "Controller.h"
+#include "Player.h"
 
 class Map;
 
@@ -27,7 +29,10 @@ public:
 	Chunk** chunk;
 	int chunkPointer = 0;
 	int seed;
-	vec2 camera = vec2(0, 0);
+	Controller* controller;
+	Player* player;
+	RectangleShape* test;
+	//vec2 camera = vec2(0, 0);
 	RandomCoor* rand;
 
 	std::vector<Biome*> biome;
@@ -72,7 +77,7 @@ public:
 	int rendererCountChunksInCameraY = 0;
 	int oldWidth = 0;
 	int oldHeight = 0;
-	vec2 leftTopAngleCamera = vec2(0, 0);
+	//vec2 leftTopAngleCamera = vec2(0, 0);
 	Chunk*** chunkRenderer = nullptr;
 };
 

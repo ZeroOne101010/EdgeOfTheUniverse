@@ -2,6 +2,7 @@
 #include "AlterableHeader.h"
 #include "OpenGLEngine/RectangleShape.h"
 #include "PropertyManager.h"
+#include "Block.h"
 
 class World;
 
@@ -9,12 +10,13 @@ class Entity : public Alterable, public IDraw
 {
 public:
 	Entity();
-
+	~Entity();
 	int id = 0;
 	bool saveInChunk = true;
 	PropertyManager propertyManager;
-	RectangleShape rect = RectangleShape(glm::vec2(16, 16));;
+	RectangleShape* rect = new RectangleShape(glm::vec2(Block::sizeBlock, Block::sizeBlock));;
 	World* world = nullptr;
+	glm::vec2 velocity;
 
 	virtual void start();
 	virtual void update();

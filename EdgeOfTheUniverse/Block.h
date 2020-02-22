@@ -25,6 +25,7 @@ public:
 
 	PropertyManager propertyManager;
 	bool isBackBlock = false;
+	bool isCanCollision = true;
 	World* world;
 	int pX = 0;
 	int pY = 0;

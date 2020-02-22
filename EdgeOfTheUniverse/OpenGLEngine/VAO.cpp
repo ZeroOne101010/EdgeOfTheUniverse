@@ -25,7 +25,7 @@ VAO::VAO(GLuint VAOBufferID, Shader* shader, TBO* texture, IBO* modelIBO)
 	coordsUVIndex = shader->getUniformIndex("textureCoords");
 	textureSamplerIndex = shader->getUniformIndex("textureSampler");
 
-	//Используя функцию Texture::setSampler(), можно добавить что то типо нормаль мапы и тд. Короче передать несколько фоток в шейдер
+	//пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ Texture::setSampler(), пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅ пїЅпїЅ пїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅ пїЅ пїЅпїЅ. пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ пїЅ пїЅпїЅпїЅпїЅпїЅпїЅ
 
 
 	shader->useShaderProgram();
@@ -37,7 +37,7 @@ VAO::VAO(GLuint VAOBufferID, Shader* shader, TBO* texture, IBO* modelIBO)
 
 	//textureRect = FloatRect(0, 0, texture->width, texture->height);
 
-	//ЗАПОЛНИТЬ!!!
+	//пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ!!!
 }
 
 GLuint VAO::createVAOBuffer()
@@ -164,7 +164,6 @@ void VAO::setSize()
 	{
 		glUniform2f(sizeIndex, Size.x * 4, Size.y * 4);
 		glUniform2f(correctSizeIndex, RenderWindow::correctSize.x, RenderWindow::correctSize.y);
-		RenderWindow::changeWindow = false;
 	}
 	else
 	{
@@ -198,6 +197,7 @@ void VAO::draw(Renderer* renderer, Alterable alters)
 		glm::vec2 p = Position * alters.RelSize;
 		glm::vec2 localPos = glm::vec2(p.x * cos(drawAngle) - p.y * sin(drawAngle), p.x * sin(drawAngle) + p.y * cos(drawAngle));
 		drawPosition = alters.Position + localPos;
+		//drawPosition += velocity;
 	}
 	draw();
 }
