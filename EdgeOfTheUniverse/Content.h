@@ -10,31 +10,30 @@ class Content
 {
 public:
 
-	//Объявление атрибуетов
+	//пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
 	static VBO::Attribute defaultModelAttribute;
 	static VBO::Attribute defaultTextureUVAttribute;
 
-	//Объявление VAO
+	//пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ VAO
 	static GLuint indexRectangleShape;
 
-	//Объявление IBO
+	//пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ IBO
 	static IBO* rectangleShapeIBO;
 
-	//Объявление VBO
+	//пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ VBO
 	static VBO* rectangleShapeVBO;
 	static VBO* rectangleTextureUVVBO;
 
 
-	//Объявление шейдеров
+	//пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
 	static DefaultShader* defaultShader;
 	static LightingShader* lightingShader;
 
-	//Объявление текстур
+	//пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ
 	static TBO* defaultTexture;
 	static TBO* spriteList_Grass;
 	static TBO* spriteList_Dirt;
-	static TBO* testSprite;
-
+	static TBO* sprite_AmnisItem;
 
 	static void load();
 

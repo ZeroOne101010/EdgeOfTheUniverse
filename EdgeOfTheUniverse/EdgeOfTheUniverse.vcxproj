@@ -151,6 +151,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="Air.cpp" />
+    <ClCompile Include="Amnis.cpp" />
     <ClCompile Include="Biome.cpp" />
     <ClCompile Include="BiomeAir.cpp" />
     <ClCompile Include="Block.cpp" />
@@ -176,6 +177,7 @@
     <ClCompile Include="Grass.cpp" />
     <ClCompile Include="ICloseObject.cpp" />
     <ClCompile Include="IntersectedEntity.cpp" />
+    <ClCompile Include="Item.cpp" />
     <ClCompile Include="LightingShader.cpp" />
     <ClCompile Include="Map.cpp" />
     <ClCompile Include="Mob.cpp" />
@@ -217,6 +219,7 @@
   <ItemGroup>
     <ClInclude Include="Air.h" />
     <ClInclude Include="AlterableHeader.h" />
+    <ClInclude Include="Amnis.h" />
     <ClInclude Include="Biome.h" />
     <ClInclude Include="BiomeAir.h" />
     <ClInclude Include="Block.h" />
@@ -244,6 +247,8 @@
     <ClInclude Include="IButton.h" />
     <ClInclude Include="ICloseObject.h" />
     <ClInclude Include="IntersectedEntity.h" />
+    <ClInclude Include="ITakeble.h" />
+    <ClInclude Include="Item.h" />
     <ClInclude Include="LightingShader.h" />
     <ClInclude Include="Map.h" />
     <ClInclude Include="Mob.h" />

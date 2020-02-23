@@ -2,7 +2,7 @@
 #include "ByteHelper.h"
 #include "RegisteryBlocks.h"
 #include <vector>
-#include "Entity.h"
+#include "RegisteryEntity.h"
 
 #define STRIDE 1
 #define STRIDE_UNICODE 2

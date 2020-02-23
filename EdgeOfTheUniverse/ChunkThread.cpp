@@ -19,7 +19,6 @@ void ChunkThread::updateThread()
 {
     while (threadIsClose)
     {
-        //std::cout << chunkContainer.size() << std::endl;
         if (chunkContainer.size() > 0)
         {
             int id = 0;
@@ -27,7 +26,6 @@ void ChunkThread::updateThread()
             id = chunkContainer.size() - 1;
             threadLocator.unlock();
 
-            std::cout << chunkContainer.size() << std::endl;
 
             loadChunkToWorld(chunkContainer[id]);
 

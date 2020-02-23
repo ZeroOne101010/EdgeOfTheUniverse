@@ -1,30 +1,30 @@
 #include "OpenGLEngine/VAO.h"
 #include "Content.h"
 
-//Инициализация атрибуетов
+//пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
 VBO::Attribute Content::defaultModelAttribute;
 VBO::Attribute Content::defaultTextureUVAttribute;
 
-//Иницилизация VAO
+//пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ VAO
 GLuint Content::indexRectangleShape;
 
-//Иницилизация IBO
+//пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ IBO
 IBO* Content::rectangleShapeIBO;
 
-//Иницилизация VBO
+//пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ VBO
 VBO* Content::rectangleShapeVBO;
 VBO* Content::rectangleTextureUVVBO;
 
 
-//Иницилизация шейдеров
+//пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
 DefaultShader* Content::defaultShader;
 LightingShader* Content::lightingShader;
 
-//Иницилизация текстур
+//пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ
 TBO* Content::defaultTexture;
 TBO* Content::spriteList_Grass;
 TBO* Content::spriteList_Dirt;
-TBO* Content::testSprite;
+TBO* Content::sprite_AmnisItem;
 
 void Content::load()
 {
@@ -39,8 +39,6 @@ void Content::load()
 	defaultTextureUVAttribute.normalized = GL_FALSE;
 	defaultTextureUVAttribute.stride = sizeof(GLfloat) * 2;
 	defaultTextureUVAttribute.pointer = 0;
-
-	//Вероятно, для инициализации буфера стоила загружать данные с файла, но время поджимает, так что фигушки
 	GLfloat rectangleShapeVertices[] =
 	{
 		 0.0f,  0.0f, 0.0f,
@@ -70,15 +68,10 @@ void Content::load()
 
 	rectangleShapeVBO = new VBO(sizeof(GLfloat) * 12, rectangleShapeVertices, GL_STREAM_DRAW, defaultModelAttribute);
 	rectangleTextureUVVBO = new VBO(sizeof(GLfloat) * 12, rectangleShapeCoordsUV, GL_STREAM_DRAW, defaultTextureUVAttribute);
-
-	////////НЕ ЗАБЫТЬ СДЕЛАТЬ ПУТЬ, ОТНОСИТЕЛЬНО ИСПОЛНИТЕЛЬНОГО ФАЙЛА!!!
 	defaultTexture = new TBO();
 	spriteList_Grass = new TBO("E:\\EdgeOfTheUniverse\\EdgeOfTheUniverse\\Resources\\Textures\\SpriteList_Grass.png");
 	spriteList_Dirt = new TBO("E:\\EdgeOfTheUniverse\\EdgeOfTheUniverse\\Resources\\Textures\\SpriteList_Dirt.png");
-
-	testSprite = new TBO("E:\\EdgeOfTheUniverse\\EdgeOfTheUniverse\\Resources\\Textures\\SpriteList_Grass.png");
-	testSprite->addTextureHandle("E:\\EdgeOfTheUniverse\\EdgeOfTheUniverse\\Resources\\Textures\\SpriteList_Dirt.png", "kekSampler");
-
+	sprite_AmnisItem = new TBO("E:\\EdgeOfTheUniverse\\EdgeOfTheUniverse\\Resources\\Textures\\Items\\AmnisLogo.png");
 	indexRectangleShape = VAO::createVAOBuffer();
 	VAO::bindVBOIBO(rectangleShapeVBO, rectangleShapeIBO, indexRectangleShape, 0);
 	VAO::bindVBO(rectangleTextureUVVBO, indexRectangleShape, 1);
