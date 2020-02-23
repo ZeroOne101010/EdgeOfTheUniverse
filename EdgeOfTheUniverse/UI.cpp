@@ -18,24 +18,19 @@ UI::~UI()
 
 Alterable UI::draw(Renderer* renderer, Alterable alters)
 {
-	//CarcassUpdate();
-	////Position = vec2((rightAttached ? RenderWindow::width : 0) + pos.x - (rightAttached ? size.x : 0), (buttonAttached ? RenderWindow::height : 0) + pos.y - (buttonAttached ? size.y : 0));
-	//Position = vec2((rightAttached ? RenderWindow::width : 0) + pos.x, (buttonAttached ? RenderWindow::height : 0) + pos.y);
-	//Origin = vec2((rightAttached ? -size.x : 0) + origin.x, (buttonAttached ? -size.y : 0) + origin.y);
-	////Origin = origin;
-	//carcass->Size = size;
-	//carcass->Position = vec2((rightAttached ? -size.x : 0), (buttonAttached ? -size.y : 0));
-	//alters *= this;
-	//if (carcassIsActive == true)
-	//	renderer->draw(carcass, alters);
-
-	CarcassUpdate();
-	Position = vec2((rightAttached ? RenderWindow::width : 0) + pos.x, (buttonAttached ? RenderWindow::height : 0) + pos.y);
-	Origin = vec2((rightAttached ? -size.x : 0) + origin.x, (buttonAttached ? -size.y : 0) + origin.y);
 	alters *= this;
+	CarcassUpdate();
+	carcass->Size = size;
+	if (buttonAttached)
+	{
+		alters.Position = vec2(alters.Position.x, RenderWindow::height - alters.Position.y - size.y);
+	}
+	if (rightAttached)
+	{
+		alters.Position = vec2(RenderWindow::width - alters.Position.x - size.x, alters.Position.y);
+	}
 	if (carcassIsActive == true)
 		renderer->draw(carcass, alters);
-	Draw(renderer, *this);
 	return alters;
 }
 

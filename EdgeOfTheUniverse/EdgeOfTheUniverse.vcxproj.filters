@@ -237,6 +237,12 @@
     <ClCompile Include="Stone_Sword.cpp">
       <Filter>Исходные файлы</Filter>
     </ClCompile>
+    <ClCompile Include="ItemHotCell.cpp">
+      <Filter>Исходные файлы</Filter>
+    </ClCompile>
+    <ClCompile Include="InventoryItemsField.cpp">
+      <Filter>Исходные файлы</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Application.h">
@@ -437,9 +443,6 @@
     <ClInclude Include="Item.h">
       <Filter>Файлы заголовков</Filter>
     </ClInclude>
-    <ClInclude Include="ITakeble.h">
-      <Filter>Файлы заголовков</Filter>
-    </ClInclude>
     <ClInclude Include="Amnis.h">
       <Filter>Файлы заголовков</Filter>
     </ClInclude>
@@ -468,6 +471,15 @@
       <Filter>Файлы заголовков</Filter>
     </ClInclude>
     <ClInclude Include="Stone_Sword.h">
+      <Filter>Файлы заголовков</Filter>
+    </ClInclude> 
+    <ClInclude Include="ItemHotCell.h">
+      <Filter>Файлы заголовков</Filter>
+    </ClInclude>
+    <ClInclude Include="ITakeble.h">
+      <Filter>Файлы заголовков</Filter>
+    </ClInclude>
+    <ClInclude Include="InventoryItemsField.h">
       <Filter>Файлы заголовков</Filter>
     </ClInclude>
   </ItemGroup>
