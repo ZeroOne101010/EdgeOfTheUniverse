@@ -3,6 +3,7 @@
 #include "RegisteryBiome.h"
 #include "World.h"
 
+#include "InventoredMob.h"
 #define OFFSET_CHUNK_DRAW 2
 #define OFFSET_BLOCK_DRAW_X 2
 #define OFFSET_BLOCK_DRAW_Y 2
@@ -26,8 +27,11 @@ World::World(int seed, Map* map)
     player->saveInChunk = false;
     testItem = RegisteryEntity::addItem(this, 0, vec2(0, 0));
     testItem->saveInChunk = false;
-    controller = new Controller(player);
 
+    controller = new Controller(player);
+    player->Position = vec2(50);
+    dynamic_cast<InventoredMob*>(player)->Take(dynamic_cast<ITakeble*>(testItem), 0);
+    dynamic_cast<InventoredMob*>(player)->Take(dynamic_cast<ITakeble*>(RegisteryEntity::addItem(this, 1, vec2(100, 0))), 0);
     //for (int x = 0; x < 28; x++)
     //{
     //    if (x == 26)

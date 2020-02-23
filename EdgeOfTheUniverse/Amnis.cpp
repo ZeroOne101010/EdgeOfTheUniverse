@@ -7,7 +7,6 @@ Amnis::Amnis()
 	setAllTexture();
 }
 
-
 Entity* Amnis::getNewEntity()
 {
 	return new Amnis;

@@ -8,6 +8,7 @@
 
 #include "Item.h"
 #include "Amnis.h"
+#include "Stone_Sword.h"
 
 class RegisteryEntity
 {

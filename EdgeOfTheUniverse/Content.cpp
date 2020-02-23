@@ -25,6 +25,7 @@ TBO* Content::defaultTexture;
 TBO* Content::spriteList_Grass;
 TBO* Content::spriteList_Dirt;
 TBO* Content::sprite_AmnisItem;
+TBO* Content::SpriteList_Tools;
 
 void Content::load()
 {
@@ -72,6 +73,7 @@ void Content::load()
 	spriteList_Grass = new TBO("E:\\EdgeOfTheUniverse\\EdgeOfTheUniverse\\Resources\\Textures\\SpriteList_Grass.png");
 	spriteList_Dirt = new TBO("E:\\EdgeOfTheUniverse\\EdgeOfTheUniverse\\Resources\\Textures\\SpriteList_Dirt.png");
 	sprite_AmnisItem = new TBO("E:\\EdgeOfTheUniverse\\EdgeOfTheUniverse\\Resources\\Textures\\Items\\AmnisLogo.png");
+	SpriteList_Tools = new TBO("E:\\EdgeOfTheUniverse\\EdgeOfTheUniverse\\Resources\\Textures\\Items\\SpriteList_Tools.png");
 	indexRectangleShape = VAO::createVAOBuffer();
 	VAO::bindVBOIBO(rectangleShapeVBO, rectangleShapeIBO, indexRectangleShape, 0);
 	VAO::bindVBO(rectangleTextureUVVBO, indexRectangleShape, 1);

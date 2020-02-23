@@ -68,4 +68,5 @@ void RegisteryEntity::initMob()
 void RegisteryEntity::initItem()
 {
 	InitEntity(new Amnis());
+	InitEntity(new Stone_Sword());
 }

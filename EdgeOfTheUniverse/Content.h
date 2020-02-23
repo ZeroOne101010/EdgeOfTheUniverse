@@ -34,6 +34,7 @@ public:
 	static TBO* spriteList_Grass;
 	static TBO* spriteList_Dirt;
 	static TBO* sprite_AmnisItem;
+	static TBO* SpriteList_Tools;
 
 	static void load();
 

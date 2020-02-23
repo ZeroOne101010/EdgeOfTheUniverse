@@ -1,11 +1,10 @@
 #pragma once
-#include "InventoredMob.h"
-#include "Block.h"
-class Player : public InventoredMob
+#include "Item.h"
+#include "Content.h"
+class Stone_Sword : public Item
 {
 public:
-	Player();
-	Inventory* mainInventory;
+	Stone_Sword();
 	virtual Entity* getNewEntity() override;
 	virtual Alterable draw(Renderer* renderer, Alterable alters) override;
 };

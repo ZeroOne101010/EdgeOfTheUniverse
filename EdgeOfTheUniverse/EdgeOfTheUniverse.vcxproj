@@ -176,8 +176,12 @@
     <ClCompile Include="glb.cpp" />
     <ClCompile Include="Grass.cpp" />
     <ClCompile Include="ICloseObject.cpp" />
+    <ClCompile Include="IInventory.cpp" />
     <ClCompile Include="IntersectedEntity.cpp" />
+    <ClCompile Include="InventoredMob.cpp" />
+    <ClCompile Include="Inventory.cpp" />
     <ClCompile Include="Item.cpp" />
+    <ClCompile Include="ItemConteiner.cpp" />
     <ClCompile Include="ItemHotPanel.cpp" />
     <ClCompile Include="LightingShader.cpp" />
     <ClCompile Include="Map.cpp" />
@@ -212,6 +216,7 @@
     <ClCompile Include="ShadowManager.cpp" />
     <ClCompile Include="Slider.cpp" />
     <ClCompile Include="Slime.cpp" />
+    <ClCompile Include="Stone_Sword.cpp" />
     <ClCompile Include="TBO.cpp" />
     <ClCompile Include="TestConteiner.cpp" />
     <ClCompile Include="UI.cpp" />
@@ -250,9 +255,13 @@
     <ClInclude Include="Grass.h" />
     <ClInclude Include="IButton.h" />
     <ClInclude Include="ICloseObject.h" />
+    <ClInclude Include="IInventory.h" />
     <ClInclude Include="IntersectedEntity.h" />
+    <ClInclude Include="InventoredMob.h" />
+    <ClInclude Include="Inventory.h" />
     <ClInclude Include="ITakeble.h" />
     <ClInclude Include="Item.h" />
+    <ClInclude Include="ItemConteiner.h" />
     <ClInclude Include="ItemHotPanel.h" />
     <ClInclude Include="LightingShader.h" />
     <ClInclude Include="Map.h" />
@@ -286,6 +295,7 @@
     <ClInclude Include="ShadowManager.h" />
     <ClInclude Include="Slider.h" />
     <ClInclude Include="Slime.h" />
+    <ClInclude Include="Stone_Sword.h" />
     <ClInclude Include="TBO.h" />
     <ClInclude Include="TestConteiner.h" />
     <ClInclude Include="UI.h" />
