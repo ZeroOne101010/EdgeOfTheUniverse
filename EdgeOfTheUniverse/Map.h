@@ -4,7 +4,7 @@
 #include "ChunkThread.h"
 #include "RandomCoor.h"
 #include "UIPlayerInterface.h"
-
+#include "TestConteiner.h"
 class Game;
 
 class Map : public Alterable, public IDraw
@@ -19,6 +19,8 @@ public:
 	RandomCoor* rand;
 
 	UIPlayerInterface* uiPlayerInterface;
+
+	TestConteiner* testCon;
 
 	virtual Alterable draw(Renderer* renderer, Alterable alters) override;
 };

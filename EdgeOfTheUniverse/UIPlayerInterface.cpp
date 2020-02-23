@@ -8,15 +8,15 @@ UIPlayerInterface::UIPlayerInterface(World* world, Entity* player)
 {
 	Color = glm::vec4(20, 20, 20, 255);
 	buttonAttached = true;
-	Color = vec4(0, 0, 0, 0);
+	//Color = vec4(0, 0, 0, 0);
 	this->world = world;
 	this->player = player;
-	size = vec2(0, 0);
+	size = vec2(100, 100);
 
 	itemHotPanel = new ItemHotPanel();
 	itemHotPanel->Color = vec4(20, 20, 20, 255);
-	itemHotPanel->size = vec2(700, 60);
-	itemHotPanel->pos = vec2(0, -60);
+	itemHotPanel->size = vec2(700, 99);
+	itemHotPanel->pos = vec2(0, 0);
 }
 
 UIPlayerInterface::~UIPlayerInterface()

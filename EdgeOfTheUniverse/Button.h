@@ -32,5 +32,8 @@ public:
 	virtual Alterable draw(Renderer* renderer, Alterable alters) override;
 protected:
 	void DelegateUpdate();
+
+	// Унаследовано через UI
+	virtual void Draw(Renderer* renderer, Alterable alters) override;
 };
 

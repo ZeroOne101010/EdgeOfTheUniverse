@@ -19,6 +19,7 @@ public:
 	bool buttonAttached = false;
 	bool carcassIsActive = true;
     RectangleShape* carcass;
+	virtual void Draw(Renderer* renderer, Alterable alters) = 0;
 	virtual Alterable draw(Renderer* renderer, Alterable alters) override;
 private:
 	void CarcassUpdate();

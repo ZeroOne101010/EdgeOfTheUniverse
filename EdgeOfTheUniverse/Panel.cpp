@@ -15,3 +15,7 @@ Alterable Panel::draw(Renderer* renderer, Alterable alters)
 	alters = UI::draw(renderer, alters);
 	return alters;
 }
+
+void Panel::Draw(Renderer* renderer, Alterable alters)
+{
+}
