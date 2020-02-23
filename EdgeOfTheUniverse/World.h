@@ -30,15 +30,12 @@ public:
 	int chunkPointer = 0;
 	int seed;
 	Controller* controller;
-	Player* player;
-	RectangleShape* test;
-	//vec2 camera = vec2(0, 0);
+	Entity* player;
 	RandomCoor* rand;
-
+	Entity* testItem;
 	std::vector<Biome*> biome;
 
 	std::vector<Entity*> entity;
-	Entity* addEntity(int posX, int posY, int id);
 
 	Biome* defaulBiome = new BiomeAir();
 	void addBiome(Biome* biome);

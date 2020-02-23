@@ -1,6 +1,8 @@
 #include "World.h"
 #include "IntersectedEntity.h"
 
+//float IntersectedEntity::G = 0.003f;
+float IntersectedEntity::G = 0.003f;
 IntersectedEntity::IntersectedEntity()
 {
 	
@@ -39,7 +41,7 @@ void IntersectedEntity::collisionUpdate()
             {
                 if ((*checkingBlock)->isCanCollision)
                 {
-                    FloatRect entityRect = FloatRect(Position, rect->Size);
+                    FloatRect entityRect = FloatRect(Position - Origin, rect->Size);
                     FloatRect blockRect = FloatRect(blockPosition, glm::vec2(Block::sizeBlock, Block::sizeBlock));
                     if (entityRect.Intersects(blockRect))
                     {
@@ -98,9 +100,13 @@ void IntersectedEntity::collisionUpdate()
         }
 }
 
-void IntersectedEntity::update()
+
+void IntersectedEntity::draw(Renderer* renderer, Alterable alters)
 {
-    Entity::update();
+ 
+    velocity.y += G;
+    Position += velocity;
     collisionUpdate();
+    Entity::draw(renderer, alters);
 }
 

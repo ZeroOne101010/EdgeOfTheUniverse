@@ -1,12 +1,10 @@
 #pragma once
-#include "Entity.h"
-class Slime : public Entity
+#include "Mob.h"
+class Slime : public Mob
 {
 public:
 	Slime();
 
-	void start() override;
-	void update() override;
 
 	virtual Entity* getNewEntity() override;
 

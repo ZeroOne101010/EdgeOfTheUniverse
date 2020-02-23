@@ -21,10 +21,13 @@ World::World(int seed, Map* map)
     {
         chunk[x] = nullptr;
     }
-    //test = new RectangleShape(100, 100);
-    player = new Player();
-    player->world = this;
+    
+    player = RegisteryEntity::addMob(this, 0, vec2(0, 0));
+    player->saveInChunk = false;
+    testItem = RegisteryEntity::addItem(this, 0, vec2(0, 0));
+    testItem->saveInChunk = false;
     controller = new Controller(player);
+
     //for (int x = 0; x < 28; x++)
     //{
     //    if (x == 26)
@@ -80,14 +83,6 @@ World::~World()
     }
     delete rand;
     delete defaulBiome;
-}
-
-Entity* World::addEntity(int posX, int posY, int id)
-{
-    Entity* localEntity = RegisteryEntity::createEntity(this, id);
-    localEntity->Position = glm::vec2(posX, posY);
-    entity.push_back(localEntity);
-    return localEntity;
 }
 
 Chunk* World::generationChunk(int chunkX, int chunkY)
@@ -837,7 +832,14 @@ void World::draw(Renderer* renderer, Alterable alters)
                     }
                 }
             }
+    for (int entityCount = 0; entityCount < entity.size(); entityCount++)
+    {
+        renderer->draw(entity[entityCount], alters);
+    }
     controller->UpdateController(this);
-    renderer->draw(player, alters);
+    //std::cout << entity[0]->Position.x << std::endl;
+    //renderer->draw(player, alters);
+    //renderer->draw(player, alters);
+    //renderer->draw(testItem, alters);
     //Position = -leftTopAngleCamera;
 }
