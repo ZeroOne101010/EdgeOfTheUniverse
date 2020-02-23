@@ -6,7 +6,7 @@ public:
 	Panel(vec2 size);
 	Panel();
 	// Не нужно писать alters *= *this;
-	virtual void Draw(Renderer* renderer, Alterable alters) override;
+	virtual Alterable draw(Renderer* renderer, Alterable alters) override;
 
 };
 

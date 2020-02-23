@@ -12,7 +12,8 @@ Entity* Amnis::getNewEntity()
 {
 	return new Amnis;
 }
-void Amnis::draw(Renderer* renderer, Alterable alters)
+Alterable Amnis::draw(Renderer* renderer, Alterable alters)
 {
 	Item::draw(renderer, alters);
+	return alters;
 }

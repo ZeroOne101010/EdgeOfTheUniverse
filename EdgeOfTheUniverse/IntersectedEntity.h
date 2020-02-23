@@ -5,7 +5,7 @@ class IntersectedEntity : public Entity
 public:
 	IntersectedEntity();
 	void collisionUpdate();
-	virtual void draw(Renderer* renderer, Alterable alters) override;
+	virtual Alterable draw(Renderer* renderer, Alterable alters) override;
 	static float G;
 };
 

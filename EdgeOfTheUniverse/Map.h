@@ -3,6 +3,7 @@
 #include "World.h"
 #include "ChunkThread.h"
 #include "RandomCoor.h"
+#include "UIPlayerInterface.h"
 
 class Game;
 
@@ -17,6 +18,8 @@ public:
 	Game* game;
 	RandomCoor* rand;
 
-	virtual void draw(Renderer* renderer, Alterable alters) override;
+	UIPlayerInterface* uiPlayerInterface;
+
+	virtual Alterable draw(Renderer* renderer, Alterable alters) override;
 };
 

@@ -16,15 +16,18 @@ UI::~UI()
 	delete carcass;
 }
 
-void UI::draw(Renderer* renderer, Alterable alters)
+Alterable UI::draw(Renderer* renderer, Alterable alters)
 {
 	CarcassUpdate();
+	//Position = vec2((rightAttached ? RenderWindow::width : 0) + pos.x - (rightAttached ? size.x : 0), (buttonAttached ? RenderWindow::height : 0) + pos.y - (buttonAttached ? size.y : 0));
 	Position = vec2((rightAttached ? RenderWindow::width : 0) + pos.x, (buttonAttached ? RenderWindow::height : 0) + pos.y);
-	Origin = vec2((rightAttached ? -size.x : 0) + origin.x, (buttonAttached ? -size.y : 0) + origin.y);
+	//Origin = vec2((rightAttached ? -size.x : 0) + origin.x, (buttonAttached ? -size.y : 0) + origin.y);
+	//Origin = origin;
+	carcass->Size = size;
 	alters *= this;
 	if (carcassIsActive == true)
 		renderer->draw(carcass, alters);
-	Draw(renderer, *this);
+	return alters;
 }
 
 void UI::CarcassUpdate()

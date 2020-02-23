@@ -2,7 +2,7 @@
 
 Player::Player()
 {
-	Wf = -7;
+	Wf = -10;
 	moveSpeed = 7;
 	rect->Size = glm::vec2(Block::sizeBlock, Block::sizeBlock * 2);
 }

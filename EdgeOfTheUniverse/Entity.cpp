@@ -84,9 +84,10 @@ Entity* Entity::createEntity(World* world)
 	return entity;
 }
 
-void Entity::draw(Renderer* renderer, Alterable alters)
+Alterable Entity::draw(Renderer* renderer, Alterable alters)
 {
 	alters *= this;
 	rect->textureRect = textureRect;
 	renderer->draw(rect, alters);
+	return alters;
 }

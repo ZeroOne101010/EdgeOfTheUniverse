@@ -703,7 +703,7 @@ void World::rendererBlock(Block* block, Renderer* renderer, Alterable alters)
 //    }
 //}
 
-void World::draw(Renderer* renderer, Alterable alters)
+Alterable World::draw(Renderer* renderer, Alterable alters)
 {
     alters *= this;
 
@@ -842,4 +842,5 @@ void World::draw(Renderer* renderer, Alterable alters)
     //renderer->draw(player, alters);
     //renderer->draw(testItem, alters);
     //Position = -leftTopAngleCamera;
+    return alters;
 }

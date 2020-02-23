@@ -4,7 +4,7 @@ class Amnis : public Item
 {
 public:
 	Amnis();
-	virtual void draw(Renderer* renderer, Alterable alters) override;
+	virtual Alterable draw(Renderer* renderer, Alterable alters) override;
 
 	virtual Entity* getNewEntity() override;
 };

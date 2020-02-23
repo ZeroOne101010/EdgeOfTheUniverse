@@ -14,6 +14,7 @@ Map::Map(int sizeNumberMap, int seed, Game* game)
 
 	world->addBiome(mountains);
 	world->Position = vec2(0, 0);
+	uiPlayerInterface = new UIPlayerInterface(world, world->player);
 }
 
 Map::~Map()
@@ -21,10 +22,13 @@ Map::~Map()
 	chunkThread->close();
 	delete world;
 	delete chunkThread;
+	delete uiPlayerInterface;
 }
 
-void Map::draw(Renderer* renderer, Alterable alters)
+Alterable Map::draw(Renderer* renderer, Alterable alters)
 {
 	alters *= this;
 	renderer->draw(world, alters);
+	renderer->draw(uiPlayerInterface, alters);
+	return alters;
 }

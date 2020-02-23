@@ -18,7 +18,7 @@ public:
 	virtual void W(float hightJump);
 	virtual void S(float downSpeed);
 	float moveSpeed;
-	float flySpeed = 10;
+	float flySpeed;
 	float Af;
 	float Df;
 	float Wf;
@@ -43,6 +43,6 @@ public:
 	virtual Entity* getNewEntity() = 0;
 	Entity* createEntity(World* world);
 
-	virtual void draw(Renderer* renderer, Alterable alters) override;
+	virtual Alterable draw(Renderer* renderer, Alterable alters) override;
 };
 

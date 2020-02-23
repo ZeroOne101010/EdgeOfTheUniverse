@@ -249,10 +249,11 @@ void Block::updateViewBlock()
     updateTextureRect();
 }
 
-void Block::draw(Renderer* renderer, Alterable alters)
+Alterable Block::draw(Renderer* renderer, Alterable alters)
 {
 	alters *= this;
 	renderer->draw(rect, alters);
+    return alters;
 }
 
 Block* Block::addProperty(int value, int sizeProperty, std::string nameProperty)

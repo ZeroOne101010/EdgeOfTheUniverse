@@ -3,6 +3,6 @@
 class IDraw 
 {
 public:
-	virtual void draw(Renderer* renderer, Alterable alters) = 0;
+	virtual Alterable draw(Renderer* renderer, Alterable alters) = 0;
 };
 

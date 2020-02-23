@@ -2,7 +2,7 @@
 #include "IntersectedEntity.h"
 
 //float IntersectedEntity::G = 0.003f;
-float IntersectedEntity::G = 0.003f;
+float IntersectedEntity::G = 0.36f;
 IntersectedEntity::IntersectedEntity()
 {
 	
@@ -41,7 +41,7 @@ void IntersectedEntity::collisionUpdate()
             {
                 if ((*checkingBlock)->isCanCollision)
                 {
-                    FloatRect entityRect = FloatRect(Position - Origin, rect->Size);
+                    FloatRect entityRect = FloatRect(Position, rect->Size);
                     FloatRect blockRect = FloatRect(blockPosition, glm::vec2(Block::sizeBlock, Block::sizeBlock));
                     if (entityRect.Intersects(blockRect))
                     {
@@ -66,7 +66,7 @@ void IntersectedEntity::collisionUpdate()
 
                         float offsetTileX = abs(dVelocity.x);
                         float offsetTileY = abs(dVelocity.y);
-                        if (entityRect.positionX < blockRect.positionX + blockRect.sizeX - offsetTileX && entityRect.positionX + entityRect.sizeX - offsetTileX > blockRect.positionX && entityRect.positionY + entityRect.sizeY <= blockRect.positionY + offsetTileY)
+                        if (entityRect.positionX < blockRect.positionX + blockRect.sizeX - offsetTileX && entityRect.positionX + entityRect.sizeX - offsetTileX > blockRect.positionX&& entityRect.positionY + entityRect.sizeY <= blockRect.positionY + offsetTileY)
                         {
                             velocity = glm::vec2(velocity.x, 0);
                             float offset = blockRect.positionY - (entityRect.positionY + entityRect.sizeY);
@@ -101,12 +101,13 @@ void IntersectedEntity::collisionUpdate()
 }
 
 
-void IntersectedEntity::draw(Renderer* renderer, Alterable alters)
+Alterable IntersectedEntity::draw(Renderer* renderer, Alterable alters)
 {
  
     velocity.y += G;
     Position += velocity;
     collisionUpdate();
     Entity::draw(renderer, alters);
+    return alters;
 }
 

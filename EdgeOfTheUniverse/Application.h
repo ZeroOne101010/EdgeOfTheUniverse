@@ -7,12 +7,14 @@
 #include <vector>
 #include "Game.h"
 #include "Content.h"
+#include "UICanvas.h"
 class Application
 {
 public:
 	Application();
 	~Application();
 	void GameLoop();
+	UICanvas* uiCanvas;
 	RenderWindow* window;
 	Game* game;
 

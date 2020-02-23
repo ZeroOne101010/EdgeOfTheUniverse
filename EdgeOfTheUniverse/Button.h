@@ -29,7 +29,7 @@ public:
 	bool isActive;
 	bool Activable = true;
 	bool* eventBool = new bool[4];
-	virtual void Draw(Renderer* renderer, Alterable alters) override;
+	virtual Alterable draw(Renderer* renderer, Alterable alters) override;
 protected:
 	void DelegateUpdate();
 };

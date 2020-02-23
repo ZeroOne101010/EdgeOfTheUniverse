@@ -182,7 +182,7 @@ void VAO::setDrawParams()
 	setColor();
 }
 
-void VAO::draw(Renderer* renderer, Alterable alters)
+Alterable VAO::draw(Renderer* renderer, Alterable alters)
 {
 	if (optimizeMode)
 	{
@@ -200,6 +200,7 @@ void VAO::draw(Renderer* renderer, Alterable alters)
 		//drawPosition += velocity;
 	}
 	draw();
+	return alters;
 }
 
 

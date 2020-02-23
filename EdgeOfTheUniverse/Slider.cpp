@@ -42,10 +42,12 @@ void Slider::handleIsTakeble()
 }
 
 
-void Slider::Draw(Renderer* renderer, Alterable alters)
+Alterable Slider::draw(Renderer* renderer, Alterable alters)
 {
+	UI::draw(renderer, alters);
 	DelegateUpdate();
 	handleIsTakeble();
 	renderer->draw(&fillArea, alters);
 	renderer->draw(&handle, alters);
+	return alters;
 }

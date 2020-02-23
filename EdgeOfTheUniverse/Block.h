@@ -44,7 +44,7 @@ public:
 	//ќбнавл€ет внешность блока(обновл€ет текстурку и т.д)
 	void updateViewBlock();
 
-	virtual void draw(Renderer* renderer, Alterable alters) override;
+	virtual Alterable draw(Renderer* renderer, Alterable alters) override;
 protected:
 	Block* addProperty(int value, int sizeProperty, std::string nameProperty);
 	int getValueProperty(std::string nameProperty);

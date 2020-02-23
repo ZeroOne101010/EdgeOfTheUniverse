@@ -10,8 +10,9 @@ Game::~Game()
 	delete map;
 }
 
-void Game::draw(Renderer* renderer, Alterable alters)
+Alterable Game::draw(Renderer* renderer, Alterable alters)
 {
 	alters *= this;
 	renderer->draw(map, alters);
+	return alters;
 }

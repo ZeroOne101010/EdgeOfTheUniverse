@@ -61,7 +61,7 @@ public:
 
 	void rendererBlock(Block* block, Renderer* renderer, Alterable alters);
 
-	virtual void draw(Renderer* renderer, Alterable alters) override;
+	virtual Alterable draw(Renderer* renderer, Alterable alters) override;
 	int countChunks;
 	int chunkRendererSize = 0;
 	int rendererChunkX = 0;

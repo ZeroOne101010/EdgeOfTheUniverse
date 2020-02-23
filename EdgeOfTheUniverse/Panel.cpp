@@ -10,6 +10,8 @@ Panel::Panel()
 
 }
 
-void Panel::Draw(Renderer* renderer, Alterable alters)
+Alterable Panel::draw(Renderer* renderer, Alterable alters)
 {
+	alters = UI::draw(renderer, alters);
+	return alters;
 }

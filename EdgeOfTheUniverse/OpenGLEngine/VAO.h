@@ -51,7 +51,7 @@ public:
 	static void bindVBOIBO(VBO* vbo, IBO* ibo, GLuint indexVAO, GLuint indexAttribute);
 
 	void draw();
-	virtual void draw(Renderer* renderer, Alterable alters) override;
+	virtual Alterable draw(Renderer* renderer, Alterable alters) override;
 private:
  	void setCoords();
 	void setSize();

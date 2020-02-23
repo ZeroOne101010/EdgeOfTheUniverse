@@ -6,21 +6,20 @@ Application::Application()
 	Content::load();
 	Registery::load();
 	game = new Game(window);
+	uiCanvas = new UICanvas();
 }
 
 Application::~Application()
 {
 	delete game;
+	delete uiCanvas;
 }
 
 
 
 void Application::GameLoop()
 {
-	//FloatRect floatRect1 = FloatRect(0, 24, 21, 21);
-	//FloatRect floatRect2 = FloatRect(0, 0, 21, 48);
 
-	//std::cout << floatRect1.Intersects(floatRect2) << std::endl;
 
 
 	while (!glfwWindowShouldClose(window->window))
@@ -29,6 +28,7 @@ void Application::GameLoop()
 		window->Clear(glm::vec3(107, 155, 238));
 
 		window->draw(game);
+		window->draw(uiCanvas);
 
 		window->Display();
 	}

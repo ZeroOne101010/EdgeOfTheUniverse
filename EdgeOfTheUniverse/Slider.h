@@ -11,6 +11,6 @@ public:
 	Button handle = Button();
 	Panel fillArea = Panel();
 	float fill;
-	virtual void Draw(Renderer* renderer, Alterable alters) override;
+	virtual Alterable draw(Renderer* renderer, Alterable alters) override;
 };
 

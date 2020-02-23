@@ -2,6 +2,7 @@
 
 Button::Button()
 {
+	buttonGroup = nullptr;
 	whiteEvent = new EventSetWhite(this);
 	addDelegates(whiteEvent);
 }
@@ -67,8 +68,9 @@ void Button::DelegateUpdate()
 		}
 	}
 }
-void Button::Draw(Renderer* renderer, Alterable alters)
+Alterable Button::draw(Renderer* renderer, Alterable alters)
 {
+	UI::draw(renderer, alters);
 	DelegateUpdate();
 	if (buttonGroup != nullptr)
 	{
@@ -81,5 +83,6 @@ void Button::Draw(Renderer* renderer, Alterable alters)
 			isActive = false;
 		}
 	}
+	return alters;
 
 }

@@ -178,6 +178,7 @@
     <ClCompile Include="ICloseObject.cpp" />
     <ClCompile Include="IntersectedEntity.cpp" />
     <ClCompile Include="Item.cpp" />
+    <ClCompile Include="ItemHotPanel.cpp" />
     <ClCompile Include="LightingShader.cpp" />
     <ClCompile Include="Map.cpp" />
     <ClCompile Include="Mob.cpp" />
@@ -213,6 +214,8 @@
     <ClCompile Include="Slime.cpp" />
     <ClCompile Include="TBO.cpp" />
     <ClCompile Include="UI.cpp" />
+    <ClCompile Include="UICanvas.cpp" />
+    <ClCompile Include="UIPlayerInterface.cpp" />
     <ClCompile Include="Vacuum.cpp" />
     <ClCompile Include="World.cpp" />
   </ItemGroup>
@@ -249,6 +252,7 @@
     <ClInclude Include="IntersectedEntity.h" />
     <ClInclude Include="ITakeble.h" />
     <ClInclude Include="Item.h" />
+    <ClInclude Include="ItemHotPanel.h" />
     <ClInclude Include="LightingShader.h" />
     <ClInclude Include="Map.h" />
     <ClInclude Include="Mob.h" />
@@ -283,6 +287,8 @@
     <ClInclude Include="Slime.h" />
     <ClInclude Include="TBO.h" />
     <ClInclude Include="UI.h" />
+    <ClInclude Include="UICanvas.h" />
+    <ClInclude Include="UIPlayerInterface.h" />
     <ClInclude Include="Vacuum.h" />
     <ClInclude Include="World.h" />
   </ItemGroup>

@@ -12,6 +12,6 @@ public:
 	RenderWindow* window;
 	Map* map;
 
-	virtual void draw(Renderer* renderer, Alterable alters) override;
+	virtual Alterable draw(Renderer* renderer, Alterable alters) override;
 };
 

@@ -10,8 +10,9 @@ void Item::Take()
 	delete this;
 }
 
-void Item::draw(Renderer* renderer, Alterable alters)
+Alterable Item::draw(Renderer* renderer, Alterable alters)
 {
 	IntersectedEntity::draw(renderer, alters);
+	return alters;
 }
 
