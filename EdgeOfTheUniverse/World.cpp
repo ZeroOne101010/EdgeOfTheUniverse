@@ -28,6 +28,8 @@ World::World(int seed, Map* map)
     testItem->saveInChunk = false;
     controller = new Controller(player);
 
+    //dynamic_cast<Player*>(player)->Take(dynamic_cast<ITakeble*>(testItem), 0);
+
     //for (int x = 0; x < 28; x++)
     //{
     //    if (x == 26)

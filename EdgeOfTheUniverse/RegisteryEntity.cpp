@@ -1,4 +1,6 @@
+
 #include "RegisteryEntity.h"
+
 std::vector<Entity*> RegisteryEntity::entity;
 int RegisteryEntity::mobsCount;
 int RegisteryEntity::itemsCount;

@@ -177,7 +177,11 @@
     <ClCompile Include="Grass.cpp" />
     <ClCompile Include="ICloseObject.cpp" />
     <ClCompile Include="IntersectedEntity.cpp" />
+    <ClCompile Include="InventoredEntity.cpp" />
+    <ClCompile Include="InventoredMob.cpp" />
+    <ClCompile Include="Inventory.cpp" />
     <ClCompile Include="Item.cpp" />
+    <ClCompile Include="ItemConteiner.cpp" />
     <ClCompile Include="LightingShader.cpp" />
     <ClCompile Include="Map.cpp" />
     <ClCompile Include="Mob.cpp" />
@@ -246,9 +250,14 @@
     <ClInclude Include="Grass.h" />
     <ClInclude Include="IButton.h" />
     <ClInclude Include="ICloseObject.h" />
+    <ClInclude Include="IInventory.h" />
     <ClInclude Include="IntersectedEntity.h" />
+    <ClInclude Include="InventoredEntity.h" />
+    <ClInclude Include="InventoredMob.h" />
+    <ClInclude Include="Inventory.h" />
     <ClInclude Include="ITakeble.h" />
     <ClInclude Include="Item.h" />
+    <ClInclude Include="ItemConteiner.h" />
     <ClInclude Include="LightingShader.h" />
     <ClInclude Include="Map.h" />
     <ClInclude Include="Mob.h" />

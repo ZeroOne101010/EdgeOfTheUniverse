@@ -2,7 +2,10 @@
 
 Player::Player()
 {
-	flySpeed = 5;
+	mainInventory = new Inventory(rect);
+	inventories.push_back(mainInventory);
+	Wf = -10;
+	moveSpeed = 7;
 	rect->Size = glm::vec2(Block::sizeBlock, Block::sizeBlock * 2);
 }
 

@@ -1,10 +1,11 @@
 #pragma once
-#include "Mob.h"
 #include "Block.h"
-class Player : public Mob
+#include "InventoredMob.h"
+class Player : public InventoredMob
 {
 public:
 	Player();
+	Inventory* mainInventory;
 	virtual Entity* getNewEntity() override;
 };
 

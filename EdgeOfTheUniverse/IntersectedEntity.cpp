@@ -1,8 +1,7 @@
 #include "World.h"
 #include "IntersectedEntity.h"
 
-//float IntersectedEntity::G = 0.003f;
-float IntersectedEntity::G = 0.003f;
+float IntersectedEntity::G = 0.10f;
 IntersectedEntity::IntersectedEntity()
 {
 	

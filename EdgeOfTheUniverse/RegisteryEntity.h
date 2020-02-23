@@ -8,6 +8,7 @@
 
 #include "Item.h"
 #include "Amnis.h"
+#include "World.h"
 
 class RegisteryEntity
 {
@@ -21,11 +22,10 @@ public:
 	static Entity* createMob(World* world, int id);
 	static Entity* createItem(World* world, int id);
 	static void initEntity();
-
+	static int mobsCount;
+	static int itemsCount;
 private:
 	static void initMob();
 	static void initItem();
-	static int mobsCount;
-	static int itemsCount;
 };
 

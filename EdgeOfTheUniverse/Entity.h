@@ -18,7 +18,7 @@ public:
 	virtual void W(float hightJump);
 	virtual void S(float downSpeed);
 	float moveSpeed;
-	float flySpeed = 10;
+	float flySpeed = 0;
 	float Af;
 	float Df;
 	float Wf;
