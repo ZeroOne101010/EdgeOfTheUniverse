@@ -33,6 +33,7 @@ public:
 	static TBO* defaultTexture;
 	static TBO* spriteList_Grass;
 	static TBO* spriteList_Dirt;
+	static TBO* sprite_AmnisItem;
 
 
 	static void load();

@@ -445,7 +445,9 @@ Chunk* ConvertChunkToData::recoveryChunk(unsigned char* chunkData, int chunkX, i
         int id = getValueFromData(pointer, sizeIdEntity, chunkData, STRIDE);
         pointer += sizeIdEntity;
 
-        Entity* localEntity = world->addEntity(posX, posY, id);
+       // Entity* localEntity = world->addEntity(posX, posY, id);
+        Entity* localEntity = RegisteryEntity::addEntity(world, id, vec2(posX, posY));
+        std::cout << "Заспавнился" << std::endl;
         if (localEntity->propertyManager.allSize > 0)
         {
             PropertyManager* propertyManager = &localEntity->propertyManager;

@@ -7,10 +7,10 @@ class Controller
 {
 public:
 	Controller();
-	Controller(Mob* target);
-	void setTarget(Mob* target);
+	Controller(Entity* target);
+	void setTarget(Entity* target);
 	void UpdateController(World* world);
-	Mob* target;
+	Entity* target;
 	vec2 Camera = vec2(0, 0);
 	vec2 camVelosity;
 	vec2 zeroCamera;

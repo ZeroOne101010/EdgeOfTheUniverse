@@ -4,39 +4,39 @@ Controller::Controller()
 {
 }
 
-Controller::Controller(Mob* target)
+Controller::Controller(Entity* target)
 {
 	this->target = target;
 }
 
-void Controller::setTarget(Mob* target)
+void Controller::setTarget(Entity* target)
 {
 	this->target = target;
 }
 
 void Controller::Controll()
 {
-    if (RenderWindow::getKeyState(GLFW_KEY_W))
-    {
-        target->W(target->Wf);
-    }
-    else if (RenderWindow::getKeyState(GLFW_KEY_S))
-    {
-        target->S(target->Sf);
-    }
+        if (RenderWindow::getKeyState(GLFW_KEY_W))
+        {
+           target->W(target->Wf);
+        }
+        else if (RenderWindow::getKeyState(GLFW_KEY_S))
+        {
+            target->S(target->Sf);
+        }
 
-    if (RenderWindow::getKeyState(GLFW_KEY_D))
-    {
-        target->D(target->Df);
-    }
-    else if (RenderWindow::getKeyState(GLFW_KEY_A))
-    {
-        target->A(-target->Af);
-    }
-    else
-    {
-        target->velocity.x = 0;
-    }
+        if (RenderWindow::getKeyState(GLFW_KEY_D))
+        {
+            target->D(target->Df);
+        }
+        else if (RenderWindow::getKeyState(GLFW_KEY_A))
+        {
+            target->A(target->Af);
+        }
+        else
+        {
+            target->velocity.x = 0;
+        }
 }
 void Controller::Interpol(float k)
 {
