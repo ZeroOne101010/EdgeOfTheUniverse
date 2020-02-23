@@ -183,7 +183,6 @@
     <ClCompile Include="Item.cpp" />
     <ClCompile Include="ItemConteiner.cpp" />
     <ClCompile Include="InventoryItemsField.cpp" />
-    <ClCompile Include="Item.cpp" />
     <ClCompile Include="ItemHotCell.cpp" />
     <ClCompile Include="ItemHotPanel.cpp" />
     <ClCompile Include="LightingShader.cpp" />
@@ -262,12 +261,10 @@
     <ClInclude Include="IntersectedEntity.h" />
     <ClInclude Include="InventoredMob.h" />
     <ClInclude Include="Inventory.h" />
-    <ClInclude Include="ITakeble.h" />
     <ClInclude Include="Item.h" />
     <ClInclude Include="ItemConteiner.h" />
     <ClInclude Include="InventoryItemsField.h" />
     <ClInclude Include="ITakeble.h" />
-    <ClInclude Include="Item.h" />
     <ClInclude Include="ItemHotCell.h" />
     <ClInclude Include="ItemHotPanel.h" />
     <ClInclude Include="LightingShader.h" />
