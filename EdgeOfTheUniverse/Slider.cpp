@@ -9,8 +9,8 @@ Slider::Slider(vec2 handleSize, vec2 areaSize) : Button(areaSize)
 	handle.Color = vec4(255, 255, 255, 255);
 	handle.hoverColor = vec4(225, 225, 225, 255);
 	handle.pressColor = vec4(220, 220, 220, 255);
-	handle.origin = vec2(-handle.size.x / 2, -handle.size.y / 2);
-	handle.pos = vec2(handle.pos.x, size.y / 2);
+	handle.Origin = vec2(-handle.size.x / 2, -handle.size.y / 2);
+	handle.Position = vec2(handle.Position.x, size.y / 2);
 
 	fillArea.size = vec2(fillArea.size.x, size.y);
 	fillArea.Color = vec4(0, 255, 149, 255);

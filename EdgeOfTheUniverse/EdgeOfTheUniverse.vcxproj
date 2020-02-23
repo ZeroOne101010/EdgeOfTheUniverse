@@ -177,7 +177,9 @@
     <ClCompile Include="Grass.cpp" />
     <ClCompile Include="ICloseObject.cpp" />
     <ClCompile Include="IntersectedEntity.cpp" />
+    <ClCompile Include="InventoryItemsField.cpp" />
     <ClCompile Include="Item.cpp" />
+    <ClCompile Include="ItemHotCell.cpp" />
     <ClCompile Include="ItemHotPanel.cpp" />
     <ClCompile Include="LightingShader.cpp" />
     <ClCompile Include="Map.cpp" />
@@ -251,8 +253,10 @@
     <ClInclude Include="IButton.h" />
     <ClInclude Include="ICloseObject.h" />
     <ClInclude Include="IntersectedEntity.h" />
+    <ClInclude Include="InventoryItemsField.h" />
     <ClInclude Include="ITakeble.h" />
     <ClInclude Include="Item.h" />
+    <ClInclude Include="ItemHotCell.h" />
     <ClInclude Include="ItemHotPanel.h" />
     <ClInclude Include="LightingShader.h" />
     <ClInclude Include="Map.h" />

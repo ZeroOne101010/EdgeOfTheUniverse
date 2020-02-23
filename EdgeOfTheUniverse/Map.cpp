@@ -15,13 +15,6 @@ Map::Map(int sizeNumberMap, int seed, Game* game)
 	world->addBiome(mountains);
 	world->Position = vec2(0, 0);
 	uiPlayerInterface = new UIPlayerInterface(world, world->player);
-
-
-
-
-	testCon = new TestConteiner();
-	testCon->Color = vec4(25, 25, 25, 255);
-	testCon->buttonAttached = true;
 }
 
 Map::~Map()
@@ -36,7 +29,7 @@ Alterable Map::draw(Renderer* renderer, Alterable alters)
 {
 	alters *= this;
 	renderer->draw(world, alters);
-	renderer->draw(testCon, alters);
-	//renderer->draw(uiPlayerInterface, alters);
+	//renderer->draw(testCon, alters);
+	renderer->draw(uiPlayerInterface, alters);
 	return alters;
 }

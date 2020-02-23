@@ -7,26 +7,30 @@
 UIPlayerInterface::UIPlayerInterface(World* world, Entity* player)
 {
 	Color = glm::vec4(20, 20, 20, 255);
-	buttonAttached = true;
-	//Color = vec4(0, 0, 0, 0);
+	Color = vec4(0, 0, 0, 0);
 	this->world = world;
 	this->player = player;
-	size = vec2(100, 100);
+	size = vec2(0, 0);
 
 	itemHotPanel = new ItemHotPanel();
+	itemHotPanel->buttonAttached = true;;
 	itemHotPanel->Color = vec4(20, 20, 20, 255);
-	itemHotPanel->size = vec2(700, 99);
-	itemHotPanel->pos = vec2(0, 0);
+
+	inventoryItemsField = new InventoryItemsField();	
+	inventoryItemsField->buttonAttached = true;
+	inventoryItemsField->Position = vec2(0, itemHotPanel->size.y + 10);
 }
 
 UIPlayerInterface::~UIPlayerInterface()
 {
 	delete itemHotPanel;
+	delete inventoryItemsField;
 }
 
 Alterable UIPlayerInterface::draw(Renderer* renderer, Alterable alters)
 {
-	alters = Panel::draw(renderer, alters);
+	Panel::draw(renderer, alters);
 	renderer->draw(itemHotPanel, alters);
+	renderer->draw(inventoryItemsField, alters);
 	return alters;
 }

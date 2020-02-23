@@ -20,8 +20,6 @@ public:
 
 	UIPlayerInterface* uiPlayerInterface;
 
-	TestConteiner* testCon;
-
 	virtual Alterable draw(Renderer* renderer, Alterable alters) override;
 };
 
