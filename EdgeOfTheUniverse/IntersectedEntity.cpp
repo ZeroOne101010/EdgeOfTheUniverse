@@ -14,10 +14,7 @@ void IntersectedEntity::collisionUpdate()
     int pX = 0;
     if (Position.x < 0)
     {
-        if ((int)abs(Position.x) % Block::sizeBlock > 0)
-        {
-            pX = (int)abs(Position.x) % Block::sizeBlock > 0 ? Position.x / Block::sizeBlock - 1 : 0;
-        }
+        pX = (int)abs(Position.x) % Block::sizeBlock > 0 ? Position.x / Block::sizeBlock - 1 : Position.x / Block::sizeBlock;
     }
     else pX = Position.x / Block::sizeBlock;
 
@@ -25,27 +22,24 @@ void IntersectedEntity::collisionUpdate()
     int pY = 0;
     if (Position.y < 0)
     {
-        if ((int)abs(Position.y) % Block::sizeBlock > 0)
-        {
-            pY = (int)abs(Position.y) % Block::sizeBlock > 0 ? Position.y / Block::sizeBlock - 1 : 0;
-        }
+        pY = (int)abs(Position.y) % Block::sizeBlock > 0 ? Position.y / Block::sizeBlock - 1 : Position.y / Block::sizeBlock;
     }
     else pY = Position.y / Block::sizeBlock;
 
+    glm::vec2 sizeEntityInBlockSize = glm::vec2((int)(size.x / Block::sizeBlock), (int)(size.y / Block::sizeBlock));
 
-    for (int x = 0; x < size.x; x++)
-        for (int y = 0; y < size.y; y++)
+    for (int x = 0; x < sizeEntityInBlockSize.x; x++)
+        for (int y = 0; y < sizeEntityInBlockSize.y; y++)
         {
-            int blockX = pX + x - size.x / 2;
-            int blockY = pY + y - size.y / 2;
+            int blockX = pX + (x - sizeEntityInBlockSize.x / 2);
+            int blockY = pY + (y - sizeEntityInBlockSize.y / 2);
             Block** checkingBlock = world->getBlockNotGeneration(blockX, blockY, false);
             glm::vec2 blockPosition = glm::vec2(blockX * Block::sizeBlock, blockY * Block::sizeBlock);
             if (checkingBlock != nullptr)
             {
                 if ((*checkingBlock)->isCanCollision)
                 {
-                    std::cout << "Intersects!" << std::endl;
-                      FloatRect entityRect = FloatRect(Position - Origin, rect->Size);
+                    FloatRect entityRect = FloatRect(Position, rect->Size);
                     FloatRect blockRect = FloatRect(blockPosition, glm::vec2(Block::sizeBlock, Block::sizeBlock));
                     if (entityRect.Intersects(blockRect))
                     {
@@ -68,30 +62,30 @@ void IntersectedEntity::collisionUpdate()
                             dVelocity.y = -Block::sizeBlock + 1;
                         }
 
-                        float offsetTileX = abs(dVelocity.x) + 1;
-                        float offsetTileY = abs(dVelocity.y) + 1;
-                        if (entityRect.positionX < entityRect.positionX + blockRect.sizeX && entityRect.positionX + entityRect.sizeX > blockRect.positionX&& entityRect.positionY + entityRect.sizeY < blockRect.positionY + offsetTileY)
+                        float offsetTileX = abs(dVelocity.x);
+                        float offsetTileY = abs(dVelocity.y);
+                        if (entityRect.positionX < blockRect.positionX + blockRect.sizeX - offsetTileX && entityRect.positionX + entityRect.sizeX - offsetTileX > blockRect.positionX && entityRect.positionY + entityRect.sizeY <= blockRect.positionY + offsetTileY)
                         {
                             velocity = glm::vec2(velocity.x, 0);
                             float offset = blockRect.positionY - (entityRect.positionY + entityRect.sizeY);
                             Position += glm::vec2(0, offset);
                         }
 
-                        if (entityRect.positionX + offsetTileX < blockRect.positionX + blockRect.sizeX && entityRect.positionX + entityRect.sizeX > blockRect.positionX + offsetTileX && entityRect.positionY > blockRect.positionY + blockRect.sizeY - offsetTileY)
+                        if (entityRect.positionX < blockRect.positionX + blockRect.sizeX - offsetTileX && entityRect.positionX + entityRect.sizeX - offsetTileX > blockRect.positionX&& entityRect.positionY >= blockRect.positionY + blockRect.sizeY - offsetTileY)
                         {
                             velocity = glm::vec2(velocity.x, 1);
                             float offset = (blockRect.positionY + blockRect.sizeY) - entityRect.positionY;
                             Position += glm::vec2(0, offset);
                         }
 
-                        if (entityRect.positionX + entityRect.sizeX < blockRect.positionX + offsetTileX && entityRect.positionY + offsetTileY < blockRect.positionY + blockRect.sizeY && entityRect.positionY + entityRect.sizeY - offsetTileY > blockRect.positionY)
+                        if (entityRect.positionX + entityRect.sizeX <= blockRect.positionX + offsetTileX && entityRect.positionY + offsetTileY < blockRect.positionY + blockRect.sizeY && entityRect.positionY + entityRect.sizeY - offsetTileY > blockRect.positionY)
                         {
                             velocity = glm::vec2(0, velocity.y);
                             float offset = blockRect.positionX - (entityRect.positionX + entityRect.sizeX);
                             Position += glm::vec2(offset, 0);
                         }
 
-                        if (entityRect.positionX > blockRect.positionX + blockRect.sizeX - offsetTileX && entityRect.positionY + offsetTileY < blockRect.positionY + blockRect.sizeY && entityRect.positionY + entityRect.sizeY - offsetTileY > blockRect.positionY)
+                        if (entityRect.positionX >= blockRect.positionX + blockRect.sizeX - offsetTileX && entityRect.positionY + offsetTileY < blockRect.positionY + blockRect.sizeY && entityRect.positionY + entityRect.sizeY - offsetTileY > blockRect.positionY)
                         {
                             velocity = glm::vec2(0, velocity.y);
                             float offset = (blockRect.positionX + blockRect.sizeX) - entityRect.positionX;

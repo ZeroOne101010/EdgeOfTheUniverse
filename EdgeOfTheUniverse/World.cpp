@@ -21,7 +21,7 @@ World::World(int seed, Map* map)
     {
         chunk[x] = nullptr;
     }
-    test = new RectangleShape(100, 100);
+    //test = new RectangleShape(100, 100);
     player = new Player();
     player->world = this;
     controller = new Controller(player);

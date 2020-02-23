@@ -2,7 +2,7 @@
 
 Mountains::Mountains(float limitUp, float limitDown) : Biome(20, 20, 34234, 4532, 1, 1, 1, -10, 0, 50)
 {
-	setLandshaft(Chunk::sizeChunk, Chunk::sizeChunk, 1, 1, 10, 1);
+	setLandshaft(Chunk::sizeChunk, Chunk::sizeChunk, 1, 1, 2, 1);
 	addSpawnBlock(RegisteryBlocks::block[2], 20, 20, 0, 0, 1, -10, 1);
 }
 

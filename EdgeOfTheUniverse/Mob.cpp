@@ -1,6 +1,6 @@
 #include "Mob.h"
 
-float Mob::G = 0.03f;
+float Mob::G = 0.15f;
 
 Mob::Mob()
 {

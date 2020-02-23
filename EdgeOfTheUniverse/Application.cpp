@@ -17,6 +17,12 @@ Application::~Application()
 
 void Application::GameLoop()
 {
+	//FloatRect floatRect1 = FloatRect(0, 24, 21, 21);
+	//FloatRect floatRect2 = FloatRect(0, 0, 21, 48);
+
+	//std::cout << floatRect1.Intersects(floatRect2) << std::endl;
+
+
 	while (!glfwWindowShouldClose(window->window))
 	{
 		window->PollEvents();

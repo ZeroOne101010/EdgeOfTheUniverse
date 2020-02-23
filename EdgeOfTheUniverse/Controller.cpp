@@ -16,13 +16,12 @@ void Controller::setTarget(Mob* target)
 
 void Controller::Controll()
 {
-    if (RenderWindow::getKeyState(GLFW_KEY_W))
+    if (RenderWindow::getKeyState(GLFW_KEY_W) || RenderWindow::getKeyState(GLFW_KEY_SPACE))
     {
-        target->W(target->Wf);
-    }
-    else if (RenderWindow::getKeyState(GLFW_KEY_S))
-    {
-        target->S(target->Sf);
+        if (target->velocity.y == 0)
+        {
+            target->W(target->Wf);
+        }
     }
 
     if (RenderWindow::getKeyState(GLFW_KEY_D))

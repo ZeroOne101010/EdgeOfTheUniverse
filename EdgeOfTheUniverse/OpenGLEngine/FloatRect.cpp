@@ -48,8 +48,8 @@ bool FloatRect::Intersects(FloatRect rect)
 	float rectTopY = rect.positionY;
 	float rectDownY = rect.positionY + rect.sizeY;
 
-	if ((leftX < rectRightX && leftX > rectLeftX) || (rightX > rectRightX && rightX < rectLeftX))
-		if ((topY < rectDownY && topY > rectTopY) || (downY > rectDownY&& downY < rectTopY))
+	if ((leftX <= rectRightX && rightX >= rectLeftX )/*&& leftX >= rectLeftX) || (rightX >= rectLeftX&& rightX <= rectRightX)*/)
+		if ((topY <= rectDownY && downY >= rectTopY)/* || (downY >= rectTopY && downY <= rectDownY)*/)
 		{
 			return true;
 		}

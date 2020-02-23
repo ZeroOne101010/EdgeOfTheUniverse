@@ -58,7 +58,6 @@ RenderWindow::RenderWindow(GLfloat width, GLfloat height, const GLchar* winName)
 		glfwTerminate();
 	}
 	glfwMakeContextCurrent(window);
-	glfwSwapInterval(0);
 	glewExperimental = GL_TRUE;
 
 	if (glewInit() != GLEW_OK)
