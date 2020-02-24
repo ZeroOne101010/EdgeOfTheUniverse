@@ -215,9 +215,11 @@
     <ClCompile Include="RegisteryBiome.cpp" />
     <ClCompile Include="RegisteryBlocks.cpp" />
     <ClCompile Include="RegisteryEntity.cpp" />
+    <ClCompile Include="RockLayer.cpp" />
     <ClCompile Include="ShadowManager.cpp" />
     <ClCompile Include="Slider.cpp" />
     <ClCompile Include="Slime.cpp" />
+    <ClCompile Include="Stone.cpp" />
     <ClCompile Include="Stone_Sword.cpp" />
     <ClCompile Include="TBO.cpp" />
     <ClCompile Include="TestConteiner.cpp" />
@@ -296,9 +298,11 @@
     <ClInclude Include="RegisteryBiome.h" />
     <ClInclude Include="RegisteryBlocks.h" />
     <ClInclude Include="RegisteryEntity.h" />
+    <ClInclude Include="RockLayer.h" />
     <ClInclude Include="ShadowManager.h" />
     <ClInclude Include="Slider.h" />
     <ClInclude Include="Slime.h" />
+    <ClInclude Include="Stone.h" />
     <ClInclude Include="Stone_Sword.h" />
     <ClInclude Include="TBO.h" />
     <ClInclude Include="TestConteiner.h" />

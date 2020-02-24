@@ -623,7 +623,7 @@ bool Biome::toCreateBlockInLandshaft(int blockX, int blockY, World* world)
 {
     bool toCreate = false;
 
-    float maxHighMountains = offsetYLandshaft * highLandshaft * sizeNoiseYLandshaft * 0.5f;
+    float maxHighMountains = highLandshaft * sizeNoiseYLandshaft;
     float answer = PerlinNoise::getPerlinNoise(blockX + offsetPosX * Chunk::sizeChunk, offsetPosY * Chunk::sizeChunk, offsetXLandshaft, offsetYLandshaft, world->rand) * highLandshaft;
     answer = maxHighMountains - answer;
     float answerDown = PerlinNoise::getPerlinNoise(blockX + offsetPosX * Chunk::sizeChunk + 32451, offsetPosY * Chunk::sizeChunk + 2346, offsetXLandshaft, offsetYLandshaft, world->rand) * highLandshaft;
@@ -943,7 +943,6 @@ Chunk* Biome::generateChunk(int chunkX, int chunkY, World* world)
         {
             block[x][y] = getBiomeBlock(blockChunkX + x, blockChunkY + y, world)->createBlock(blockChunkX + x, blockChunkY + y, false, world);
         }
-
     chunk->block = block;
 
     Block*** backBlock = new Block * *[Chunk::sizeChunk];

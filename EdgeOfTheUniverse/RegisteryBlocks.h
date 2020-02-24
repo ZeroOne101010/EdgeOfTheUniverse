@@ -7,6 +7,7 @@
 #include "Vacuum.h"
 #include "Dirt.h"
 #include "Grass.h"
+#include "Stone.h"
 
 class World;
 
@@ -16,7 +17,8 @@ enum BlockName
 	air,
 	vacuum,
 	dirt,
-	grass
+	grass,
+	stone
 };
 
 class RegisteryBlocks

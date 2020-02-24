@@ -45,6 +45,10 @@ void IntersectedEntity::collisionUpdate()
                     FloatRect blockRect = FloatRect(blockPosition, glm::vec2(Block::sizeBlock, Block::sizeBlock));
                     if (entityRect.Intersects(blockRect))
                     {
+                        if (RenderWindow::getKeyState(GLFW_KEY_N))
+                        {
+                            int k = 1;
+                        }
                         glm::vec2 dVelocity = velocity;
                         if (dVelocity.x >= Block::sizeBlock)
                         {
@@ -64,9 +68,10 @@ void IntersectedEntity::collisionUpdate()
                             dVelocity.y = -Block::sizeBlock + 1;
                         }
 
-                        float offsetTileX = abs(dVelocity.x);
-                        float offsetTileY = abs(dVelocity.y);
+                        float offsetTileX = abs(dVelocity.x) + 1;
+                        float offsetTileY = abs(dVelocity.y) + 1;
                         if (entityRect.positionX < blockRect.positionX + blockRect.sizeX - offsetTileX && entityRect.positionX + entityRect.sizeX - offsetTileX > blockRect.positionX&& entityRect.positionY + entityRect.sizeY <= blockRect.positionY + offsetTileY)
+                        //if (entityRect.positionY + entityRect.sizeY <= blockRect.positionY + offsetTileY)
                         {
                             velocity = glm::vec2(velocity.x, 0);
                             float offset = blockRect.positionY - (entityRect.positionY + entityRect.sizeY);
@@ -96,7 +101,6 @@ void IntersectedEntity::collisionUpdate()
                     }
                 }
             }
-
         }
 }
 

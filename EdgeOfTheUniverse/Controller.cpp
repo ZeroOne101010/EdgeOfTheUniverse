@@ -45,10 +45,12 @@ void Controller::Interpol(float k)
 void Controller::UpdateController(World* world)
 {
     Interpol(0.1f);
+    //Camera += vec2((int)camVelosity.x, (int)camVelosity.y);
     Camera += camVelosity;
 	zeroCamera = Camera - vec2(RenderWindow::width / 2, RenderWindow::height / 2);
     Controll();
-	world->Position = -zeroCamera;
+	//world->Position = -zeroCamera;
+	world->Position = -vec2((int)zeroCamera.x, (int)zeroCamera.y);
 }
 
 

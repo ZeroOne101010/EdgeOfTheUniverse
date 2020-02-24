@@ -12,6 +12,7 @@ vec2 coords;
 
 void main()
 {
+
 	coords = vec2(CoordsUV.x * textureCoords.z + textureCoords.x, CoordsUV.y * textureCoords.w + textureCoords.y);
 	vec4 tColor = texture(textureSampler, coords) * Color;
 

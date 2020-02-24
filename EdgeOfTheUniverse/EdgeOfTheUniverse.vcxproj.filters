@@ -243,6 +243,12 @@
     <ClCompile Include="InventoryItemsField.cpp">
       <Filter>Исходные файлы</Filter>
     </ClCompile>
+    <ClCompile Include="Stone.cpp">
+      <Filter>Исходные файлы</Filter>
+    </ClCompile>
+    <ClCompile Include="RockLayer.cpp">
+      <Filter>Исходные файлы</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Application.h">
@@ -472,7 +478,7 @@
     </ClInclude>
     <ClInclude Include="Stone_Sword.h">
       <Filter>Файлы заголовков</Filter>
-    </ClInclude> 
+    </ClInclude>
     <ClInclude Include="ItemHotCell.h">
       <Filter>Файлы заголовков</Filter>
     </ClInclude>
@@ -480,6 +486,12 @@
       <Filter>Файлы заголовков</Filter>
     </ClInclude>
     <ClInclude Include="InventoryItemsField.h">
+      <Filter>Файлы заголовков</Filter>
+    </ClInclude>
+    <ClInclude Include="Stone.h">
+      <Filter>Файлы заголовков</Filter>
+    </ClInclude>
+    <ClInclude Include="RockLayer.h">
       <Filter>Файлы заголовков</Filter>
     </ClInclude>
   </ItemGroup>

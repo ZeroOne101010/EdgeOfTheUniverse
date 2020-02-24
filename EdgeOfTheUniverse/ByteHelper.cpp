@@ -80,6 +80,7 @@ unsigned char* ByteHelper::set10To256(int value, int& size)
     {
         code[x] = (unsigned char)(codeInt[x]);
     }
+    delete[size] codeInt;
     return code;
 }
 
