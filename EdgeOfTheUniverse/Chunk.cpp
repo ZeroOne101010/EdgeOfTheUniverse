@@ -11,31 +11,45 @@ Chunk::Chunk(World* world, int chunkX, int chunkY)
 	this->chunkX = chunkX;
 	this->chunkY = chunkY;
 
-	block = new Block**[sizeChunk];
-	backBlock = new Block**[sizeChunk];
+	//block = new Block**[sizeChunk];
+	//backBlock = new Block**[sizeChunk];
 
-	for (int x = 0; x < sizeChunk; x++)
-	{
-		block[x] = new Block * [sizeChunk];
-		backBlock[x] = new Block * [sizeChunk];
-	}
+	//for (int x = 0; x < sizeChunk; x++)
+	//{
+	//	block[x] = new Block * [sizeChunk];
+	//	backBlock[x] = new Block * [sizeChunk];
+	//}
 
-	for(int x = 0; x < sizeChunk; x++)
-		for (int y = 0; y < sizeChunk; y++)
-		{
-			block[x][y] = RegisteryBlocks::createBlock(chunkX * sizeChunk + x, chunkY * sizeChunk + y, false, world, 0);
-			backBlock[x][y] = RegisteryBlocks::createBlock(chunkX * sizeChunk + x, chunkY * sizeChunk + y, false, world, 0);
-		}
+	//for(int x = 0; x < sizeChunk; x++)
+	//	for (int y = 0; y < sizeChunk; y++)
+	//	{
+	//		block[x][y] = RegisteryBlocks::createBlock(chunkX * sizeChunk + x, chunkY * sizeChunk + y, false, world, 0);
+	//		backBlock[x][y] = RegisteryBlocks::createBlock(chunkX * sizeChunk + x, chunkY * sizeChunk + y, false, world, 0);
+	//	}
 }
 
 Chunk::~Chunk()
 {
+	deleteBlocks();
+}
+
+void Chunk::deleteBlocks()
+{
 	for (int x = 0; x < sizeChunk; x++)
 		for (int y = 0; y < sizeChunk; y++)
 		{
-			if (block[x][y] != nullptr) delete block[x][y];
-			if (backBlock[x][y] != nullptr) delete backBlock[x][y];
+			delete block[x][y];
+			delete backBlock[x][y];
 		}
+
+	for (int x = 0; x < sizeChunk; x++)
+	{
+		delete[sizeChunk] block[x];
+		delete[sizeChunk] backBlock[x];
+	}
+
+	delete[sizeChunk] block;
+	delete[sizeChunk] backBlock;
 }
 
 void Chunk::updateCloseBlocks()

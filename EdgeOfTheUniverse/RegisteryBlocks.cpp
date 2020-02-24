@@ -27,4 +27,5 @@ void RegisteryBlocks::initBlocks()
 	addBlock(new Vacuum(), vacuum);
 	addBlock(new Dirt(), dirt);
 	addBlock(new Grass(), grass);
+	addBlock(new Stone(), stone);
 }

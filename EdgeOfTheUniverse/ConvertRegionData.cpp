@@ -277,11 +277,6 @@ void ConvertRegionData::saveChunkDataToRegion(Chunk* chunk, World* world)
 
     std::vector<unsigned char> fileData;
 
-    if (chunk->chunkX == 27)
-    {
-        int k = 1;
-    }
-
     if (reader.is_open())
     {
         char ch = 0;
@@ -429,6 +424,7 @@ void ConvertRegionData::notHaveChunk(unsigned long pointer, Chunk* chunk, int re
     {
         data[x] = chunkData[x - newChunkAddress];
     }
+    delete[sizeNewChunk] chunkData;
 
     pointer = newChunkXInData;
 
@@ -469,6 +465,7 @@ void ConvertRegionData::notHaveChunk(unsigned long pointer, Chunk* chunk, int re
     std::ofstream writer(path, std::ofstream::binary);
     writer.write(reinterpret_cast<char*>(data), size);
     writer.close();
+    delete[sizeNewRegionData] data;
 }
 
 void ConvertRegionData::haveChunk(unsigned long pointer, Chunk* chunk, int regionX, int regionY, World* world, unsigned char* data, int size)
@@ -621,6 +618,8 @@ void ConvertRegionData::haveChunk(unsigned long pointer, Chunk* chunk, int regio
     std::ofstream writer(path, std::ofstream::binary);
     writer.write(reinterpret_cast<char*>(data), size);
     writer.close();
+
+    delete[newSizeChunk] chunkData;
 
     if (offsetChunk > 0 || offsetChunk < 0)
     {

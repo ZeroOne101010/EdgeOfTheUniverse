@@ -10,6 +10,8 @@ public:
 	Chunk(World* world, int chunkX, int chunkY);
 	~Chunk();
 
+	void deleteBlocks();
+
 	static const int sizeChunk;
 
 	int chunkX = 0;

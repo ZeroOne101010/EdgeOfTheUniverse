@@ -12,6 +12,13 @@ const int World::countActiveChunks = 100;
 
 World::World(int seed, Map* map)
 {
+    //Chunk* k = new Chunk(this, 0, 0);
+    //for (int x = 0; x < 1000; x++)
+    //{
+    //    Chunk* k = new Chunk(this, 0, 0);
+    //    delete k;
+    //}
+
     rand = new RandomCoor(10000, seed);
     this->seed = seed;
     this->map = map;
@@ -98,6 +105,7 @@ Chunk* World::generationChunk(int chunkX, int chunkY)
 {
     Chunk* chunk = nullptr;
     chunk = getChunkBiome(chunkX, chunkY)->generateChunk(chunkX, chunkY, this);
+    //chunk = new Chunk(this, chunkX, chunkY);
     return chunk;
 }
 
@@ -792,11 +800,7 @@ Alterable World::draw(Renderer* renderer, Alterable alters)
 
     if (mouseButtonActive == 1)
     {
-        Block** block = getBlockNotGeneration(mousePX, mousePY, false);
-        if (block != nullptr)
-        {
-           setBlock(mousePX, mousePY, 2, false);
-        }
+        setBlock(mousePX, mousePY, 2, false);
     }
 
     int id = 0;
@@ -807,6 +811,7 @@ Alterable World::draw(Renderer* renderer, Alterable alters)
         for (int y = rendererChunkY; y < maxChunkY; y++)
         {
             chunkRenderer[id] = getChunk(x, y);
+            //chunkRenderer[id] = getChunkWithoutThread(x, y);
             id++;
         }
 
