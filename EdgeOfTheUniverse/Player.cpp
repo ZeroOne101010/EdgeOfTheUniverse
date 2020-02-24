@@ -2,7 +2,7 @@
 
 Player::Player()
 {
-	mainInventory = new Inventory(20);
+	mainInventory = new Inventory(60);
 	inventories.push_back(mainInventory);
 	Wf = -10;
 	moveSpeed = 7;

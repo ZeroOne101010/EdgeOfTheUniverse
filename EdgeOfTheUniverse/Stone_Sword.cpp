@@ -5,6 +5,7 @@ Stone_Sword::Stone_Sword()
 	rect->Size = glm::vec2(32, 32);
 	setTexture(Content::SpriteList_Tools);
 	textureRect = FloatRect(glm::vec2(32 + 2, 0), glm::vec2(32, 32));
+	rect->textureRect = FloatRect(glm::vec2(32 + 2, 0), glm::vec2(32, 32));
 }
 
 Entity* Stone_Sword::getNewEntity()

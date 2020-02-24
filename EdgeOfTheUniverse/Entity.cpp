@@ -4,18 +4,21 @@
 Entity::Entity()
 {
 	rect->tbo = Content::defaultTexture;
+	rect->Color = vec4(255, 255, 255, 255);
 }
 
 Entity::Entity(FloatRect textureRect, TBO* texture)
 {
 	this->textureRect = textureRect;
 	rect->tbo = texture;
+	rect->Color = vec4(255, 255, 255, 255);
 }
 
 Entity::Entity(TBO* texture)
 {
 	rect->tbo = texture;
 	setAllTexture();
+	rect->Color = vec4(255, 255, 255, 255);
 }
 
 void Entity::A(float speed)

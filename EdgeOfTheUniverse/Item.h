@@ -6,6 +6,7 @@ class Item : public IntersectedEntity, public ITakeble
 public:
 	Item();
 	int stuck = 64;
+	int itemID;
 	virtual void Taked(Alterable* ownerAlter, glm::vec2* ownerOffset, Inventory* ownerInventory) override;
 	virtual void GiveToInventory() override;
 	virtual void Delete() override;

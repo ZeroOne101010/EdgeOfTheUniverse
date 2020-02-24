@@ -28,11 +28,10 @@ void Item::GiveToInventory()
 			{
 				for (slot = 0; slot < ownerInventory->slots.size(); slot++)
 				{
-					if (ownerInventory->slots[slot].itemID == id)
+					if (ownerInventory->slots[slot].id == id)
 					{
 						if (ownerInventory->slots[slot].stuckCount < stuck)
 						{
-							std::cout << "Add item in slot" << std::endl;
 							ownerInventory->slots[slot].stuckCount++;
 							alreadyTaked = true;
 							Delete();
@@ -45,22 +44,19 @@ void Item::GiveToInventory()
 				{
 					if (ownerInventory->slots.size() < ownerInventory->maxSlots)
 					{
-						std::cout << "Add new slot" << std::endl;
-						ownerInventory->slots.push_back(ItemConteiner(id));
+						ownerInventory->slots.push_back(ItemConteiner(id, stuck));
 						alreadyTaked = true;
 						Delete();
 					}
 					else
 					{
-						std::cout << "Inventory become full" << std::endl;
 						ownerInventory->full = true;
 					}
 				}
 			}
 			else
 			{
-				std::cout << "Was empty" << std::endl;
-				ownerInventory->slots.push_back(ItemConteiner(id));
+				ownerInventory->slots.push_back(ItemConteiner(id, stuck));
 				alreadyTaked = true;
 				Delete();
 			}

@@ -2,9 +2,9 @@
 class ItemConteiner
 {
 public:
-	ItemConteiner(int itemID, int stackCount = 0);
+	ItemConteiner(int id, int stackCount = 0);
 	bool full;
 	int stuckCount;
-	int itemID;
+	int id;
 };
 

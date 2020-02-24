@@ -73,7 +73,7 @@ void Button::Draw(Renderer* renderer, Alterable alters)
 }
 Alterable Button::draw(Renderer* renderer, Alterable alters)
 {
-	UI::draw(renderer, alters);
+	alters = UI::draw(renderer, alters);
 	DelegateUpdate();
 	if (buttonGroup != nullptr)
 	{

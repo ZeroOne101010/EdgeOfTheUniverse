@@ -1,8 +1,8 @@
 #include "ItemConteiner.h"
 
-ItemConteiner::ItemConteiner(int itemID, int stuckCount)
+ItemConteiner::ItemConteiner(int id, int stuckCount)
 {
-	this->itemID = itemID;
+	this->id = id;
 	this->stuckCount = stuckCount;
 }
 

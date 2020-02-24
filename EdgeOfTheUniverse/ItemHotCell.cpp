@@ -11,8 +11,6 @@ ItemHotCell::ItemHotCell()
 	item = new Panel(vec2(size.x - offset, size.y - offset));
 	item->Color = vec4(255, 255, 255, 0);
 	item->Position = vec2((size.x - item->size.x) / 2, (size.y - item->size.y) / 2);
-	//item->carcass->tbo = Content::spriteList_Grass;
-	//item->carcass->textureRect = FloatRect(9 * (16 + 2), 3 * (16 + 2), 16, 16);
 }
 
 ItemHotCell::~ItemHotCell()

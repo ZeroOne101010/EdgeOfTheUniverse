@@ -1,7 +1,10 @@
 #include "InventoryItemsField.h"
-
-InventoryItemsField::InventoryItemsField()
+#include "IInventory.h"
+#include "RegisteryEntity.h"
+InventoryItemsField::InventoryItemsField(Controller* controller, int* coutItemInHotPanel)
 {
+	this->controller = controller;
+	this->coutItemInHotPanel = coutItemInHotPanel;
 	Color = vec4(20, 20, 20, 150);
 	itemCell = new ItemHotCell * *[countItemsX];
 
@@ -41,9 +44,8 @@ InventoryItemsField::~InventoryItemsField()
 
 ItemHotCell* InventoryItemsField::getItemContainer(int id)
 {
-	int countX = id / countItemsY;
-	int countY = id - countItemsX * countItemsY; // Значение будет другим, тк у countX при делении убирается остаток
-
+	int countY = id / countItemsX;
+	int countX = id - countY * countItemsX; // Значение будет другим, тк у countX при делении убирается остаток
 	if (countX > countItemsX || countY > countItemsY)
 	{
 		std::cout << "При поиске предметов в инвенаре, id вышло за границы массива в классе InventoryItemsField." << std::endl;
@@ -54,8 +56,23 @@ ItemHotCell* InventoryItemsField::getItemContainer(int id)
 	return itemCell[countX][countY];
 }
 
+void InventoryItemsField::UpdateCells()
+{
+	if (dynamic_cast<IInventory*>(controller->target))
+	{
+		for (int x = *coutItemInHotPanel; dynamic_cast<IInventory*>(controller->target)->inventories[0]->slots.size() > 0 & x <  dynamic_cast<IInventory*>(controller->target)->inventories[0]->slots.size(); x++)
+		{
+			ItemHotCell* cell = getItemContainer(x - *coutItemInHotPanel);
+			int ID = dynamic_cast<IInventory*>(controller->target)->inventories[0]->slots[x].id;
+			cell->item->carcass->tbo = RegisteryEntity::entity[ID]->rect->tbo;
+			cell->item->carcass->textureRect = RegisteryEntity::entity[ID]->textureRect;
+			cell->item->Color = vec4(255, 255, 255, 255);
+		}
+	}
+}
 Alterable InventoryItemsField::draw(Renderer* renderer, Alterable alters)
 {
+	UpdateCells();
 	alters = Panel::draw(renderer, alters);
 	for (int x = 0; x < countItemsX; x++)
 		for (int y = 0; y < countItemsY; y++)
@@ -64,3 +81,5 @@ Alterable InventoryItemsField::draw(Renderer* renderer, Alterable alters)
 		}
 	return Alterable();
 }
+
+

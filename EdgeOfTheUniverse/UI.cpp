@@ -1,8 +1,9 @@
 #include "UI.h"
-
+#include "Content.h"
 UI::UI()
 {
 	carcass = new RectangleShape(size);
+	//carcass->tbo = Content::spriteList_Grass;
 }
 
 UI::UI(vec2 size)

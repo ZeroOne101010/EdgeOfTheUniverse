@@ -5,11 +5,12 @@ int RegisteryEntity::itemsCount;
 void RegisteryEntity::InitEntity(Entity* entity)
 {
 	if (dynamic_cast<Mob*>(entity)) {
-		entity->id = mobsCount;
+		entity->id = RegisteryEntity::entity.size();;
 		mobsCount++;
 	}
 	if (dynamic_cast<Item*>(entity)) {
-		entity->id = itemsCount;
+		dynamic_cast<Item*>(entity)->itemID = itemsCount;
+		entity->id = RegisteryEntity::entity.size();
 		itemsCount++;
 	}
 	RegisteryEntity::entity.push_back(entity);

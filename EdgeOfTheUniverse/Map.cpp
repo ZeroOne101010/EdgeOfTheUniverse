@@ -14,7 +14,7 @@ Map::Map(int sizeNumberMap, int seed, Game* game)
 
 	world->addBiome(mountains);
 	world->Position = vec2(0, 0);
-	uiPlayerInterface = new UIPlayerInterface(world, world->player);
+	uiPlayerInterface = new UIPlayerInterface(world, world->controller);
 }
 
 Map::~Map()

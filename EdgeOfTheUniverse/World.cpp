@@ -32,6 +32,11 @@ World::World(int seed, Map* map)
     player->Position = vec2(50);
     dynamic_cast<InventoredMob*>(player)->Take(dynamic_cast<ITakeble*>(testItem), 0);
     dynamic_cast<InventoredMob*>(player)->Take(dynamic_cast<ITakeble*>(RegisteryEntity::addItem(this, 1, vec2(100, 0))), 0);
+    for (int k = 0; k < 100; k++)
+    {
+        dynamic_cast<InventoredMob*>(player)->Take(dynamic_cast<ITakeble*>(RegisteryEntity::addItem(this, 0, vec2(k * 15, 0))), 0);
+    }
+
     //for (int x = 0; x < 28; x++)
     //{
     //    if (x == 26)
@@ -841,10 +846,5 @@ Alterable World::draw(Renderer* renderer, Alterable alters)
         renderer->draw(entity[entityCount], alters);
     }
     controller->UpdateController(this);
-    //std::cout << entity[0]->Position.x << std::endl;
-    //renderer->draw(player, alters);
-    //renderer->draw(player, alters);
-    //renderer->draw(testItem, alters);
-    //Position = -leftTopAngleCamera;
     return alters;
 }
