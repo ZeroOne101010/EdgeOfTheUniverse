@@ -253,6 +253,14 @@
       <Filter>Исходные файлы</Filter>
     </ClCompile>
     <ClCompile Include="ItemOnMouse.cpp">
+     <Filter>Исходные файлы</Filter>
+    </ClCompile>
+    <ClCompile Include="BackGraund.cpp">
+      <Filter>Исходные файлы</Filter>
+    </ClCompile>
+    <ClCompile Include="BackGroundLayer.cpp">
+    <Filter>Исходные файлы</Filter>
+    </ClCompile>
       <Filter>Исходные файлы</Filter>
     </ClCompile>
   </ItemGroup>
@@ -504,6 +512,13 @@
       <Filter>Файлы заголовков</Filter>
     </ClInclude>
     <ClInclude Include="ItemOnMouse.h">
+      <Filter>Файлы заголовков</Filter>
+    </ClInclude>
+    <ClInclude Include="BackGraund.h">
+      <Filter>Файлы заголовков</Filter>
+    </ClInclude>
+    <ClInclude Include="BackGroundLayer.h">
+    </ClInclude>
       <Filter>Файлы заголовков</Filter>
     </ClInclude>
   </ItemGroup>

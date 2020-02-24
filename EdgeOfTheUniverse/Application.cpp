@@ -8,6 +8,7 @@ Application::Application()
 	Registery::load();
 	game = new Game(window);
 	uiCanvas = new UICanvas();
+	cursor = new Cursor();
 }
 
 Application::~Application()
@@ -28,7 +29,7 @@ void Application::GameLoop()
 
 		window->draw(game);
 		window->draw(uiCanvas);
-
+		window->draw(cursor);
 		window->Display();
 	}
 	glfwTerminate();

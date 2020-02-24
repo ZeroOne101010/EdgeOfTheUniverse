@@ -4,7 +4,6 @@
 
 UICanvas::UICanvas()
 {
-
 }
 
 UICanvas::~UICanvas()

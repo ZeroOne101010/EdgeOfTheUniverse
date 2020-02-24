@@ -25,7 +25,11 @@ public:
 	bool hoverBool;
 	bool pressBool;
 	bool clickBool;
+	bool clickUpHoverBool;
+	bool upClickBool;
+	bool upClickUpHoverBool;
 	bool pressOnButtonBool;
+	bool alreadyClicked;
 	bool isActive;
 	bool Activable = true;
 	bool* eventBool = new bool[4];

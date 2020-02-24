@@ -13,6 +13,7 @@
 #include "Cursor.h"
 #include "Controller.h"
 #include "Player.h"
+#include "BackGraund.h"
 
 class Map;
 
@@ -34,9 +35,10 @@ public:
 	RandomCoor* rand;
 	Entity* testItem;
 	std::vector<Biome*> biome;
+	
 
 	std::vector<Entity*> entity;
-
+	BackGraund* background;
 	Biome* defaulBiome = new BiomeAir();
 	void addBiome(Biome* biome);
 	Biome* getChunkBiome(int chunkX, int chunkY);

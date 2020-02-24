@@ -8,12 +8,13 @@ class InventoryItemsField : public Panel
 {
 public:
 
-	InventoryItemsField(Controller* controller, int* coutItemInHotPanel);
+	InventoryItemsField(World* world, Controller* controller, int* coutItemInHotPanel);
 	~InventoryItemsField();
 
 	ItemHotCell* getItemContainer(int id);
 	virtual Alterable draw(Renderer* renderer, Alterable alters) override;
 	Controller* controller;
+	World* world;
 	int countItemsX = 10;
 	int countItemsY = 5;
 	int* coutItemInHotPanel;
@@ -22,5 +23,6 @@ public:
 	ButtonGroup buttonGroup;
 private:
 	void UpdateCells();
+	void UpdteKeepedCell();
 };
 
