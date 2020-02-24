@@ -37,7 +37,11 @@ World::World(int seed, Map* map)
         dynamic_cast<InventoredMob*>(player)->Take(dynamic_cast<ITakeble*>(RegisteryEntity::addItem(this, 0, vec2(k * 15, 0))), 0);
         dynamic_cast<InventoredMob*>(player)->Take(dynamic_cast<ITakeble*>(RegisteryEntity::addItem(this, 1, vec2(k * -15, 0))), 0);
     }
-
+    background = new BackGraund();
+    BackGroundLayer firstBG(BackGroundLayer(this, vec2(0.2f, 0.05f), vec2(RenderWindow::width, RenderWindow::height)));
+    firstBG.layer.tbo = Content::spriteList_Dirt;
+    firstBG.layer.textureRect = FloatRect(0, 0, RenderWindow::width, RenderWindow::height);
+    background->layers.push_back(firstBG);
     //for (int x = 0; x < 28; x++)
     //{
     //    if (x == 26)
@@ -716,7 +720,7 @@ void World::rendererBlock(Block* block, Renderer* renderer, Alterable alters)
 Alterable World::draw(Renderer* renderer, Alterable alters)
 {
     alters *= this;
-
+    renderer->draw(background, alters);
     float speed = 20;
 
     //if (RenderWindow::getKeyState(GLFW_KEY_W))

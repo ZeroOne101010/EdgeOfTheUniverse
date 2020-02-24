@@ -18,9 +18,7 @@ VAO::VAO(GLuint VAOBufferID, Shader* shader, TBO* texture, IBO* modelIBO)
 	relSizeIndex = shader->getUniformIndex("relSize");
 	correctSizeIndex = shader->getUniformIndex("correctSize");
 	sizeIndex = shader->getUniformIndex("size");
-	optimizeModeIndex = shader->getUniformIndex("optimizeMode");;
-
-	int k = 0;
+	optimizeModeIndex = shader->getUniformIndex("optimizeMode");
 
 	coordsUVIndex = shader->getUniformIndex("textureCoords");
 	textureSamplerIndex = shader->getUniformIndex("textureSampler");

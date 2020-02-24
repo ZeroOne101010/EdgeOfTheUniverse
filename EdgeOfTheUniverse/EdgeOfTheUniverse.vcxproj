@@ -152,6 +152,8 @@
   <ItemGroup>
     <ClCompile Include="Air.cpp" />
     <ClCompile Include="Amnis.cpp" />
+    <ClCompile Include="BackGraund.cpp" />
+    <ClCompile Include="BackGroundLayer.cpp" />
     <ClCompile Include="Biome.cpp" />
     <ClCompile Include="BiomeAir.cpp" />
     <ClCompile Include="Block.cpp" />
@@ -231,6 +233,8 @@
     <ClInclude Include="Air.h" />
     <ClInclude Include="AlterableHeader.h" />
     <ClInclude Include="Amnis.h" />
+    <ClInclude Include="BackGraund.h" />
+    <ClInclude Include="BackGroundLayer.h" />
     <ClInclude Include="Biome.h" />
     <ClInclude Include="BiomeAir.h" />
     <ClInclude Include="Block.h" />
