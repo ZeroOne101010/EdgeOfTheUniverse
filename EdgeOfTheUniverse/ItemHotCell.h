@@ -1,6 +1,9 @@
 #pragma once
 #include "Button.h"
 #include "Panel.h"
+#include "EventTakeItemCell.h"
+
+class ItemHotPanel;
 
 class ItemHotCell : public Button
 {

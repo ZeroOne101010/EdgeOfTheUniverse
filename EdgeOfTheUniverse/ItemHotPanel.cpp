@@ -2,8 +2,10 @@
 
 int ItemHotPanel::coutItemInHotPanel = 10;
 
-ItemHotPanel::ItemHotPanel(Controller* controller)
+ItemHotPanel::ItemHotPanel(Controller* controller, World* world, UIPlayerInterface* playerInterface)
 {
+	this->playerInterface = playerInterface;
+	this->world = world;
 	this->controller = controller;
 	itemSlot = new ItemHotCell * [coutItemInHotPanel];
 	int offset = 5;
@@ -14,11 +16,13 @@ ItemHotPanel::ItemHotPanel(Controller* controller)
 		itemSlot[x]->Position = vec2(x * (itemSlot[x]->size.x + offset) + offset, offset);
 	}
 	size = vec2((itemSlot[0]->size.x + offset) * coutItemInHotPanel + offset, itemSlot[0]->size.y + offset * 2);
+	itemOnMouse = new ItemOnMouse(world);
 }
 
 ItemHotPanel::~ItemHotPanel()
 {
 	delete[coutItemInHotPanel] itemSlot;
+	delete itemOnMouse;
 }
 
 void ItemHotPanel::UpdateCells()
@@ -45,6 +49,7 @@ Alterable ItemHotPanel::draw(Renderer* renderer, Alterable alters)
 	{
 		renderer->draw(itemSlot[x], alters);
 	}
+	renderer->draw(itemOnMouse, alters);
 	return alters;
 }
 

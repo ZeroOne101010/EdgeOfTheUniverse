@@ -1,4 +1,5 @@
 #include "VAO.h"
+#include "../Content.h"
 #include "Shader.h"
 
 
@@ -15,6 +16,9 @@ Shader::Shader(const GLchar* pathVertex, const GLchar* pathFragment)
 	fragmentShaderFile.exceptions(std::ifstream::badbit);
 	try
 	{
+		const GLchar* vertexName = Content::fileName(pathVertex);
+		const GLchar* fragmentName = Content::fileName(pathFragment);
+
 		vertexShaderFile.open(pathVertex);
 		fragmentShaderFile.open(pathFragment);
 		std::stringstream vertexShaderStream, fragmentShaderStream;

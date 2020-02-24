@@ -1,5 +1,5 @@
 #include "LightingShader.h"
-LightingShader::LightingShader() : DefaultShader("Resources/Shaders/DefaultShader.vert", "Resources/Shaders/LightingShader.frag")
+LightingShader::LightingShader() : DefaultShader("Resources\\Shaders\\DefaultShader.vert", "Resources\\Shaders\\LightingShader.frag")
 {
 
 }

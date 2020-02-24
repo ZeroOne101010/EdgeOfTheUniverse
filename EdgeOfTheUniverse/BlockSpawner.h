@@ -19,7 +19,8 @@ public:
     float limitUp;
     float limitDown;
     static float offsetLimited;
-    static float kLimit;
+
+    float highLandshaft = 10;
 
     BlockSpawner(Block* block, float offsetX, float offsetY, float offsetPosX, float offsetPosY, float high, float highSection, float limitUp, float limitDown, float sizeNoise);
 

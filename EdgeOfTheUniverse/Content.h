@@ -35,6 +35,9 @@ public:
 	static TBO* spriteList_Dirt;
 	static TBO* sprite_AmnisItem;
 	static TBO* SpriteList_Tools;
+	static TBO* SpriteList_Stone;
+
+	static const GLchar* fileName(std::string localPath);
 
 	static void load();
 

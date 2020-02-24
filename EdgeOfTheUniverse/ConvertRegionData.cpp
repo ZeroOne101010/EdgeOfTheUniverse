@@ -160,6 +160,56 @@ std::string ConvertRegionData::getPath(std::string localPath)
     return globalPath;
 }
 
+const GLchar* ConvertRegionData::getPathGLChar(std::string localPath)
+{
+    const int maxLenght = MAX_PATH * 2;
+    wchar_t path[maxLenght];
+
+    GetModuleFileName(NULL, path, maxLenght);
+
+    int lenght = 0;
+    for (int x = 0; x < maxLenght; x++)
+    {
+        if (path[x] == STOP_NAME)
+        {
+            lenght = x;
+            break;
+        }
+    }
+
+    char* charPath = new char[lenght];
+    int addreses = 0;
+
+    for (int x = 0; x < lenght; x++)
+    {
+        charPath[x] = (char)path[x]; // Преобразование через reinterpret_cast невозможно, так как размер wchar_t = 2 байта
+        if (charPath[x] == 92)
+        {
+            addreses = x - 2;
+        }
+    }
+
+    int lenghtAnswerChar = lenght - addreses;
+    int sizeStr = lenghtAnswerChar + localPath.length();
+
+    char* answer = new char[(sizeStr + 1)];
+
+    for (int x = 0; x < lenghtAnswerChar; x++)
+    {
+        answer[x] = charPath[x];
+    }
+
+    for (size_t x = 0; x < localPath.length(); x++)
+    {
+        answer[lenghtAnswerChar + x] = localPath[x];
+    }
+
+    delete[lenght] charPath;
+
+    answer[sizeStr] = '\0';
+    return answer;
+}
+
 unsigned char* ConvertRegionData::createRegionFile(int regionX, int regionY, int& size)
 {
     int dataSize = sizeRegionPos * 2 + sizeAddress + (sizeRegionPos * 2 + sizeAddress) * sizeRegion * sizeRegion;

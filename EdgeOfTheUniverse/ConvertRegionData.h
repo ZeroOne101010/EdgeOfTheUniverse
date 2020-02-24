@@ -41,6 +41,7 @@ public:
     static void setDataToUnicode(unsigned char* data);
     static std::string getPath(char* localPath, int size);
     static std::string getPath(std::string localPath);
+    static const GLchar* getPathGLChar(std::string localPath);
 
     static unsigned char* createRegionFile(int regionX, int regionY, int& size);
     static void saveChunkDataToRegion(Chunk* chunk, World* world);

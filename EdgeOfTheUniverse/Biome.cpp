@@ -60,60 +60,33 @@ Biome* Biome::createBiome(World* world)
 }
 
 
-void Biome::setLandshaft(int offsetXLandshaft, int offsetYLandshaft, float sizeNoiseXLandshaft, float sizeNoiseYLandshaft, float highLandshaft)
+void Biome::setLandshaft(int offsetXLandshaft, int offsetYLandshaft, float offsetPosX, float offsetPosY, float sizeNoiseXLandshaft, float sizeNoiseYLandshaft, float highLandshaft)
 {
 	this->offsetXLandshaft = offsetXLandshaft;
 	this->offsetYLandshaft = offsetYLandshaft;
 	this->sizeNoiseXLandshaft = sizeNoiseXLandshaft;
 	this->sizeNoiseYLandshaft = sizeNoiseYLandshaft;
 	this->highLandshaft = highLandshaft;
-}
-
-void Biome::setLandshaft(int offsetXLandshaft, int offsetYLandshaft, float sizeNoiseXLandshaft, float sizeNoiseYLandshaft, float highLandshaft, float kMaxHighMounties)
-{
-    this->offsetXLandshaft = offsetXLandshaft;
-    this->offsetYLandshaft = offsetYLandshaft;
-    this->sizeNoiseXLandshaft = sizeNoiseXLandshaft;
-    this->sizeNoiseYLandshaft = sizeNoiseYLandshaft;
-    this->highLandshaft = highLandshaft;
-    this->kMaxHighMounties = kMaxHighMounties;
+    this->offsetPosXLandshaft = offsetPosX;
+    this->offsetPosYLandshaft = offsetPosY;
 }
 
 bool Biome::toSpawnBiome(int posX, int posY, RandomCoor* rand)
 {
-    float answer = PerlinNoise::getPerlinNoise((posX + offsetPosX) / (sizeNoiseX / 5), (posY + offsetPosY) / (sizeNoiseY / 5), (int)offsetX, (int)offsetY, rand);
+    float answer = PerlinNoise::getPerlinNoise((posX + offsetPosX) / sizeNoiseX, (posY + offsetPosY) / sizeNoiseY, (int)offsetX, (int)offsetY, rand);
     answer *= high;
     bool toSpawn = false;
 
-    if (posY < limitDown - biomeOffsetLimited && posY > limitUp + biomeOffsetLimited)
+    float limitedAnswerUp = PerlinNoise::getPerlinNoise((posX + 245) * 1.000f / sizeNoiseX, 2344.000f / sizeNoiseY, (int)offsetX, (int)offsetY, rand) * highLandshaft;
+    float limitedAnswerDown = PerlinNoise::getPerlinNoise((posX + 2346) * 1.000f / sizeNoiseX, 745.000f / sizeNoiseY, (int)offsetX, (int)offsetY, rand) * highLandshaft;
+
+
+    limitedAnswerUp = limitUp + limitedAnswerUp;
+    limitedAnswerDown = limitDown - limitedAnswerDown;
+
+    if (posY > limitedAnswerUp&& posY < limitedAnswerDown)
     {
         if (answer > highSection)
-        {
-            toSpawn = true;
-        }
-    }
-    else
-    {
-        float t = 0;
-        if (posY >= limitDown - biomeOffsetLimited)
-        {
-            t = (biomeOffsetLimited - (limitDown - posY)) / biomeOffsetLimited;
-        }
-        else if (posY <= limitUp + biomeOffsetLimited)
-        {
-            t = (biomeOffsetLimited - (posY - limitUp)) / biomeOffsetLimited;
-        }
-        else
-        {
-            t = 1;
-        }
-
-        if (t < 0) t = 0;
-        if (t > 1) t = 1;
-
-        float section = highSection + (offsetY * BlockSpawner::kLimit * high * sizeNoiseY - highSection) * t;
-
-        if (answer > section)
         {
             toSpawn = true;
         }
@@ -623,19 +596,25 @@ bool Biome::toCreateBlockInLandshaft(int blockX, int blockY, World* world)
 {
     bool toCreate = false;
 
-    float maxHighMountains = highLandshaft * sizeNoiseYLandshaft;
-    float answer = PerlinNoise::getPerlinNoise(blockX + offsetPosX * Chunk::sizeChunk, offsetPosY * Chunk::sizeChunk, offsetXLandshaft, offsetYLandshaft, world->rand) * highLandshaft;
-    answer = maxHighMountains - answer;
-    float answerDown = PerlinNoise::getPerlinNoise(blockX + offsetPosX * Chunk::sizeChunk + 32451, offsetPosY * Chunk::sizeChunk + 2346, offsetXLandshaft, offsetYLandshaft, world->rand) * highLandshaft;
-    answer = maxHighMountains - answer;
+    //if (spawnBlock[0].block->id != 0)
+    //{
 
-    int highPoint = (int)(limitUp * Chunk::sizeChunk + maxHighMountains);
-    int lowPoint = (int)(limitDown * Chunk::sizeChunk - maxHighMountains);
+    //}
 
-    if (blockY > answer + highPoint && blockY < lowPoint - answer)
+    float limitedAnswerUp = PerlinNoise::getPerlinNoise((blockX + 245 + offsetPosXLandshaft) * 1.000f / sizeNoiseXLandshaft, (2344.000f + offsetPosYLandshaft) / sizeNoiseYLandshaft, (int)offsetXLandshaft, (int)offsetYLandshaft, world->rand);
+    float limitedAnswerDown = PerlinNoise::getPerlinNoise((blockX + 2346 + offsetPosXLandshaft) * 1.000f / sizeNoiseXLandshaft, (745.000f + offsetPosYLandshaft) / sizeNoiseYLandshaft, (int)offsetXLandshaft, (int)offsetYLandshaft, world->rand);
+
+    limitedAnswerUp *= highLandshaft;
+    limitedAnswerDown *= highLandshaft;
+
+    limitedAnswerUp = limitLandshaftUp + limitedAnswerUp;
+    limitedAnswerDown = limitLandshaftDown - limitedAnswerDown;
+
+    if (blockY > limitedAnswerUp && blockY < limitedAnswerDown)
     {
         toCreate = true;
     }
+
     return toCreate;
 }
 
@@ -961,7 +940,7 @@ Chunk* Biome::generateChunk(int chunkX, int chunkY, World* world)
     chunk->backBlock = backBlock;
 
     setLandshaftChunk(chunk, world);
-    setBorderChunk(chunk, world);
+    //setBorderChunk(chunk, world);
     setAdditionChunk(chunk, world);
     return chunk;
 }

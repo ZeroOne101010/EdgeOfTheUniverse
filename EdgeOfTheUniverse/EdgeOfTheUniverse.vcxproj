@@ -171,6 +171,7 @@
     <ClCompile Include="Entity.cpp" />
     <ClCompile Include="Event.cpp" />
     <ClCompile Include="EventSetWhite.cpp" />
+    <ClCompile Include="EventTakeItemCell.cpp" />
     <ClCompile Include="FreeCamera.cpp" />
     <ClCompile Include="Game.cpp" />
     <ClCompile Include="glb.cpp" />
@@ -185,6 +186,7 @@
     <ClCompile Include="InventoryItemsField.cpp" />
     <ClCompile Include="ItemHotCell.cpp" />
     <ClCompile Include="ItemHotPanel.cpp" />
+    <ClCompile Include="ItemOnMouse.cpp" />
     <ClCompile Include="LightingShader.cpp" />
     <ClCompile Include="Map.cpp" />
     <ClCompile Include="Mob.cpp" />
@@ -253,6 +255,7 @@
     <ClInclude Include="Entity.h" />
     <ClInclude Include="Event.h" />
     <ClInclude Include="EventSetWhite.h" />
+    <ClInclude Include="EventTakeItemCell.h" />
     <ClInclude Include="FreeCamera.h" />
     <ClInclude Include="Game.h" />
     <ClInclude Include="glb.h" />
@@ -269,6 +272,7 @@
     <ClInclude Include="ITakeble.h" />
     <ClInclude Include="ItemHotCell.h" />
     <ClInclude Include="ItemHotPanel.h" />
+    <ClInclude Include="ItemOnMouse.h" />
     <ClInclude Include="LightingShader.h" />
     <ClInclude Include="Map.h" />
     <ClInclude Include="Mob.h" />

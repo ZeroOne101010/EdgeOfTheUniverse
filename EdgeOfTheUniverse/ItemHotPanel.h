@@ -5,16 +5,24 @@
 #include "Controller.h"
 #include "IInventory.h"
 #include "RegisteryEntity.h"
+#include "ItemOnMouse.h"
 class ItemHotPanel : public Panel
 {
 public:
-	ItemHotPanel(Controller* controller);
+	ItemHotPanel(Controller* controller, World* world, UIPlayerInterface* playerInterface);
 	~ItemHotPanel();
 	
 	static int coutItemInHotPanel;// Их количиство будет равно 10, тк для быстрого доступа доступно только 10 цифр
 	ItemHotCell** itemSlot;
+
+
 	Controller* controller;
 	ButtonGroup buttonGroup;
+
+	ItemOnMouse* itemOnMouse;
+	UIPlayerInterface* playerInterface;
+
+	World* world;
 
 	virtual Alterable draw(Renderer* renderer, Alterable alters) override;
 private:

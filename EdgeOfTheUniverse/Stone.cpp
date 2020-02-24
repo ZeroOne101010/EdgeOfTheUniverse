@@ -2,7 +2,8 @@
 
 Stone::Stone()
 {
-	color = glm::vec4(150, 150, 150, 255);
+	texture = Content::SpriteList_Stone;
+	color = glm::vec4(255, 255, 255, 255);
 }
 
 Block* Stone::getNewBlock()

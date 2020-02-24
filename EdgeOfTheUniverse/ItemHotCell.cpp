@@ -1,5 +1,6 @@
 #include "Panel.h"
 #include "Content.h"
+#include "ItemHotPanel.h"
 #include "ItemHotCell.h"
 
 ItemHotCell::ItemHotCell()
@@ -9,7 +10,7 @@ ItemHotCell::ItemHotCell()
 	Color = vec4(255, 255, 255, 150);
 	hoverColor = vec4(255, 255, 255, 200);
 	item = new Panel(vec2(size.x - offset, size.y - offset));
-	item->Color = vec4(255, 255, 255, 0);
+	//item->Color = vec4(255, 255, 255, 255);
 	item->Position = vec2((size.x - item->size.x) / 2, (size.y - item->size.y) / 2);
 }
 

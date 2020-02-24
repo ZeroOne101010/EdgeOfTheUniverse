@@ -1,7 +1,6 @@
 #include "BlockSpawner.h"
 
 float BlockSpawner::offsetLimited = 30;
-float BlockSpawner::kLimit = 0.2f;
 
 
 BlockSpawner::BlockSpawner(Block* block, float offsetX, float offsetY, float offsetPosX, float offsetPosY, float high, float highSection, float limitUp, float limitDown, float sizeNoise)
@@ -21,40 +20,25 @@ BlockSpawner::BlockSpawner(Block* block, float offsetX, float offsetY, float off
 bool BlockSpawner::toCreateBlock(int posX, int posY, RandomCoor* rand)
 {
     float answer = PerlinNoise::getPerlinNoise((posX + offsetPosX) / sizeNoise, (posY + offsetPosY) / sizeNoise, (int)offsetX, (int)offsetY, rand);
+    
+
     answer *= high;
     bool isCreate = false;
 
+
+    float limitedAnswerUp = PerlinNoise::getPerlinNoise((posX + 245) * 1.000f / sizeNoise, 2344.000f / sizeNoise, (int)offsetX, (int)offsetY, rand) * highLandshaft;
+    float limitedAnswerDown = PerlinNoise::getPerlinNoise((posX + 2346) * 1.000f / sizeNoise, 745.000f / sizeNoise, (int)offsetX, (int)offsetY, rand) * highLandshaft;
+
+
+    limitedAnswerUp = limitUp + limitedAnswerUp;
+    limitedAnswerDown = limitDown - limitedAnswerDown;
+
     if (!isInverseMap)
     {
-        if (posY < limitDown - offsetLimited && posY > limitUp + offsetLimited)
+
+        if (posY > limitedAnswerUp && posY < limitedAnswerDown)
         {
-            if (answer > highSection)
-            {
-                isCreate = true;
-            }
-        }
-        else
-        {
-            float t = 0;
-            if (posY >= limitDown - offsetLimited)
-            {
-                t = (offsetLimited - (limitDown - posY)) / offsetLimited;
-            }
-            else if (posY <= limitUp + offsetLimited)
-            {
-                t = (offsetLimited - (posY - limitUp)) / offsetLimited;
-            }
-            else
-            {
-                t = 1;
-            }
-
-            if (t < 0) t = 0;
-            if (t > 1) t = 1;
-
-            float section = highSection + (offsetY * kLimit * high * sizeNoise - highSection) * t;
-
-            if (answer > section)
+            if (answer >= highSection)
             {
                 isCreate = true;
             }
@@ -62,35 +46,9 @@ bool BlockSpawner::toCreateBlock(int posX, int posY, RandomCoor* rand)
     }
     else
     {
-        if (posY < limitDown - offsetLimited && posY > limitUp + offsetLimited)
+        if (posY > limitedAnswerUp&& posY < limitedAnswerDown)
         {
             if (answer < highSection)
-            {
-                isCreate = true;
-            }
-        }
-        else
-        {
-            float t = 0;
-            if (posY >= limitDown - offsetLimited)
-            {
-                t = (offsetLimited - (limitDown - posY)) / offsetLimited;
-            }
-            else if (posY <= limitUp + offsetLimited)
-            {
-                t = (offsetLimited - (posY - limitUp)) / offsetLimited;
-            }
-            else
-            {
-                t = 1;
-            }
-
-            if (t < 0) t = 0;
-            if (t > 1) t = 1;
-
-            float section = highSection + (offsetY * kLimit * high * sizeNoise - highSection) * t;
-
-            if (answer < section)
             {
                 isCreate = true;
             }
@@ -106,37 +64,18 @@ bool BlockSpawner::toCreateBlock(int posX, int posY, float tSection, RandomCoor*
     answer *= high;
     bool isCreate = false;
 
+    float limitedAnswerUp = PerlinNoise::getPerlinNoise((posX + 245) * 1.000f / sizeNoise, 2344.000f / sizeNoise, (int)offsetX, (int)offsetY, rand) * highLandshaft;
+    float limitedAnswerDown = PerlinNoise::getPerlinNoise((posX + 2346) * 1.000f / sizeNoise, 745.000f / sizeNoise, (int)offsetX, (int)offsetY, rand) * highLandshaft;
+
+
+    limitedAnswerUp = limitUp + limitedAnswerUp;
+    limitedAnswerDown = limitDown - limitedAnswerDown;
+
     if (!isInverseMap)
     {
-        if (posY < limitDown - offsetLimited && posY > limitUp + offsetLimited)
+        if (posY > limitedAnswerUp&& posY < limitedAnswerDown)
         {
-            if (answer > (highSection + (offsetY * kLimit * high * sizeNoise - highSection) * tSection))
-            {
-                isCreate = true;
-            }
-        }
-        else
-        {
-            float t = 0;
-            if (posY >= limitDown - offsetLimited)
-            {
-                t = (offsetLimited - (limitDown - posY)) / offsetLimited;
-            }
-            else if (posY <= limitUp + offsetLimited)
-            {
-                t = (offsetLimited - (posY - limitUp)) / offsetLimited;
-            }
-            else
-            {
-                t = 1;
-            }
-
-            if (t < 0) t = 0;
-            if (t > 1) t = 1;
-
-            float section = (highSection + (offsetY * kLimit * high * sizeNoise - highSection) * tSection) + (offsetY * kLimit * high * sizeNoise - (highSection + (offsetY * kLimit * high * sizeNoise - highSection) * tSection)) * t;;
-
-            if (answer > section)
+            if (answer > (highSection * tSection))
             {
                 isCreate = true;
             }
@@ -144,35 +83,9 @@ bool BlockSpawner::toCreateBlock(int posX, int posY, float tSection, RandomCoor*
     }
     else
     {
-        if (posY < limitDown - offsetLimited && posY > limitUp + offsetLimited)
+        if (posY > limitedAnswerUp&& posY < limitedAnswerDown)
         {
-            if (answer < (highSection + (offsetY * kLimit * high * sizeNoise - highSection) * tSection))
-            {
-                isCreate = true;
-            }
-        }
-        else
-        {
-            float t = 0;
-            if (posY >= limitDown - offsetLimited)
-            {
-                t = (offsetLimited - (limitDown - posY)) / offsetLimited;
-            }
-            else if (posY <= limitUp + offsetLimited)
-            {
-                t = (offsetLimited - (posY - limitUp)) / offsetLimited;
-            }
-            else
-            {
-                t = 1;
-            }
-
-            if (t < 0) t = 0;
-            if (t > 1) t = 1;
-
-            float section = (highSection + (offsetY * kLimit * high * sizeNoise - highSection) * tSection) + (offsetY * kLimit * high * sizeNoise - (highSection + (offsetY * kLimit * high * sizeNoise - highSection) * tSection)) * t;;
-
-            if (answer < section)
+            if (answer < (highSection * tSection))
             {
                 isCreate = true;
             }

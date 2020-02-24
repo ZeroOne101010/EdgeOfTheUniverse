@@ -1,5 +1,7 @@
-#include "UI.h"
+#include "OpenGLEngine/RenderWindow.h"
+#include "Cursor.h"
 #include "Content.h"
+#include "UI.h"
 UI::UI()
 {
 	carcass = new RectangleShape(size);
@@ -15,6 +17,11 @@ UI::UI(vec2 size)
 UI::~UI()
 {
 	delete carcass;
+}
+
+bool UI::IntersectMouseWithPanel()
+{
+	return Cursor::Intersect(this, RenderWindow::window);
 }
 
 Alterable UI::draw(Renderer* renderer, Alterable alters)

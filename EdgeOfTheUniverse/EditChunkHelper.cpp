@@ -227,3 +227,55 @@ void EditChunkHelper::setGrass(Chunk* chunk, Block*** block, Block*** backBlock,
             delete[9] neighboringBlock;
         }
 }
+
+
+void EditChunkHelper::setGrass(Chunk * chunk, Block * **block, Block * **backBlock, int idGrass, int grassBlockPlace, int sizeBlockX, int sizeBlockY)
+    {
+        for (int x = 0; x < sizeBlockX; x++)
+            for (int y = 0; y < sizeBlockY; y++)
+            {
+                Block** neighboringBlock = getNeighboringBlock(x, y, block, sizeBlockX, sizeBlockY);
+
+
+                Block* top = neighboringBlock[0];
+                Block* right = neighboringBlock[2];
+                Block* down = neighboringBlock[4];
+                Block* left = neighboringBlock[6];
+                Block* center = neighboringBlock[8];
+
+                if (top != nullptr && right != nullptr && down != nullptr && left != nullptr && center != nullptr)
+                {
+                    if (center->id == grassBlockPlace)
+                    {
+                        int blockX = block[x][y]->pX;
+                        int blockY = block[x][y]->pY;
+                        if (top->id == 0)
+                        {
+                            center = RegisteryBlocks::createBlock(blockX, blockY, false, chunk->world, idGrass);
+                            if (block[x][y] != nullptr) delete block[x][y];
+                            block[x][y] = center;
+                        }
+                        else if (right->id == 0)
+                        {
+                            center = RegisteryBlocks::createBlock(blockX, blockY, false, chunk->world, idGrass);
+                            if (block[x][y] != nullptr) delete block[x][y];
+                            block[x][y] = center;
+                        }
+                        else if (down->id == 0)
+                        {
+                            center = RegisteryBlocks::createBlock(blockX, blockY, false, chunk->world, idGrass);
+                            if (block[x][y] != nullptr) delete block[x][y];
+                            block[x][y] = center;
+                        }
+                        else if (left->id == 0)
+                        {
+                            center = RegisteryBlocks::createBlock(blockX, blockY, false, chunk->world, idGrass);
+                            if (block[x][y] != nullptr) delete block[x][y];
+                            block[x][y] = center;
+                        }
+                    }
+                }
+
+                delete[9] neighboringBlock;
+            }
+}

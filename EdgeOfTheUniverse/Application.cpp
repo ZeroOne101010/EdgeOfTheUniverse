@@ -1,5 +1,6 @@
 #include "Application.h"
 
+
 Application::Application()
 {
 	window = new RenderWindow(1280, 720, "EdgeOfTheUniverse");
@@ -16,10 +17,8 @@ Application::~Application()
 }
 
 
-
 void Application::GameLoop()
 {
-
 
 
 	while (!glfwWindowShouldClose(window->window))

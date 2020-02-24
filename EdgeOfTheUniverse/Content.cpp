@@ -1,4 +1,5 @@
 #include "OpenGLEngine/VAO.h"
+#include "ConvertRegionData.h"
 #include "Content.h"
 
 //������������� ����������
@@ -26,6 +27,13 @@ TBO* Content::spriteList_Grass;
 TBO* Content::spriteList_Dirt;
 TBO* Content::sprite_AmnisItem;
 TBO* Content::SpriteList_Tools;
+TBO* Content::SpriteList_Stone;
+
+const GLchar* Content::fileName(std::string localPath)
+{
+	std::cout << ConvertRegionData::getPathGLChar(localPath) << std::endl;
+	return ConvertRegionData::getPathGLChar(localPath);
+}
 
 void Content::load()
 {
@@ -70,10 +78,11 @@ void Content::load()
 	rectangleShapeVBO = new VBO(sizeof(GLfloat) * 12, rectangleShapeVertices, GL_STREAM_DRAW, defaultModelAttribute);
 	rectangleTextureUVVBO = new VBO(sizeof(GLfloat) * 12, rectangleShapeCoordsUV, GL_STREAM_DRAW, defaultTextureUVAttribute);
 	defaultTexture = new TBO();
-	spriteList_Grass = new TBO("E:\\EdgeOfTheUniverse\\EdgeOfTheUniverse\\Resources\\Textures\\SpriteList_Grass.png");
-	spriteList_Dirt = new TBO("E:\\EdgeOfTheUniverse\\EdgeOfTheUniverse\\Resources\\Textures\\SpriteList_Dirt.png");
-	sprite_AmnisItem = new TBO("E:\\EdgeOfTheUniverse\\EdgeOfTheUniverse\\Resources\\Textures\\Items\\AmnisLogo.png");
-	SpriteList_Tools = new TBO("E:\\EdgeOfTheUniverse\\EdgeOfTheUniverse\\Resources\\Textures\\Items\\SpriteList_Tools.png");
+	spriteList_Grass = new TBO(fileName("Resources\\Textures\\SpriteList_Grass.png"));
+	spriteList_Dirt = new TBO(fileName("Resources\\Textures\\SpriteList_Dirt.png"));
+	sprite_AmnisItem = new TBO(fileName("Resources\\Textures\\Items\\AmnisLogo.png"));
+	SpriteList_Tools = new TBO(fileName("Resources\\Textures\\Items\\SpriteList_Tools.png"));
+	SpriteList_Stone = new TBO(fileName("Resources\\Textures\\SpriteList_Stone.png"));
 	indexRectangleShape = VAO::createVAOBuffer();
 	VAO::bindVBOIBO(rectangleShapeVBO, rectangleShapeIBO, indexRectangleShape, 0);
 	VAO::bindVBO(rectangleTextureUVVBO, indexRectangleShape, 1);

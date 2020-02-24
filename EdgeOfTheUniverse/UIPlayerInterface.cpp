@@ -12,7 +12,7 @@ UIPlayerInterface::UIPlayerInterface(World* world, Controller* controller)
 	this->controller = controller;
 	size = vec2(0, 0);
 
-	itemHotPanel = new ItemHotPanel(controller);
+	itemHotPanel = new ItemHotPanel(controller, world, this);
 	itemHotPanel->buttonAttached = true;
 	itemHotPanel->Position += vec2(10, 10);
 	itemHotPanel->Color = vec4(20, 20, 20, 255);

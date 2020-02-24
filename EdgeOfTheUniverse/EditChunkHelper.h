@@ -9,5 +9,6 @@ public:
 	static void setGrass(Chunk* chunk, Block*** block, Block*** backBlock, BlockName nameGrass, int sizeBlockX, int sizeBlockY);
 	static void setGrass(Chunk* chunk, Block*** block, Block*** backBlock, int* idGrass, int sizeIdGrass, int sizeBlockX, int sizeBlockY);
 	static void setGrass(Chunk* chunk, Block*** block, Block*** backBlock, int idGrass, int sizeBlockX, int sizeBlockY);
+	static void setGrass(Chunk* chunk, Block*** block, Block*** backBlock, int idGrass, int grassBlockPlace, int sizeBlockX, int sizeBlockY);
 };
 
