@@ -64,9 +64,43 @@ void InventoryItemsField::UpdateCells()
 		{
 			ItemHotCell* cell = getItemContainer(x - *coutItemInHotPanel);
 			int ID = dynamic_cast<IInventory*>(controller->target)->inventories[0]->slots[x].id;
+			cell->drawItem = true;
 			cell->item->carcass->tbo = RegisteryEntity::entity[ID]->rect->tbo;
 			cell->item->carcass->textureRect = RegisteryEntity::entity[ID]->textureRect;
 			cell->item->Color = vec4(255, 255, 255, 255);
+
+			if (cell->clickBool == true)
+			{
+				Cursor::grappedInventoryCell = cell;
+			}
+			if (Cursor::grappedInventoryCell == cell)
+			{
+				cell->drawItem = false;
+				if ((cell->hoverBool == false) & (RenderWindow::mouseLeft == true))
+				{
+					Cursor::grappedInventoryCell = nullptr;
+					cell->drawItem = true;
+				}
+			}
+		}
+	}
+}
+void InventoryItemsField::UpdteKeepedCell()
+{
+
+	//Cursor::grappedInventoryCell->keepedItem.Color = vec4(255, 255, 255, 255);
+
+	//keepedItem.Size = item->carcass->Size;
+	//keepedItem.Position = Cursor::getMousePosition(RenderWindow::window) - globalPosition;
+	//keepedItem.Origin = vec2(-keepedItem.Size.x / 2, -keepedItem.Size.y / 2);
+	//keepedItem.textureRect = item->carcass->textureRect;
+	//keepedItem.tbo = item->carcass->tbo;
+	//keepedItem.Color = vec4(255, 255, 255, 255);
+	if (dynamic_cast<IInventory*>(controller->target))
+	{
+		for (int x = *coutItemInHotPanel; dynamic_cast<IInventory*>(controller->target)->inventories[0]->slots.size() > 0 & x < dynamic_cast<IInventory*>(controller->target)->inventories[0]->slots.size(); x++)
+		{
+
 		}
 	}
 }
@@ -79,6 +113,7 @@ Alterable InventoryItemsField::draw(Renderer* renderer, Alterable alters)
 		{
 			renderer->draw(itemCell[x][y], alters);
 		}
+	//UpdteKeepedCell();
 	return Alterable();
 }
 

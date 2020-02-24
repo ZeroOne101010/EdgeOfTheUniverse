@@ -19,7 +19,6 @@ public:
 	static void mouse_callback(GLFWwindow* window, int button, int action, int mods);
 	static bool mouseLeft;
 	static bool mouseRight;
-
 	RenderWindow(GLfloat width, GLfloat height, const GLchar* winName);
 	~RenderWindow();
 	static GLFWwindow* window;

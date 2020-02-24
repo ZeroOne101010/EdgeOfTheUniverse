@@ -21,6 +21,7 @@ ItemHotCell::~ItemHotCell()
 Alterable ItemHotCell::draw(Renderer* renderer, Alterable alters)
 {
 	alters = Button::draw(renderer, alters);
+	if(drawItem == true)
 	renderer->draw(item, alters);
 	return Alterable();
 }

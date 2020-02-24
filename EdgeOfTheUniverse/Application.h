@@ -8,6 +8,7 @@
 #include "Game.h"
 #include "Content.h"
 #include "UICanvas.h"
+#include "Cursor.h"
 class Application
 {
 public:
@@ -17,6 +18,7 @@ public:
 	UICanvas* uiCanvas;
 	RenderWindow* window;
 	Game* game;
+	Cursor* cursor;
 
 };
 

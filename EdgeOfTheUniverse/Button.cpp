@@ -23,6 +23,15 @@ void Button::addDelegates(IButton* obj)
 void Button::DelegateUpdate()
 {
 	clickBool = false;
+	upClickBool = false;
+	upClickUpHoverBool = false;
+	clickUpHoverBool == false;
+	if (Cursor::Intersect(this, RenderWindow::window) == false)
+		if (RenderWindow::mouseLeft == true)
+		{
+			alreadyClicked = true;
+		}
+
 	if (Cursor::Intersect(this, RenderWindow::window) == true)
 	{
 		hoverBool = true;
@@ -34,32 +43,46 @@ void Button::DelegateUpdate()
 				pressOnButtonBool = true;
 				Delegates[i]->press();
 				pressBool = true;
-				if (Delegates[i]->blockClickLeft == false)
+				if ((Delegates[i]->blockClickLeft == false) & (alreadyClicked == false))
 				{
 					Delegates[i]->onClick();
 					clickBool = true;
 					Delegates[i]->blockClickLeft = true;
+
 				}
 				Delegates[i]->blockUpClickLeft = true;
+
+
 			}
-			else 
+			else
 			{
 				pressOnButtonBool = false;
 				pressBool = false;
 				if (Delegates[i]->blockUpClickLeft == true)
 				{
 					Delegates[i]->upClick();
+					alreadyClicked = false;
+					upClickBool = true;
 					Delegates[i]->blockUpClickLeft = false;
 				}
 				Delegates[i]->blockClickLeft = false;
 			}
 		}
 	}
-	else 
+	else
 	{
 		pressOnButtonBool = false;
 		if (RenderWindow::mouseLeft == false)
+		{
+			alreadyClicked = false;
 			pressBool = false;
+			upClickUpHoverBool = true;
+		}
+		else
+		{
+			clickUpHoverBool == true;
+		}
+
 		for (int i = 0; i < Delegates.size(); i++)
 		{
 			hoverBool = false;
