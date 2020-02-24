@@ -17,7 +17,7 @@ UIPlayerInterface::UIPlayerInterface(World* world, Controller* controller)
 	itemHotPanel->Position += vec2(10, 10);
 	itemHotPanel->Color = vec4(20, 20, 20, 255);
 
-	inventoryItemsField = new InventoryItemsField(controller, &itemHotPanel->coutItemInHotPanel);
+	inventoryItemsField = new InventoryItemsField(world ,controller, &itemHotPanel->coutItemInHotPanel);
 	inventoryItemsField->buttonAttached = true;
 	inventoryItemsField->Position = vec2(10, itemHotPanel->size.y + 10 + 10);
 }

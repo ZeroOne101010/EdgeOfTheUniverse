@@ -35,6 +35,7 @@ World::World(int seed, Map* map)
     for (int k = 0; k < 100; k++)
     {
         dynamic_cast<InventoredMob*>(player)->Take(dynamic_cast<ITakeble*>(RegisteryEntity::addItem(this, 0, vec2(k * 15, 0))), 0);
+        dynamic_cast<InventoredMob*>(player)->Take(dynamic_cast<ITakeble*>(RegisteryEntity::addItem(this, 1, vec2(k * -15, 0))), 0);
     }
 
     //for (int x = 0; x < 28; x++)
