@@ -188,7 +188,6 @@
     <ClCompile Include="InventoryItemsField.cpp" />
     <ClCompile Include="ItemHotCell.cpp" />
     <ClCompile Include="ItemHotPanel.cpp" />
-    <ClCompile Include="ItemOnMouse.cpp" />
     <ClCompile Include="LightingShader.cpp" />
     <ClCompile Include="Map.cpp" />
     <ClCompile Include="Mob.cpp" />
@@ -276,7 +275,6 @@
     <ClInclude Include="ITakeble.h" />
     <ClInclude Include="ItemHotCell.h" />
     <ClInclude Include="ItemHotPanel.h" />
-    <ClInclude Include="ItemOnMouse.h" />
     <ClInclude Include="LightingShader.h" />
     <ClInclude Include="Map.h" />
     <ClInclude Include="Mob.h" />

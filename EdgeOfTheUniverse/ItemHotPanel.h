@@ -19,7 +19,7 @@ public:
 	Controller* controller;
 	ButtonGroup buttonGroup;
 
-	ItemOnMouse* itemOnMouse;
+	//ItemOnMouse* itemOnMouse;
 	UIPlayerInterface* playerInterface;
 
 	World* world;

@@ -1,530 +1,177 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
-    <Filter Include="Исходные файлы">
-      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
-      <Extensions>cpp;c;cc;cxx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
-    </Filter>
-    <Filter Include="Файлы заголовков">
-      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
-      <Extensions>h;hh;hpp;hxx;hm;inl;inc;ipp;xsd</Extensions>
-    </Filter>
-    <Filter Include="Файлы ресурсов">
-      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
-      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
-    </Filter>
+    <ClCompile Include="Air.cpp" />
+    <ClCompile Include="Amnis.cpp" />
+    <ClCompile Include="BackGraund.cpp" />
+    <ClCompile Include="BackGroundLayer.cpp" />
+    <ClCompile Include="Biome.cpp" />
+    <ClCompile Include="BiomeAir.cpp" />
+    <ClCompile Include="Block.cpp" />
+    <ClCompile Include="BlockSpawner.cpp" />
+    <ClCompile Include="Button.cpp" />
+    <ClCompile Include="ButtonGroup.cpp" />
+    <ClCompile Include="ByteHelper.cpp" />
+    <ClCompile Include="Chunk.cpp" />
+    <ClCompile Include="ChunkThread.cpp" />
+    <ClCompile Include="Content.cpp" />
+    <ClCompile Include="Controller.cpp" />
+    <ClCompile Include="ConvertChunkToData.cpp" />
+    <ClCompile Include="ConvertRegionData.cpp" />
+    <ClCompile Include="Cursor.cpp" />
+    <ClCompile Include="Dirt.cpp" />
+    <ClCompile Include="EditChunkHelper.cpp" />
+    <ClCompile Include="Entity.cpp" />
+    <ClCompile Include="Event.cpp" />
+    <ClCompile Include="EventSetWhite.cpp" />
+    <ClCompile Include="EventTakeItemCell.cpp" />
+    <ClCompile Include="FreeCamera.cpp" />
+    <ClCompile Include="Game.cpp" />
+    <ClCompile Include="glb.cpp" />
+    <ClCompile Include="Grass.cpp" />
+    <ClCompile Include="ICloseObject.cpp" />
+    <ClCompile Include="IInventory.cpp" />
+    <ClCompile Include="IntersectedEntity.cpp" />
+    <ClCompile Include="InventoredMob.cpp" />
+    <ClCompile Include="Inventory.cpp" />
+    <ClCompile Include="Item.cpp" />
+    <ClCompile Include="ItemConteiner.cpp" />
+    <ClCompile Include="InventoryItemsField.cpp" />
+    <ClCompile Include="ItemHotCell.cpp" />
+    <ClCompile Include="ItemHotPanel.cpp" />
+    <ClCompile Include="LightingShader.cpp" />
+    <ClCompile Include="Map.cpp" />
+    <ClCompile Include="Mob.cpp" />
+    <ClCompile Include="Mountains.cpp" />
+    <ClCompile Include="OpenGLEngine\Alter.cpp" />
+    <ClCompile Include="OpenGLEngine\Alterable.cpp" />
+    <ClCompile Include="Application.cpp" />
+    <ClCompile Include="OpenGLEngine\DefaultShader.cpp" />
+    <ClCompile Include="EdgeOfTheUniverse.cpp" />
+    <ClCompile Include="OpenGLEngine\FloatRect.cpp" />
+    <ClCompile Include="OpenGLEngine\IBO.cpp" />
+    <ClCompile Include="OpenGLEngine\IDraw.cpp" />
+    <ClCompile Include="OpenGLEngine\RectangleShape.cpp" />
+    <ClCompile Include="OpenGLEngine\Renderer.cpp" />
+    <ClCompile Include="OpenGLEngine\RenderWindow.cpp" />
+    <ClCompile Include="OpenGLEngine\Shader.cpp" />
+    <ClCompile Include="OpenGLEngine\Shape.cpp" />
+    <ClCompile Include="OpenGLEngine\Texture.cpp" />
+    <ClCompile Include="OpenGLEngine\VAO.cpp" />
+    <ClCompile Include="OpenGLEngine\VBO.cpp" />
+    <ClCompile Include="Panel.cpp" />
+    <ClCompile Include="PerlinNoise.cpp" />
+    <ClCompile Include="Player.cpp" />
+    <ClCompile Include="Property.cpp" />
+    <ClCompile Include="PropertyManager.cpp" />
+    <ClCompile Include="RandomCoor.cpp" />
+    <ClCompile Include="Registery.cpp" />
+    <ClCompile Include="RegisteryBiome.cpp" />
+    <ClCompile Include="RegisteryBlocks.cpp" />
+    <ClCompile Include="RegisteryEntity.cpp" />
+    <ClCompile Include="RockLayer.cpp" />
+    <ClCompile Include="ShadowManager.cpp" />
+    <ClCompile Include="Slider.cpp" />
+    <ClCompile Include="Slime.cpp" />
+    <ClCompile Include="Stone.cpp" />
+    <ClCompile Include="Stone_Sword.cpp" />
+    <ClCompile Include="TBO.cpp" />
+    <ClCompile Include="TestConteiner.cpp" />
+    <ClCompile Include="UI.cpp" />
+    <ClCompile Include="UICanvas.cpp" />
+    <ClCompile Include="UIPlayerInterface.cpp" />
+    <ClCompile Include="Vacuum.cpp" />
+    <ClCompile Include="World.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="EdgeOfTheUniverse.cpp">
-      <Filter>Исходные файлы</Filter>
-    </ClCompile>
-    <ClCompile Include="Application.cpp">
-      <Filter>Исходные файлы</Filter>
-    </ClCompile>
-    <ClCompile Include="OpenGLEngine\Alter.cpp">
-      <Filter>Исходные файлы</Filter>
-    </ClCompile>
-    <ClCompile Include="OpenGLEngine\Alterable.cpp">
-      <Filter>Исходные файлы</Filter>
-    </ClCompile>
-    <ClCompile Include="OpenGLEngine\DefaultShader.cpp">
-      <Filter>Исходные файлы</Filter>
-    </ClCompile>
-    <ClCompile Include="OpenGLEngine\FloatRect.cpp">
-      <Filter>Исходные файлы</Filter>
-    </ClCompile>
-    <ClCompile Include="OpenGLEngine\IBO.cpp">
-      <Filter>Исходные файлы</Filter>
-    </ClCompile>
-    <ClCompile Include="OpenGLEngine\IDraw.cpp">
-      <Filter>Исходные файлы</Filter>
-    </ClCompile>
-    <ClCompile Include="OpenGLEngine\RectangleShape.cpp">
-      <Filter>Исходные файлы</Filter>
-    </ClCompile>
-    <ClCompile Include="OpenGLEngine\Renderer.cpp">
-      <Filter>Исходные файлы</Filter>
-    </ClCompile>
-    <ClCompile Include="OpenGLEngine\RenderWindow.cpp">
-      <Filter>Исходные файлы</Filter>
-    </ClCompile>
-    <ClCompile Include="OpenGLEngine\Shader.cpp">
-      <Filter>Исходные файлы</Filter>
-    </ClCompile>
-    <ClCompile Include="OpenGLEngine\Shape.cpp">
-      <Filter>Исходные файлы</Filter>
-    </ClCompile>
-    <ClCompile Include="OpenGLEngine\Texture.cpp">
-      <Filter>Исходные файлы</Filter>
-    </ClCompile>
-    <ClCompile Include="OpenGLEngine\VAO.cpp">
-      <Filter>Исходные файлы</Filter>
-    </ClCompile>
-    <ClCompile Include="OpenGLEngine\VBO.cpp">
-      <Filter>Исходные файлы</Filter>
-    </ClCompile>
-    <ClCompile Include="Game.cpp">
-      <Filter>Исходные файлы</Filter>
-    </ClCompile>
-    <ClCompile Include="Map.cpp">
-      <Filter>Исходные файлы</Filter>
-    </ClCompile>
-    <ClCompile Include="World.cpp">
-      <Filter>Исходные файлы</Filter>
-    </ClCompile>
-    <ClCompile Include="Chunk.cpp">
-      <Filter>Исходные файлы</Filter>
-    </ClCompile>
-    <ClCompile Include="Block.cpp">
-      <Filter>Исходные файлы</Filter>
-    </ClCompile>
-    <ClCompile Include="Vacuum.cpp">
-      <Filter>Исходные файлы</Filter>
-    </ClCompile>
-    <ClCompile Include="Air.cpp">
-      <Filter>Исходные файлы</Filter>
-    </ClCompile>
-    <ClCompile Include="Registery.cpp">
-      <Filter>Исходные файлы</Filter>
-    </ClCompile>
-    <ClCompile Include="RegisteryBlocks.cpp">
-      <Filter>Исходные файлы</Filter>
-    </ClCompile>
-    <ClCompile Include="Dirt.cpp">
-      <Filter>Исходные файлы</Filter>
-    </ClCompile>
-    <ClCompile Include="ByteHelper.cpp">
-      <Filter>Исходные файлы</Filter>
-    </ClCompile>
-    <ClCompile Include="ConvertChunkToData.cpp">
-      <Filter>Исходные файлы</Filter>
-    </ClCompile>
-    <ClCompile Include="Entity.cpp">
-      <Filter>Исходные файлы</Filter>
-    </ClCompile>
-    <ClCompile Include="Property.cpp">
-      <Filter>Исходные файлы</Filter>
-    </ClCompile>
-    <ClCompile Include="PropertyManager.cpp">
-      <Filter>Исходные файлы</Filter>
-    </ClCompile>
-    <ClCompile Include="RegisteryEntity.cpp">
-      <Filter>Исходные файлы</Filter>
-    </ClCompile>
-    <ClCompile Include="Slime.cpp">
-      <Filter>Исходные файлы</Filter>
-    </ClCompile>
-    <ClCompile Include="ConvertRegionData.cpp">
-      <Filter>Исходные файлы</Filter>
-    </ClCompile>
-    <ClCompile Include="Content.cpp">
-      <Filter>Исходные файлы</Filter>
-    </ClCompile>
-    <ClCompile Include="ChunkThread.cpp">
-      <Filter>Исходные файлы</Filter>
-    </ClCompile>
-    <ClCompile Include="ICloseObject.cpp">
-      <Filter>Исходные файлы</Filter>
-    </ClCompile>
-    <ClCompile Include="RandomCoor.cpp">
-      <Filter>Исходные файлы</Filter>
-    </ClCompile>
-    <ClCompile Include="PerlinNoise.cpp">
-      <Filter>Исходные файлы</Filter>
-    </ClCompile>
-    <ClCompile Include="Biome.cpp">
-      <Filter>Исходные файлы</Filter>
-    </ClCompile>
-    <ClCompile Include="BlockSpawner.cpp">
-      <Filter>Исходные файлы</Filter>
-    </ClCompile>
-    <ClCompile Include="RegisteryBiome.cpp">
-      <Filter>Исходные файлы</Filter>
-    </ClCompile>
-    <ClCompile Include="Mountains.cpp">
-      <Filter>Исходные файлы</Filter>
-    </ClCompile>
-    <ClCompile Include="BiomeAir.cpp">
-      <Filter>Исходные файлы</Filter>
-    </ClCompile>
-    <ClCompile Include="EditChunkHelper.cpp">
-      <Filter>Исходные файлы</Filter>
-    </ClCompile>
-    <ClCompile Include="Grass.cpp">
-      <Filter>Исходные файлы</Filter>
-    </ClCompile>
-    <ClCompile Include="ShadowManager.cpp">
-      <Filter>Исходные файлы</Filter>
-    </ClCompile>
-    <ClCompile Include="LightingShader.cpp">
-      <Filter>Исходные файлы</Filter>
-    </ClCompile>
-    <ClCompile Include="TBO.cpp">
-      <Filter>Исходные файлы</Filter>
-    </ClCompile>
-    <ClCompile Include="Button.cpp">
-      <Filter>Исходные файлы</Filter>
-    </ClCompile>
-    <ClCompile Include="ButtonGroup.cpp">
-      <Filter>Исходные файлы</Filter>
-    </ClCompile>
-    <ClCompile Include="Cursor.cpp">
-      <Filter>Исходные файлы</Filter>
-    </ClCompile>
-    <ClCompile Include="Event.cpp">
-      <Filter>Исходные файлы</Filter>
-    </ClCompile>
-    <ClCompile Include="EventSetWhite.cpp">
-      <Filter>Исходные файлы</Filter>
-    </ClCompile>
-    <ClCompile Include="Panel.cpp">
-      <Filter>Исходные файлы</Filter>
-    </ClCompile>
-    <ClCompile Include="Slider.cpp">
-      <Filter>Исходные файлы</Filter>
-    </ClCompile>
-    <ClCompile Include="UI.cpp">
-      <Filter>Исходные файлы</Filter>
-    </ClCompile>
-    <ClCompile Include="Controller.cpp">
-      <Filter>Исходные файлы</Filter>
-    </ClCompile>
-    <ClCompile Include="Player.cpp">
-      <Filter>Исходные файлы</Filter>
-    </ClCompile>
-    <ClCompile Include="FreeCamera.cpp">
-      <Filter>Исходные файлы</Filter>
-    </ClCompile>
-    <ClCompile Include="Mob.cpp">
-      <Filter>Исходные файлы</Filter>
-    </ClCompile>
-    <ClCompile Include="glb.cpp">
-      <Filter>Исходные файлы</Filter>
-    </ClCompile>
-    <ClCompile Include="IntersectedEntity.cpp">
-      <Filter>Исходные файлы</Filter>
-    </ClCompile>
-    <ClCompile Include="Item.cpp">
-      <Filter>Исходные файлы</Filter>
-    </ClCompile>
-    <ClCompile Include="Amnis.cpp">
-      <Filter>Исходные файлы</Filter>
-    </ClCompile>
-    <ClCompile Include="UICanvas.cpp">
-      <Filter>Исходные файлы</Filter>
-    </ClCompile>
-    <ClCompile Include="ItemHotPanel.cpp">
-      <Filter>Исходные файлы</Filter>
-    </ClCompile>
-    <ClCompile Include="UIPlayerInterface.cpp">
-      <Filter>Исходные файлы</Filter>
-    </ClCompile>
-    <ClCompile Include="TestConteiner.cpp">
-      <Filter>Исходные файлы</Filter>
-    </ClCompile>
-    <ClCompile Include="InventoredMob.cpp">
-      <Filter>Исходные файлы</Filter>
-    </ClCompile>
-    <ClCompile Include="IInventory.cpp">
-      <Filter>Исходные файлы</Filter>
-    </ClCompile>
-    <ClCompile Include="Inventory.cpp">
-      <Filter>Исходные файлы</Filter>
-    </ClCompile>
-    <ClCompile Include="ItemConteiner.cpp">
-      <Filter>Исходные файлы</Filter>
-    </ClCompile>
-    <ClCompile Include="Stone_Sword.cpp">
-      <Filter>Исходные файлы</Filter>
-    </ClCompile>
-    <ClCompile Include="ItemHotCell.cpp">
-      <Filter>Исходные файлы</Filter>
-    </ClCompile>
-    <ClCompile Include="InventoryItemsField.cpp">
-      <Filter>Исходные файлы</Filter>
-    </ClCompile>
-    <ClCompile Include="Stone.cpp">
-      <Filter>Исходные файлы</Filter>
-    </ClCompile>
-    <ClCompile Include="RockLayer.cpp">
-      <Filter>Исходные файлы</Filter>
-    </ClCompile>
-    <ClCompile Include="EventTakeItemCell.cpp">
-      <Filter>Исходные файлы</Filter>
-    </ClCompile>
-    <ClCompile Include="ItemOnMouse.cpp">
-     <Filter>Исходные файлы</Filter>
-    </ClCompile>
-    <ClCompile Include="BackGraund.cpp">
-      <Filter>Исходные файлы</Filter>
-    </ClCompile>
-    <ClCompile Include="BackGroundLayer.cpp">
-    <Filter>Исходные файлы</Filter>
-    </ClCompile>
-      <Filter>Исходные файлы</Filter>
-    </ClCompile>
+    <ClInclude Include="Air.h" />
+    <ClInclude Include="AlterableHeader.h" />
+    <ClInclude Include="Amnis.h" />
+    <ClInclude Include="BackGraund.h" />
+    <ClInclude Include="BackGroundLayer.h" />
+    <ClInclude Include="Biome.h" />
+    <ClInclude Include="BiomeAir.h" />
+    <ClInclude Include="Block.h" />
+    <ClInclude Include="BlockSpawner.h" />
+    <ClInclude Include="Button.h" />
+    <ClInclude Include="ButtonEvents.h" />
+    <ClInclude Include="ButtonGroup.h" />
+    <ClInclude Include="ByteHelper.h" />
+    <ClInclude Include="Chunk.h" />
+    <ClInclude Include="ChunkThread.h" />
+    <ClInclude Include="Content.h" />
+    <ClInclude Include="Controller.h" />
+    <ClInclude Include="ConvertChunkToData.h" />
+    <ClInclude Include="ConvertRegionData.h" />
+    <ClInclude Include="Cursor.h" />
+    <ClInclude Include="Dirt.h" />
+    <ClInclude Include="EditChunkHelper.h" />
+    <ClInclude Include="Entity.h" />
+    <ClInclude Include="Event.h" />
+    <ClInclude Include="EventSetWhite.h" />
+    <ClInclude Include="EventTakeItemCell.h" />
+    <ClInclude Include="FreeCamera.h" />
+    <ClInclude Include="Game.h" />
+    <ClInclude Include="glb.h" />
+    <ClInclude Include="Grass.h" />
+    <ClInclude Include="IButton.h" />
+    <ClInclude Include="ICloseObject.h" />
+    <ClInclude Include="IInventory.h" />
+    <ClInclude Include="IntersectedEntity.h" />
+    <ClInclude Include="InventoredMob.h" />
+    <ClInclude Include="Inventory.h" />
+    <ClInclude Include="Item.h" />
+    <ClInclude Include="ItemConteiner.h" />
+    <ClInclude Include="InventoryItemsField.h" />
+    <ClInclude Include="ITakeble.h" />
+    <ClInclude Include="ItemHotCell.h" />
+    <ClInclude Include="ItemHotPanel.h" />
+    <ClInclude Include="LightingShader.h" />
+    <ClInclude Include="Map.h" />
+    <ClInclude Include="Mob.h" />
+    <ClInclude Include="Mountains.h" />
+    <ClInclude Include="OpenGLEngine\Alter.h" />
+    <ClInclude Include="OpenGLEngine\Alterable.h" />
+    <ClInclude Include="Application.h" />
+    <ClInclude Include="OpenGLEngine\DefaultShader.h" />
+    <ClInclude Include="OpenGLEngine\FloatRect.h" />
+    <ClInclude Include="OpenGLEngine\IBO.h" />
+    <ClInclude Include="OpenGLEngine\IDraw.h" />
+    <ClInclude Include="OpenGLEngine\RectangleShape.h" />
+    <ClInclude Include="OpenGLEngine\Renderer.h" />
+    <ClInclude Include="OpenGLEngine\RenderWindow.h" />
+    <ClInclude Include="OpenGLEngine\Shader.h" />
+    <ClInclude Include="OpenGLEngine\Shape.h" />
+    <ClInclude Include="OpenGLEngine\Texture.h" />
+    <ClInclude Include="OpenGLEngine\VAO.h" />
+    <ClInclude Include="OpenGLEngine\VBO.h" />
+    <ClInclude Include="Panel.h" />
+    <ClInclude Include="PerlinNoise.h" />
+    <ClInclude Include="Player.h" />
+    <ClInclude Include="Property.h" />
+    <ClInclude Include="PropertyManager.h" />
+    <ClInclude Include="RandomCoor.h" />
+    <ClInclude Include="Registery.h" />
+    <ClInclude Include="RegisteryBiome.h" />
+    <ClInclude Include="RegisteryBlocks.h" />
+    <ClInclude Include="RegisteryEntity.h" />
+    <ClInclude Include="RockLayer.h" />
+    <ClInclude Include="ShadowManager.h" />
+    <ClInclude Include="Slider.h" />
+    <ClInclude Include="Slime.h" />
+    <ClInclude Include="Stone.h" />
+    <ClInclude Include="Stone_Sword.h" />
+    <ClInclude Include="TBO.h" />
+    <ClInclude Include="TestConteiner.h" />
+    <ClInclude Include="UI.h" />
+    <ClInclude Include="UICanvas.h" />
+    <ClInclude Include="UIPlayerInterface.h" />
+    <ClInclude Include="Vacuum.h" />
+    <ClInclude Include="World.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Application.h">
-      <Filter>Файлы заголовков</Filter>
-    </ClInclude>
-    <ClInclude Include="OpenGLEngine\Alter.h">
-      <Filter>Файлы заголовков</Filter>
-    </ClInclude>
-    <ClInclude Include="OpenGLEngine\Alterable.h">
-      <Filter>Файлы заголовков</Filter>
-    </ClInclude>
-    <ClInclude Include="OpenGLEngine\DefaultShader.h">
-      <Filter>Файлы заголовков</Filter>
-    </ClInclude>
-    <ClInclude Include="OpenGLEngine\FloatRect.h">
-      <Filter>Файлы заголовков</Filter>
-    </ClInclude>
-    <ClInclude Include="OpenGLEngine\IBO.h">
-      <Filter>Файлы заголовков</Filter>
-    </ClInclude>
-    <ClInclude Include="OpenGLEngine\IDraw.h">
-      <Filter>Файлы заголовков</Filter>
-    </ClInclude>
-    <ClInclude Include="OpenGLEngine\RectangleShape.h">
-      <Filter>Файлы заголовков</Filter>
-    </ClInclude>
-    <ClInclude Include="OpenGLEngine\Renderer.h">
-      <Filter>Файлы заголовков</Filter>
-    </ClInclude>
-    <ClInclude Include="OpenGLEngine\RenderWindow.h">
-      <Filter>Файлы заголовков</Filter>
-    </ClInclude>
-    <ClInclude Include="OpenGLEngine\Shader.h">
-      <Filter>Файлы заголовков</Filter>
-    </ClInclude>
-    <ClInclude Include="OpenGLEngine\Shape.h">
-      <Filter>Файлы заголовков</Filter>
-    </ClInclude>
-    <ClInclude Include="OpenGLEngine\Texture.h">
-      <Filter>Файлы заголовков</Filter>
-    </ClInclude>
-    <ClInclude Include="OpenGLEngine\VAO.h">
-      <Filter>Файлы заголовков</Filter>
-    </ClInclude>
-    <ClInclude Include="OpenGLEngine\VBO.h">
-      <Filter>Файлы заголовков</Filter>
-    </ClInclude>
-    <ClInclude Include="Game.h">
-      <Filter>Файлы заголовков</Filter>
-    </ClInclude>
-    <ClInclude Include="AlterableHeader.h">
-      <Filter>Файлы заголовков</Filter>
-    </ClInclude>
-    <ClInclude Include="Map.h">
-      <Filter>Файлы заголовков</Filter>
-    </ClInclude>
-    <ClInclude Include="World.h">
-      <Filter>Файлы заголовков</Filter>
-    </ClInclude>
-    <ClInclude Include="Chunk.h">
-      <Filter>Файлы заголовков</Filter>
-    </ClInclude>
-    <ClInclude Include="Block.h">
-      <Filter>Файлы заголовков</Filter>
-    </ClInclude>
-    <ClInclude Include="Vacuum.h">
-      <Filter>Файлы заголовков</Filter>
-    </ClInclude>
-    <ClInclude Include="Air.h">
-      <Filter>Файлы заголовков</Filter>
-    </ClInclude>
-    <ClInclude Include="Registery.h">
-      <Filter>Файлы заголовков</Filter>
-    </ClInclude>
-    <ClInclude Include="RegisteryBlocks.h">
-      <Filter>Файлы заголовков</Filter>
-    </ClInclude>
-    <ClInclude Include="Dirt.h">
-      <Filter>Файлы заголовков</Filter>
-    </ClInclude>
-    <ClInclude Include="ByteHelper.h">
-      <Filter>Файлы заголовков</Filter>
-    </ClInclude>
-    <ClInclude Include="ConvertChunkToData.h">
-      <Filter>Файлы заголовков</Filter>
-    </ClInclude>
-    <ClInclude Include="Entity.h">
-      <Filter>Файлы заголовков</Filter>
-    </ClInclude>
-    <ClInclude Include="Property.h">
-      <Filter>Файлы заголовков</Filter>
-    </ClInclude>
-    <ClInclude Include="PropertyManager.h">
-      <Filter>Файлы заголовков</Filter>
-    </ClInclude>
-    <ClInclude Include="RegisteryEntity.h">
-      <Filter>Файлы заголовков</Filter>
-    </ClInclude>
-    <ClInclude Include="Slime.h">
-      <Filter>Файлы заголовков</Filter>
-    </ClInclude>
-    <ClInclude Include="ConvertRegionData.h">
-      <Filter>Файлы заголовков</Filter>
-    </ClInclude>
-    <ClInclude Include="Content.h">
-      <Filter>Файлы заголовков</Filter>
-    </ClInclude>
-    <ClInclude Include="ChunkThread.h">
-      <Filter>Файлы заголовков</Filter>
-    </ClInclude>
-    <ClInclude Include="ICloseObject.h">
-      <Filter>Файлы заголовков</Filter>
-    </ClInclude>
-    <ClInclude Include="RandomCoor.h">
-      <Filter>Файлы заголовков</Filter>
-    </ClInclude>
-    <ClInclude Include="PerlinNoise.h">
-      <Filter>Файлы заголовков</Filter>
-    </ClInclude>
-    <ClInclude Include="Biome.h">
-      <Filter>Файлы заголовков</Filter>
-    </ClInclude>
-    <ClInclude Include="BlockSpawner.h">
-      <Filter>Файлы заголовков</Filter>
-    </ClInclude>
-    <ClInclude Include="RegisteryBiome.h">
-      <Filter>Файлы заголовков</Filter>
-    </ClInclude>
-    <ClInclude Include="Mountains.h">
-      <Filter>Файлы заголовков</Filter>
-    </ClInclude>
-    <ClInclude Include="BiomeAir.h">
-      <Filter>Файлы заголовков</Filter>
-    </ClInclude>
-    <ClInclude Include="EditChunkHelper.h">
-      <Filter>Файлы заголовков</Filter>
-    </ClInclude>
-    <ClInclude Include="Grass.h">
-      <Filter>Файлы заголовков</Filter>
-    </ClInclude>
-    <ClInclude Include="ShadowManager.h">
-      <Filter>Файлы заголовков</Filter>
-    </ClInclude>
-    <ClInclude Include="LightingShader.h">
-      <Filter>Файлы заголовков</Filter>
-    </ClInclude>
-    <ClInclude Include="TBO.h">
-      <Filter>Файлы заголовков</Filter>
-    </ClInclude>
-    <ClInclude Include="Button.h">
-      <Filter>Файлы заголовков</Filter>
-    </ClInclude>
-    <ClInclude Include="ButtonEvents.h">
-      <Filter>Файлы заголовков</Filter>
-    </ClInclude>
-    <ClInclude Include="ButtonGroup.h">
-      <Filter>Файлы заголовков</Filter>
-    </ClInclude>
-    <ClInclude Include="Cursor.h">
-      <Filter>Файлы заголовков</Filter>
-    </ClInclude>
-    <ClInclude Include="Event.h">
-      <Filter>Файлы заголовков</Filter>
-    </ClInclude>
-    <ClInclude Include="EventSetWhite.h">
-      <Filter>Файлы заголовков</Filter>
-    </ClInclude>
-    <ClInclude Include="IButton.h">
-      <Filter>Файлы заголовков</Filter>
-    </ClInclude>
-    <ClInclude Include="Panel.h">
-      <Filter>Файлы заголовков</Filter>
-    </ClInclude>
-    <ClInclude Include="Slider.h">
-      <Filter>Файлы заголовков</Filter>
-    </ClInclude>
-    <ClInclude Include="UI.h">
-      <Filter>Файлы заголовков</Filter>
-    </ClInclude>
-    <ClInclude Include="Controller.h">
-      <Filter>Файлы заголовков</Filter>
-    </ClInclude>
-    <ClInclude Include="Player.h">
-      <Filter>Файлы заголовков</Filter>
-    </ClInclude>
-    <ClInclude Include="FreeCamera.h">
-      <Filter>Файлы заголовков</Filter>
-    </ClInclude>
-    <ClInclude Include="Mob.h">
-      <Filter>Файлы заголовков</Filter>
-    </ClInclude>
-    <ClInclude Include="glb.h">
-      <Filter>Файлы заголовков</Filter>
-    </ClInclude>
-    <ClInclude Include="IntersectedEntity.h">
-      <Filter>Файлы заголовков</Filter>
-    </ClInclude>
-    <ClInclude Include="Item.h">
-      <Filter>Файлы заголовков</Filter>
-    </ClInclude>
-    <ClInclude Include="Amnis.h">
-      <Filter>Файлы заголовков</Filter>
-    </ClInclude>
-    <ClInclude Include="UICanvas.h">
-      <Filter>Файлы заголовков</Filter>
-    </ClInclude>
-    <ClInclude Include="ItemHotPanel.h">
-      <Filter>Файлы заголовков</Filter>
-    </ClInclude>
-    <ClInclude Include="UIPlayerInterface.h">
-      <Filter>Файлы заголовков</Filter>
-    </ClInclude>
-    <ClInclude Include="TestConteiner.h">
-      <Filter>Файлы заголовков</Filter>
-    </ClInclude>
-    <ClInclude Include="InventoredMob.h">
-      <Filter>Файлы заголовков</Filter>
-    </ClInclude>
-    <ClInclude Include="IInventory.h">
-      <Filter>Файлы заголовков</Filter>
-    </ClInclude>
-    <ClInclude Include="Inventory.h">
-      <Filter>Файлы заголовков</Filter>
-    </ClInclude>
-    <ClInclude Include="ItemConteiner.h">
-      <Filter>Файлы заголовков</Filter>
-    </ClInclude>
-    <ClInclude Include="Stone_Sword.h">
-      <Filter>Файлы заголовков</Filter>
-    </ClInclude>
-    <ClInclude Include="ItemHotCell.h">
-      <Filter>Файлы заголовков</Filter>
-    </ClInclude>
-    <ClInclude Include="ITakeble.h">
-      <Filter>Файлы заголовков</Filter>
-    </ClInclude>
-    <ClInclude Include="InventoryItemsField.h">
-      <Filter>Файлы заголовков</Filter>
-    </ClInclude>
-    <ClInclude Include="Stone.h">
-      <Filter>Файлы заголовков</Filter>
-    </ClInclude>
-    <ClInclude Include="RockLayer.h">
-      <Filter>Файлы заголовков</Filter>
-    </ClInclude>
-    <ClInclude Include="EventTakeItemCell.h">
-      <Filter>Файлы заголовков</Filter>
-    </ClInclude>
-    <ClInclude Include="ItemOnMouse.h">
-      <Filter>Файлы заголовков</Filter>
-    </ClInclude>
-    <ClInclude Include="BackGraund.h">
-      <Filter>Файлы заголовков</Filter>
-    </ClInclude>
-    <ClInclude Include="BackGroundLayer.h">
-    </ClInclude>
-      <Filter>Файлы заголовков</Filter>
-    </ClInclude>
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Resources\Shaders\DefaultShader.vert" />
     <None Include="Resources\Shaders\DefaultShader.frag" />
+    <None Include="Resources\Shaders\DefaultShader.vert" />
     <None Include="Resources\Shaders\LightingShader.frag" />
   </ItemGroup>
 </Project>

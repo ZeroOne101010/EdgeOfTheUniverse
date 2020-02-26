@@ -16,13 +16,13 @@ ItemHotPanel::ItemHotPanel(Controller* controller, World* world, UIPlayerInterfa
 		itemSlot[x]->Position = vec2(x * (itemSlot[x]->size.x + offset) + offset, offset);
 	}
 	size = vec2((itemSlot[0]->size.x + offset) * coutItemInHotPanel + offset, itemSlot[0]->size.y + offset * 2);
-	itemOnMouse = new ItemOnMouse(world);
+	//itemOnMouse = new ItemOnMouse(world);
 }
 
 ItemHotPanel::~ItemHotPanel()
 {
 	delete[coutItemInHotPanel] itemSlot;
-	delete itemOnMouse;
+	//delete itemOnMouse;
 }
 
 void ItemHotPanel::UpdateCells()
@@ -31,8 +31,8 @@ void ItemHotPanel::UpdateCells()
 	{
 		for (int x = 0; x < dynamic_cast<IInventory*>(controller->target)->inventories[0]->slots.size()& x < coutItemInHotPanel; x++)
 		{
-
 			int ID = dynamic_cast<IInventory*>(controller->target)->inventories[0]->slots[x].id;
+			itemSlot[x]->drawItem = true;
 			itemSlot[x]->item->carcass->tbo = RegisteryEntity::entity[ID]->rect->tbo;
 			itemSlot[x]->item->carcass->textureRect = RegisteryEntity::entity[ID]->textureRect;
 			itemSlot[x]->item->Color = vec4(255, 255, 255, 255);
@@ -49,7 +49,7 @@ Alterable ItemHotPanel::draw(Renderer* renderer, Alterable alters)
 	{
 		renderer->draw(itemSlot[x], alters);
 	}
-	renderer->draw(itemOnMouse, alters);
+	//renderer->draw(itemOnMouse, alters);
 	return alters;
 }
 

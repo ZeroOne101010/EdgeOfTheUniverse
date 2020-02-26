@@ -14,7 +14,7 @@ void EventTakeItemCell::onClick()
 
 void EventTakeItemCell::upClick()
 {
-	playerInterface->itemHotPanel->itemOnMouse->itemRect->Color = vec4(255, 255, 0, 255);
+	//playerInterface->itemHotPanel->itemOnMouse->itemRect->Color = vec4(255, 255, 0, 255);
 }
 
 void EventTakeItemCell::onHover()

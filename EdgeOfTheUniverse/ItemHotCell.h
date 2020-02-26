@@ -12,7 +12,7 @@ public:
 	~ItemHotCell();
 	
 	Panel* item;
-	bool drawItem = true;
+	bool drawItem = false;
 	virtual Alterable draw(Renderer* renderer, Alterable alters) override;
 };
 

@@ -12,13 +12,6 @@ const int World::countActiveChunks = 100;
 
 World::World(int seed, Map* map)
 {
-    //Chunk* k = new Chunk(this, 0, 0);
-    //for (int x = 0; x < 1000; x++)
-    //{
-    //    Chunk* k = new Chunk(this, 0, 0);
-    //    delete k;
-    //}
-
     rand = new RandomCoor(10000, seed);
     this->seed = seed;
     this->map = map;

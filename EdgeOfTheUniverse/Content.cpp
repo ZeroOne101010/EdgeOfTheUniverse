@@ -78,11 +78,17 @@ void Content::load()
 	rectangleShapeVBO = new VBO(sizeof(GLfloat) * 12, rectangleShapeVertices, GL_STREAM_DRAW, defaultModelAttribute);
 	rectangleTextureUVVBO = new VBO(sizeof(GLfloat) * 12, rectangleShapeCoordsUV, GL_STREAM_DRAW, defaultTextureUVAttribute);
 	defaultTexture = new TBO();
-	spriteList_Grass = new TBO(fileName("Resources\\Textures\\SpriteList_Grass.png"));
-	spriteList_Dirt = new TBO(fileName("Resources\\Textures\\SpriteList_Dirt.png"));
-	sprite_AmnisItem = new TBO(fileName("Resources\\Textures\\Items\\AmnisLogo.png"));
-	SpriteList_Tools = new TBO(fileName("Resources\\Textures\\Items\\SpriteList_Tools.png"));
-	SpriteList_Stone = new TBO(fileName("Resources\\Textures\\SpriteList_Stone.png"));
+	//spriteList_Grass = new TBO(fileName("Resources\\Textures\\SpriteList_Grass.png"));
+	//spriteList_Dirt = new TBO(fileName("Resources\\Textures\\SpriteList_Dirt.png"));
+	//sprite_AmnisItem = new TBO(fileName("Resources\\Textures\\Items\\AmnisLogo.png"));
+	//SpriteList_Tools = new TBO(fileName("Resources\\Textures\\Items\\SpriteList_Tools.png"));
+	//SpriteList_Stone = new TBO(fileName("Resources\\Textures\\SpriteList_Stone.png"));
+
+	spriteList_Grass = new TBO("Resources\\Textures\\SpriteList_Grass.png");
+	spriteList_Dirt = new TBO("Resources\\Textures\\SpriteList_Dirt.png");
+	sprite_AmnisItem = new TBO("Resources\\Textures\\Items\\AmnisLogo.png");
+	SpriteList_Tools = new TBO("Resources\\Textures\\Items\\SpriteList_Tools.png");
+	SpriteList_Stone = new TBO("Resources\\Textures\\SpriteList_Stone.png");
 	indexRectangleShape = VAO::createVAOBuffer();
 	VAO::bindVBOIBO(rectangleShapeVBO, rectangleShapeIBO, indexRectangleShape, 0);
 	VAO::bindVBO(rectangleTextureUVVBO, indexRectangleShape, 1);

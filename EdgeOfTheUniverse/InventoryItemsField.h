@@ -23,6 +23,5 @@ public:
 	ButtonGroup buttonGroup;
 private:
 	void UpdateCells();
-	void UpdteKeepedCell();
 };
 
